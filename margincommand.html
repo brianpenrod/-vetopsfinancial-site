@@ -275,7 +275,7 @@
   .modules-inner { max-width: 1200px; margin: 0 auto; }
   #modules h2 { color: var(--white); }
   #modules .section-intro { color: rgba(255,255,255,0.55); }
-  .module-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: rgba(255,255,255,0.05); margin-top: 56px; }
+  .module-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; background: rgba(255,255,255,0.05); margin-top: 56px; }
   .module-card { background: var(--navy); padding: 40px 36px; border-top: 2px solid transparent; transition: border-color 0.25s; }
   .module-card:hover { border-top-color: var(--gold); }
   .module-icon {
@@ -447,14 +447,21 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     .hero-inner  { grid-template-columns: 1fr; }
+    .hero-text { min-width: 0; max-width: 100%; }
+    .hero-pain { max-width: calc(100vw - 46px); }
     .hero-dashboard { display: none; }
     .pain-grid, .steps, .module-grid, .pricing-grid, .yield-inner { grid-template-columns: 1fr; }
     .steps::before { display: none; }
     .nav-right .nav-link { display: none; }
     .nav-by { display: none; }
     .nav-back { display: none; }
+    .nav-right { gap: 12px; }
+    .nav-cta-btn { display: none; }
     .nav-mc { font-size: 17px; }
     .nav-logo-img { height: 32px; }
+    .hero-proof { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .proof-item { min-width: 0; }
+    .proof-label { overflow-wrap: anywhere; }
     #workflow > div > div:nth-child(4) { grid-template-columns: 1fr; }
     #workflow .arrow-col { display: none; }
   }
@@ -462,6 +469,7 @@
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
     <img src="vetops-shield.png" alt="VetOps Financial" class="nav-logo-img">
@@ -477,15 +485,16 @@
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
   <div class="hero-noise"></div>
   <div class="hero-line"></div>
   <div class="hero-inner">
     <div class="hero-text">
       <div class="hero-eyebrow"><div class="pulse"></div>Pilot Program Now Open</div>
-      <h1 class="hero-h1">Quote. Capture.<br>Invoice. <em>Powered by AI.</em></h1>
+      <h1 class="hero-h1">Quote. Capture.<br>Approve. <em>Know.</em></h1>
       <p class="hero-pain">
-        Most caterers quote a job on a napkin, send a text as a proposal, and email a rough number as an invoice. <strong>That's not a business — that's a guess.</strong> MarginCommand is your AI Finance Operator. It connects yield-adjusted quoting, automated receipt extraction via Google Document AI, and seamless invoicing into one intelligent workflow.
+        Quote the job. Send the proposal. Attach your payment link. Capture receipts. Approve actuals. Know whether the job made money. <strong>Gemini assists. Operators approve.</strong>
       </p>
       <div class="hero-actions">
         <a href="#pilot" class="btn-gold">Request Pilot Access</a>
@@ -494,7 +503,7 @@
       <div class="hero-proof">
         <div class="proof-item">
           <div class="proof-num">60s</div>
-          <div class="proof-label">Quote to estimate</div>
+          <div class="proof-label">Quote to proposal</div>
         </div>
         <div class="proof-item">
           <div class="proof-num">3</div>
@@ -506,14 +515,15 @@
         </div>
         <div class="proof-item">
           <div class="proof-num">0</div>
-          <div class="proof-label">Accounting background needed</div>
+          <div class="proof-label">No accounting setup</div>
         </div>
       </div>
     </div>
 
+    <!-- MOCK DASHBOARD -->
     <div class="hero-dashboard">
       <div class="dash-topbar">
-        <span class="dash-title">▶ MISSION CONTROL · LIVE</span>
+        <span class="dash-title">▶ MISSION CONTROL · BETA</span>
         <div class="dash-dot-row">
           <div class="dash-dot" style="background:#C94C4C"></div>
           <div class="dash-dot" style="background:#C9A84C"></div>
@@ -554,9 +564,9 @@
           <span class="job-name">Drop-off Event · Bulk</span>
           <span class="job-margin warn">38.2% ✗</span>
         </div>
-        <div class="dash-alert" style="background:rgba(201,168,76,0.1); border-color:rgba(201,168,76,0.3);">
-          <div class="alert-icon">⚡</div>
-          <div class="alert-text"><strong style="color:var(--gold);">AI Review Gate:</strong> Gemini extracted 3 new receipts from Restaurant Depot. Brisket supplier price increased $0.40/lb causing a 4% variance. <span style="text-decoration:underline; cursor:pointer;">Review & Approve Actuals &rarr;</span></div>
+        <div class="dash-alert">
+          <div class="alert-icon">⚠</div>
+          <div class="alert-text"><strong>Margin Alert:</strong> Drop-off Event is below the 45% floor. Yield-loss variance exceeds estimate by 18 lb raw. Reprice before closeout.</div>
         </div>
       </div>
     </div>
@@ -564,6 +574,7 @@
   </div>
 </section>
 
+<!-- PAIN -->
 <section id="pain">
   <div class="pain-inner">
     <div class="section-label">The Problem</div>
@@ -589,18 +600,22 @@
   </div>
 </section>
 
+<!-- WORKFLOW SHOWCASE -->
 <section id="workflow" style="padding:96px 5%;background:var(--navy);">
   <div style="max-width:1200px;margin:0 auto;">
     <div class="section-label">The Workflow</div>
-    <h2 style="color:var(--white);margin-bottom:12px;">One Screen.<br><em>Three Deliverables.</em></h2>
-    <p class="section-intro" style="color:rgba(255,255,255,0.55);margin-bottom:64px;">Build the quote. Generate the proposal. Send the invoice. All from the same job — margin protected at every step.</p>
+    <h2 style="color:var(--white);margin-bottom:12px;">One Job File.<br><em>Complete Money Loop.</em></h2>
+    <p class="section-intro" style="color:rgba(255,255,255,0.55);margin-bottom:64px;">Quote, proposal, invoice, operator-owned payment link, receipts, approved actuals, margin review, and export all stay tied to the same job record.</p>
 
+    <!-- WORKFLOW FLOW -->
     <div style="display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;gap:0;align-items:start;">
 
-<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-top:3px solid var(--gold);padding:32px 28px;">
+      <!-- STEP 1: Quick-Quote -->
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-top:3px solid var(--gold);padding:32px 28px;">
         <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;">Step 01 · Quick-Quote</div>
-        <div style="font-size:19px;font-weight:600;color:var(--white);margin-bottom:12px;line-height:1.25;">Yield-Adjusted Estimate in 60s · <span style="color:var(--gold);font-style:italic;">Enhanced by Gemini</span></div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;font-weight:300;margin-bottom:24px;">Enter headcount, protein, sides, labor, and miles. Aided by Gemini, MarginCommand applies the yield-loss coefficient automatically — so the price you give the client is the price that actually covers your cost.</p>
+        <div style="font-size:19px;font-weight:600;color:var(--white);margin-bottom:12px;line-height:1.25;">Pilot-Ready Quote in 60 Seconds</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;font-weight:300;margin-bottom:24px;">Enter headcount, menu mix, yield loss, labor, mileage, and supplies. MarginCommand keeps the pricing logic visible before the operator sends anything to the customer.</p>
+        <!-- MOCK QUOTE -->
         <div style="background:#070F1E;padding:16px;font-family:'JetBrains Mono',monospace;font-size:11px;">
           <div style="color:rgba(255,255,255,0.3);margin-bottom:10px;letter-spacing:0.08em;">// WEDDING RECEPTION · 175pp</div>
           <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.6);">
@@ -618,14 +633,17 @@
         </div>
       </div>
 
+      <!-- ARROW -->
       <div style="display:flex;align-items:center;justify-content:center;padding-top:80px;">
         <div style="font-size:22px;color:var(--gold);opacity:0.6;">→</div>
       </div>
 
+      <!-- STEP 2: Proposal -->
       <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-top:3px solid var(--gold-light);padding:32px 28px;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;">Step 02 · Client Proposal</div>
-        <div style="font-size:19px;font-weight:600;color:var(--white);margin-bottom:12px;line-height:1.25;">Branded PDF. One Click. Looks Like a Real Business.</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;font-weight:300;margin-bottom:24px;">No reformatting. No copy-paste. The estimate becomes a professional client-facing proposal PDF — itemized, branded, and ready to send before you leave the truck.</p>
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;">Step 02 · Proposal / Invoice</div>
+        <div style="font-size:19px;font-weight:600;color:var(--white);margin-bottom:12px;line-height:1.25;">Customer-Ready PDFs from the Approved Quote</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;font-weight:300;margin-bottom:24px;">Generate proposal and invoice PDFs from the same approved quote data. No rekeying, no duplicate math, no gap between what was proposed and what was billed.</p>
+        <!-- MOCK PROPOSAL -->
         <div style="background:#070F1E;padding:16px;">
           <div style="border-bottom:2px solid var(--gold);padding-bottom:10px;margin-bottom:12px;">
             <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--white);">Bud Wiser's BBQ LLC</div>
@@ -641,14 +659,17 @@
         </div>
       </div>
 
+      <!-- ARROW -->
       <div style="display:flex;align-items:center;justify-content:center;padding-top:80px;">
         <div style="font-size:22px;color:var(--gold);opacity:0.6;">→</div>
       </div>
 
+      <!-- STEP 3: Invoice -->
       <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-top:3px solid rgba(201,168,76,0.5);padding:32px 28px;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;">Step 03 · Invoice</div>
-        <div style="font-size:19px;font-weight:600;color:var(--white);margin-bottom:12px;line-height:1.25;">The Invoice Matches the Quote. Every Time.</div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;font-weight:300;margin-bottom:24px;">The invoice pulls directly from the same job data. No rekeying, no rounding guesses, no gaps between what you promised and what you billed. Send it the same day the job closes.</p>
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;">Step 03 · Payment / Actuals</div>
+        <div style="font-size:19px;font-weight:600;color:var(--white);margin-bottom:12px;line-height:1.25;">Track Payment Status. Approve Actual Costs.</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;font-weight:300;margin-bottom:24px;">Attach the operator's own payment link, track status manually during beta, capture receipts, and approve costs before they become financial Ground Truth.</p>
+        <!-- MOCK INVOICE -->
         <div style="background:#070F1E;padding:16px;">
           <div style="border-bottom:2px solid rgba(255,255,255,0.1);padding-bottom:10px;margin-bottom:12px;">
             <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--white);">INVOICE #2026-007</div>
@@ -663,19 +684,22 @@
           <div style="display:flex;justify-content:space-between;padding:8px 0 0;border-top:1px solid rgba(255,255,255,0.08);margin-top:4px;font-size:13px;color:var(--green);font-weight:600;font-family:'JetBrains Mono',monospace;">
             <span>TOTAL DUE</span><span>$4,119.50</span>
           </div>
-          <div style="margin-top:12px;background:rgba(61,170,110,0.1);border:1px solid rgba(61,170,110,0.2);padding:6px 10px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);">📄 Invoice_WeddingReception.pdf</div>
+          <div style="margin-top:12px;background:rgba(61,170,110,0.1);border:1px solid rgba(61,170,110,0.2);padding:6px 10px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);">Invoice PDF + operator payment link attached</div>
+          <div style="margin-top:8px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.18);padding:6px 10px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">Status: Deposit Requested</div>
         </div>
       </div>
 
     </div>
 
+    <!-- BOTTOM BAR -->
     <div style="margin-top:2px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.12);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:300;">All three documents come from the same job entry. Change the headcount — the proposal and invoice update automatically.</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:300;">Pilot-ready beta workflow: quote to proposal/invoice to payment status to receipt review to approved actuals to margin review.</div>
       <a href="#pilot" class="btn-gold" style="white-space:nowrap;">Try It Free</a>
     </div>
   </div>
 </section>
 
+<!-- YIELD MATH -->
 <section id="yield">
   <div class="yield-inner">
     <div class="yield-math">
@@ -704,102 +728,166 @@
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
 <section id="how">
   <div class="how-inner">
     <div class="how-header">
       <div class="section-label">Workflow</div>
-      <h2>Four Steps.<br><em>Closed Loop.</em></h2>
+      <h2>Four Phases.<br><em>Operator Approved.</em></h2>
     </div>
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
-        <div class="step-name">Quick-Quote</div>
-        <p class="step-desc">Build a yield-adjusted, fully-costed estimate in under 60 seconds. Protein, sides, labor, miles — the margin is live as you type. Know if the job is worth taking before you shake hands.</p>
+        <div class="step-name">Quick Quote</div>
+        <p class="step-desc">Build a catering or service-job estimate from headcount, menu mix, yield loss, labor, mileage, and supplies. The quote is the source record for the rest of the workflow.</p>
         <div class="step-time">~60 seconds</div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <div class="step-name">Client Proposal PDF</div>
-        <p class="step-desc">One button. Branded, itemized proposal PDF — ready to send before you leave the truck. No copy-paste, no reformatting, no "let me get back to you." Win the job on the spot.</p>
-        <div class="step-time">One click</div>
+        <div class="step-name">Proposal / Invoice / Link</div>
+        <p class="step-desc">Generate customer-ready proposal and invoice PDFs from the same approved quote data, then attach a Stripe, Square, QuickBooks, or other business-owned payment link.</p>
+        <div class="step-time">Same job file</div>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-name">AI Receipt Capture</div>
-        <p class="step-desc">Snap a photo of your supplier receipt from the truck. Google Document AI instantly parses line items, extracts pricing, and stages costs in a review gate to update your actuals and audit log.</p>
-        <div class="step-time">Instant Extraction</div>
+        <div class="step-name">Receipts / Review / Approval</div>
+        <p class="step-desc">Capture receipts, let Gemini help review details and flag possible issues, then require operator approval before anything updates actual costs.</p>
+        <div class="step-time">Human reviewed</div>
       </div>
       <div class="step">
         <div class="step-num">04</div>
-        <div class="step-name">Invoice &amp; Intelligence</div>
-        <p class="step-desc">The final invoice matches the quote perfectly. Meanwhile, Gemini flags margin variance alerts, logs field notes via voice, and generates your CPA-ready export automatically.</p>
-        <div class="step-time">Always-on</div>
+        <div class="step-name">Margin Review / Export</div>
+        <p class="step-desc">Compare quoted vs. actual margin in Mission Control, then export job records and after-action notes for bookkeeping, CPA review, and operator learning.</p>
+        <div class="step-time">After action</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- MODULES -->
 <section id="modules">
   <div class="modules-inner">
     <div class="section-label">Features</div>
-    <h2 style="color:var(--white);">Everything the Job<br><em>Demands.</em></h2>
-    <p class="section-intro">The core workflow is Quote → Proposal → Invoice. The intelligence layer — yield engine, margin dashboard, cost tracker, CPA export — runs behind it, automatically.</p>
+    <h2 style="color:var(--white);">Built for the Complete<br><em>Job-Money Loop.</em></h2>
+    <p class="section-intro">Pilot-ready beta workflow for moving from quote to invoice to operator-owned payment tracking to receipt review, approved actuals, margin review, and CPA/AAR export.</p>
     <div class="module-grid">
 
-<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-top:3px solid var(--gold);padding:32px 28px;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;">Step 01 · Quick-Quote</div>
-        <div style="font-size:19px;font-weight:600;color:var(--white);margin-bottom:12px;line-height:1.25;">Yield-Adjusted Estimate in 60s · <span style="color:var(--gold);font-style:italic;">Enhanced by Gemini</span></div>
-        <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;font-weight:300;margin-bottom:24px;">Enter headcount, protein, sides, labor, and miles. Aided by Gemini, MarginCommand applies the yield-loss coefficient automatically — so the price you give the client is the price that actually covers your cost.</p>
+      <div class="module-card">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 7H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V9a2 2 0 00-2-2h-2M9 7a2 2 0 012-2h2a2 2 0 012 2M9 7h6"/></svg>
+        </div>
+        <div class="module-name">Quick Quote</div>
+        <div class="module-sub">Estimate Built from Real Job Inputs</div>
+        <p class="module-desc">Build a catering or service-job estimate from headcount, menu mix, yield loss, labor, mileage, and supplies before sending numbers to the customer.</p>
+      </div>
 
       <div class="module-card">
         <div class="module-icon">
           <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
         </div>
-        <div class="module-name">Proposal Generator</div>
-        <div class="module-sub">Client-Ready PDF · One Click</div>
-        <p class="module-desc">Branded, itemized proposal PDF generated directly from the quote — no reformatting. Client sees your business name, the event details, the menu breakdown, and the total. Looks professional. Wins faster.</p>
+        <div class="module-name">Proposal PDF</div>
+        <div class="module-sub">Customer-Ready Proposal</div>
+        <p class="module-desc">Generate a professional proposal PDF from the same approved quote data, with event details, menu breakdown, and pricing tied back to the job record.</p>
       </div>
 
       <div class="module-card">
         <div class="module-icon">
           <svg viewBox="0 0 24 24"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
         </div>
-        <div class="module-name">Invoice Generator</div>
-        <div class="module-sub">Matched to the Quote. Always.</div>
-        <p class="module-desc">Invoice PDF pulled from the same job data as the estimate. The numbers match — automatically. No rekeying, no discrepancies, no client disputes about what was agreed. Send the same day the job closes.</p>
+        <div class="module-name">Invoice PDF</div>
+        <div class="module-sub">Generated from Approved Quote Data</div>
+        <p class="module-desc">Create customer-ready invoice PDFs without rekeying the quote, so proposal and invoice numbers stay aligned through the beta workflow.</p>
       </div>
 
       <div class="module-card">
         <div class="module-icon">
           <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
         </div>
-        <div class="module-name">Mission Control</div>
-        <div class="module-sub">Margin Intelligence Layer</div>
-        <p class="module-desc">Live pipeline dashboard — planned vs. actual margin on every active job. Variance alerts surface before you send the invoice. Stress-test sliders model protein cost spikes. CPA Bridge exports the whole picture in one click.</p>
+        <div class="module-name">Operator-Owned Payment Link</div>
+        <div class="module-sub">Funds Stay with the Operator</div>
+        <p class="module-desc">Attach a Stripe, Square, QuickBooks, or other business-owned payment link. MarginCommand does not process payments, route funds, or act as merchant of record.</p>
       </div>
 
       <div class="module-card">
         <div class="module-icon">
-          <svg viewBox="0 0 24 24"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
         </div>
-        <div class="module-name">AI Receipt Capture</div>
-        <div class="module-sub">Powered by Google Document AI</div>
-        <p class="module-desc">Mobile-friendly receipt capture from the field. The extraction engine parses supplier pricing and line items instantly. Costs enter a secure review gate for your approval, establishing an immutable audit log.</p>
+        <div class="module-name">Payment Status Tracking</div>
+        <div class="module-sub">Manual During Beta</div>
+        <p class="module-desc">Track Draft, Sent, Deposit Requested, Deposit Received, Paid, or Cancelled manually while payment activity remains outside MarginCommand.</p>
       </div>
 
       <div class="module-card">
         <div class="module-icon">
-          <svg viewBox="0 0 24 24"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M9 2h6l1 3h3a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h3l1-3zM9 13h6M9 17h4"/></svg>
         </div>
-        <div class="module-name">Field Intel &amp; Variance</div>
-        <div class="module-sub">Powered by Gemini AI</div>
-        <p class="module-desc">Speak your field notes directly into the app. Gemini extracts the operational context, generates automated margin variance explanations automatically, and stages CPA review notes for month-end reconciliation.</p>
+        <div class="module-name">Receipt Capture</div>
+        <div class="module-sub">Receipts Tied to the Job</div>
+        <p class="module-desc">Capture job receipts and keep them attached to the workflow so actual costs can be reviewed against the original quote.</p>
       </div>
 
+      <div class="module-card">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2l.9-5.5-4-3.9 5.5-.8L12 3z"/></svg>
+        </div>
+        <div class="module-name">Gemini Receipt Review Assistant</div>
+        <div class="module-sub">AI Advisory, Not Final</div>
+        <p class="module-desc">Gemini helps review receipt details and flag possible issues. AI output is advisory until the operator reviews and approves it.</p>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg>
+        </div>
+        <div class="module-name">Actual Cost Tracker</div>
+        <div class="module-sub">Operator Approval Before Actuals</div>
+        <p class="module-desc">Log approved actual costs only after review, then compare them against the quote without treating AI suggestions as financial Ground Truth.</p>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M8 16v-5m4 5V8m4 8v-3"/></svg>
+        </div>
+        <div class="module-name">Mission Control / Margin Review</div>
+        <div class="module-sub">Quoted vs. Actual Margin</div>
+        <p class="module-desc">See where the job made or lost money by comparing quoted margin against approved actual costs in the operator's job file.</p>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 3v4a2 2 0 002 2h4M6 2h9l5 5v15H6zM9 14h6M9 18h6"/></svg>
+        </div>
+        <div class="module-name">CPA Bridge / Job AAR Export</div>
+        <div class="module-sub">Bookkeeping and Operator Learning</div>
+        <p class="module-desc">Export job records and after-action notes for bookkeeping, CPA review, and margin learning while the operator remains responsible for review.</p>
+      </div>
+
+      <div class="module-card">
+        <div class="module-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 17l5-5 4 4 7-8M4 21h16M4 3h16"/></svg>
+        </div>
+        <div class="module-name">Cost-to-Serve / Google Cloud Roadmap</div>
+        <div class="module-sub">Planned Cloud and Analytics Path</div>
+        <p class="module-desc">Planned path for Cloud Run hosting, Cloud Storage receipt handling, audit logs, cost-to-serve visibility, and margin analytics as the beta matures.</p>
+      </div>
+
+    </div>
+    <div class="module-grid" style="margin-top:2px;">
+      <div style="background:#070F1E;border-top:2px solid var(--gold);padding:32px 36px;">
+        <div class="module-sub">Payment Boundary</div>
+        <div class="module-name">Operator-Owned Payment Links</div>
+        <p class="module-desc">During beta, MarginCommand supports invoice-to-payment tracking through operator-owned payment links. MarginCommand does not process payments, route funds, hold funds, act as merchant of record, or use Stripe Connect.</p>
+      </div>
+      <div style="background:#070F1E;border-top:2px solid var(--gold);padding:32px 36px;">
+        <div class="module-sub">AI Boundary</div>
+        <div class="module-name">Gemini Assists. Operators Approve.</div>
+        <p class="module-desc">AI suggestions remain advisory until the operator reviews and approves them. MarginCommand is designed to protect financial Ground Truth before actuals update.</p>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- PRICING -->
 <section id="pricing">
   <div class="pricing-inner">
     <div class="section-label">Simple Pricing</div>
@@ -812,11 +900,11 @@
         <div class="price-num"><sup>$</sup>37</div>
         <div class="price-period">per month · billed monthly</div>
         <ul class="price-features">
-          <li><span class="feat-check">✓</span> Quick-Quote with yield-loss engine</li>
-          <li><span class="feat-check">✓</span> Actual Cost Tracker (up to 10 jobs/mo)</li>
-          <li><span class="feat-check">✓</span> Mission Control dashboard</li>
-          <li><span class="feat-check">✓</span> Client proposal &amp; invoice PDFs</li>
-          <li><span class="feat-check">✓</span> CPA Bridge CSV export</li>
+          <li><span class="feat-check">✓</span> Quick Quote workflow</li>
+          <li><span class="feat-check">✓</span> Proposal &amp; invoice PDFs</li>
+          <li><span class="feat-check">✓</span> Operator-owned payment link tracking</li>
+          <li><span class="feat-check">✓</span> Receipt capture and approved actuals</li>
+          <li><span class="feat-check">✓</span> CPA Bridge / Job AAR export</li>
           <li><span class="feat-check">✓</span> Email support</li>
         </ul>
         <a href="#pilot" class="price-cta outline">Start Free Pilot</a>
@@ -830,8 +918,8 @@
         <ul class="price-features">
           <li><span class="feat-check">✓</span> Everything in Starter</li>
           <li><span class="feat-check">✓</span> Unlimited jobs per month</li>
-          <li><span class="feat-check">✓</span> Variance report &amp; trend analysis</li>
-          <li><span class="feat-check">✓</span> JSON full-data export</li>
+          <li><span class="feat-check">✓</span> Mission Control margin review</li>
+          <li><span class="feat-check">✓</span> Gemini receipt review assistance</li>
           <li><span class="feat-check">✓</span> Multi-event pipeline view</li>
           <li><span class="feat-check">✓</span> Priority support</li>
         </ul>
@@ -842,6 +930,7 @@
   </div>
 </section>
 
+<!-- PROOF QUOTE -->
 <section id="proof">
   <div class="proof-inner">
     <div class="proof-quote">"The pricing error isn't a math problem. It's a visibility problem. Every operator knows their food cost. Almost none of them know their actual yield-adjusted margin until the job is already done."</div>
@@ -849,19 +938,21 @@
   </div>
 </section>
 
+<!-- PILOT CTA -->
 <section id="pilot">
   <div class="pilot-glow"></div>
   <div class="section-label">Pilot Program</div>
   <h2 style="color:var(--white);margin-bottom:12px;">Limited Spots.<br><em>60 Days Free.</em></h2>
-  <p class="section-intro">We're running a structured pilot with a small group of BBQ caterers and food truck operators. No cost. Real jobs. You get the tool — we get the feedback.</p>
+  <p class="section-intro">We're running a structured pilot-ready beta with a small group of BBQ caterers and food truck operators. No cost. Real jobs. Operators keep control of payment links, AI review, and financial approvals.</p>
   <div class="pilot-spots"><div class="pulse"></div>Accepting applications now</div>
   <div class="pilot-form">
     <input type="email" class="pilot-input" placeholder="your@email.com">
     <button class="pilot-submit" onclick="this.textContent='Submitted ✓'; this.style.background='#3DAA6E'; this.style.color='white';">Apply</button>
   </div>
-  <p class="pilot-note">Or email directly: <a href="mailto:hello@vetopsfinancial.com?subject=MarginCommand%20Pilot%20Application" style="color:rgba(255,255,255,0.5);">hello@vetopsfinancial.com</a></p>
+  <p class="pilot-note">Or email directly: <a href="mailto:support@vetopsfinancial.com" style="color:rgba(255,255,255,0.5);">support@vetopsfinancial.com</a></p>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="foot-inner">
     <div style="display:flex;align-items:center;gap:14px;">
@@ -875,12 +966,9 @@
       <a href="index.html">VetOps Financial</a>
       <a href="#pricing">Pricing</a>
       <a href="#pilot">Pilot</a>
-      <a href="mailto:hello@vetopsfinancial.com?subject=MarginCommand%20Inquiry">Contact</a>
+      <a href="mailto:support@vetopsfinancial.com">Contact</a>
     </div>
-    <div class="foot-copy">
-      © 2026 VetOps Financial, LLC<br>SDVOSB · Raeford, NC<br>
-      <span style="display:inline-block; margin-top:8px; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3);">Infrastructure by Google Cloud, Vertex AI &amp; Document AI</span>
-    </div>
+    <div class="foot-copy">© 2026 VetOps Financial, LLC<br>SDVOSB · Raeford, NC</div>
   </div>
 </footer>
 

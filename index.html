@@ -458,6 +458,26 @@
     background: rgba(201,168,76,0.15);
   }
 
+  .division-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .division-card-cta {
+    display: inline-flex;
+    align-items: center;
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(201,168,76,0.55);
+  }
+
   .status-dot {
     width: 5px; height: 5px;
     border-radius: 50%;
@@ -792,7 +812,7 @@
   <div class="hero-glow"></div>
   <div class="hero-content">
     <div class="hero-left">
-      <div class="hero-badge">SDVOSB · Veteran-Owned · Fayetteville, NC</div>
+      <div class="hero-badge">SDVOSB · Veteran-Owned · Raeford, NC</div>
       <h1>Operational<br>Precision.<br><em>Financial Clarity.</em></h1>
       <p class="hero-sub">VetOps Financial builds workflow technology for operators who cannot afford the gap between what they quote and what they earn. Founded by a 29-year Special Forces Command Sergeant Major.</p>
       <div class="hero-actions">
@@ -863,17 +883,16 @@
     <div class="division-cards">
 
       <!-- MarginCommand -->
-    <a href="margincommand.html" class="division-card featured" style="text-decoration:none;">
+      <a href="margincommand.html" class="division-card featured" style="text-decoration:none;">
         <div class="division-num">Division I · Main Effort</div>
         <div class="division-name">MarginCommand</div>
-        <div class="division-tagline">The AI Finance Operator</div>
-        <p class="division-desc">Workflow SaaS for owner-operator service businesses. Built natively on Google Cloud Platform utilizing <strong>Vertex AI (Gemini)</strong> for margin variance logic, <strong>Cloud Document AI</strong> for automated receipt parsing, and <strong>Cloud Speech-to-Text</strong> for field note extraction. Replaces manual quoting, cost tracking, and margin reconciliation.</p>
-        
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px;">
-          <div class="division-status status-active" style="margin-bottom:0;">
-            <span class="status-dot"></span>Active · Beta Live
+        <div class="division-tagline">Quote. Track. Close the Gap.</div>
+        <p class="division-desc">Pilot-ready workflow for owner-operator service businesses. Quote to proposal/invoice to operator-owned payment link to receipt capture, approved actuals, and Mission Control margin review. Beachhead: BBQ caterers and food truck operators where yield-loss pricing error is a physical constant.</p>
+        <div class="division-card-footer">
+          <div class="division-status status-active">
+            <span class="status-dot"></span>Active · MVP Live
           </div>
-          <div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);">Explore Platform &rarr;</div>
+          <span class="division-card-cta">Explore MarginCommand →</span>
         </div>
       </a>
 
@@ -1004,12 +1023,13 @@
     <h2>Ready to<br><em>Talk.</em></h2>
     <p class="section-intro">VetOps Financial is currently in active fundraising and program engagement. PenFed VEP cohort submission in progress.</p>
     <div class="cta-group">
-      <a href="mailto:invest@vetopsfinancial.com?subject=VetOps%20Financial%20Inquiry" class="btn-navy">Investor Inquiries</a>
+      <a href="mailto:support@vetopsfinancial.com" class="btn-navy">Contact Founder</a>
       <a href="margincommand.html" class="btn-primary">View MarginCommand</a>
     </div>
-    <p class="contact-note">Investor &amp; program: <a href="mailto:invest@vetopsfinancial.com">invest@vetopsfinancial.com</a> &nbsp;·&nbsp; General: <a href="mailto:hello@vetopsfinancial.com">hello@vetopsfinancial.com</a> &nbsp;·&nbsp; Raeford, North Carolina</p>
+    <p class="contact-note">Direct line: <a href="mailto:support@vetopsfinancial.com">support@vetopsfinancial.com</a> &nbsp;·&nbsp; Raeford, North Carolina</p>
   </div>
 </section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -1018,12 +1038,11 @@
       <span class="footer-wordmark">VetOps Financial</span>
     </div>
     <div class="footer-meta">
-      <a href="mailto:hello@vetopsfinancial.com" style="color:rgba(255,255,255,0.55);text-decoration:none;">hello@vetopsfinancial.com</a> · Raeford, NC<br>
-      © 2026 VetOps Financial, LLC · SDVOSB · Veteran-Owned · All Rights Reserved
+      © 2026 VetOps Financial, LLC · Raeford, NC<br>
+      SDVOSB · Veteran-Owned · All Rights Reserved
     </div>
   </div>
 </footer>
-
 
 </body>
 </html>
