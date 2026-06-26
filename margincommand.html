@@ -127,6 +127,19 @@
     color: rgba(255,255,255,0.65); max-width: 500px; margin-bottom: 44px;
   }
   .hero-pain strong { color: var(--white); font-weight: 500; }
+  .hero-beta-cta {
+    display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .hero-beta-copy { max-width: 380px; }
+  .hero-beta-copy p {
+    font-size: 14px; line-height: 1.55; font-weight: 300;
+    color: rgba(255,255,255,0.7);
+  }
+  .hero-beta-copy .beta-trust {
+    margin-top: 4px;
+    font-size: 11px; color: rgba(255,255,255,0.42);
+  }
   .hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 52px; }
   .btn-gold {
     padding: 15px 36px;
@@ -136,6 +149,7 @@
     transition: background 0.2s, transform 0.15s;
   }
   .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .beta-login-btn { text-transform: none; letter-spacing: 0.08em; }
   .btn-outline {
     padding: 15px 36px; background: transparent;
     color: rgba(255,255,255,0.65); font-size: 11px; font-weight: 500;
@@ -462,8 +476,9 @@
     .hero-proof { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
     .proof-item { min-width: 0; }
     .proof-label { overflow-wrap: anywhere; }
-    #workflow > div > div:nth-child(4) { grid-template-columns: 1fr; }
-    #workflow .arrow-col { display: none; }
+    #workflow > div > div:nth-child(4) { grid-template-columns: 1fr !important; }
+    #workflow > div > div:nth-child(4) > div:nth-child(2),
+    #workflow > div > div:nth-child(4) > div:nth-child(4) { display: none !important; }
   }
 </style>
 </head>
@@ -496,6 +511,13 @@
       <p class="hero-pain">
         Quote the job. Send the proposal. Attach your payment link. Capture receipts. Approve actuals. Know whether the job made money. <strong>Gemini assists. Operators approve.</strong>
       </p>
+      <div class="hero-beta-cta">
+        <a href="https://margincommand-app-628959962178.us-east1.run.app" class="btn-gold beta-login-btn">MarginCommand Beta Login</a>
+        <div class="hero-beta-copy">
+          <p>Invite-only beta for owner-operator job costing and margin review.</p>
+          <p class="beta-trust">Private beta access only. Accounts are provisioned by VetOps Financial.</p>
+        </div>
+      </div>
       <div class="hero-actions">
         <a href="#pilot" class="btn-gold">Request Pilot Access</a>
         <a href="#how" class="btn-outline">See How It Works</a>
