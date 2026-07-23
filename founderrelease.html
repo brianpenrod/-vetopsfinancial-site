@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder Release Readiness | VetOps Financial — Evidence-Backed Release Gates for AI-Built Apps</title>
+<meta name="description" content="Your app works. Now prove its critical workflow is ready to release. Fixed-scope, evidence-backed release gates for founders shipping AI-assisted software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1C3A;
+    --navy-mid: #122347;
+    --navy-light: #1A3060;
+    --gold: #C9A84C;
+    --gold-light: #E2C06A;
+    --gold-pale: #F5EDD6;
+    --white: #FFFFFF;
+    --off-white: #F8F6F1;
+    --text-muted: #6B7A99;
+    --border: rgba(201,168,76,0.2);
+    --green: #4C9A6B;
+    --amber: #C9A84C;
+    --red: #B0533E;
+    --slate: #6B7A99;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 72px;
+    background: rgba(11,28,58,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo-img { height: 42px; width: auto; display: block; }
+
+  .nav-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    font-size: 11px !important;
+    padding: 8px 20px;
+    border: 1px solid var(--gold) !important;
+    color: var(--gold) !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .nav-cta:hover { background: var(--gold); color: var(--navy) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 92vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 72px;
+  }
+
+  .hero-grid-overlay {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    top: 50%; left: 60%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 5%;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 4.6vw, 66px);
+    font-weight: 600;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  h1 em { font-style: italic; color: var(--gold); }
+
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+    max-width: 500px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-ghost {
+    padding: 14px 32px;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-right { animation: fadeUp 0.8s 0.25s ease both; }
+
+  .hero-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 36px;
+  }
+
+  .hero-card-label {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+
+  .dispo-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .dispo-row:last-child { border-bottom: none; }
+
+  .dispo-chip {
+    flex-shrink: 0;
+    min-width: 118px;
+    padding: 5px 10px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    border: 1px solid;
+  }
+
+  .chip-go { color: #7FBF9A; border-color: rgba(127,191,154,0.5); background: rgba(76,154,107,0.12); }
+  .chip-cgo { color: var(--gold-light); border-color: rgba(201,168,76,0.5); background: rgba(201,168,76,0.1); }
+  .chip-nogo { color: #D98A76; border-color: rgba(176,83,62,0.55); background: rgba(176,83,62,0.12); }
+  .chip-hold { color: #9FB0CC; border-color: rgba(107,122,153,0.55); background: rgba(107,122,153,0.12); }
+
+  .dispo-desc {
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    padding-top: 3px;
+  }
+
+  .hero-card-foot {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 5%; }
+
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+
+  h2 em { font-style: italic; color: var(--gold); }
+
+  .section-intro {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: 620px;
+    font-weight: 300;
+  }
+
+  /* ── STRIP ── */
+  #strip {
+    padding: 28px 5%;
+    background: var(--off-white);
+    border-top: 1px solid rgba(11,28,58,0.08);
+    border-bottom: 1px solid rgba(11,28,58,0.08);
+  }
+
+  .strip-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex; align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .strip-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+
+  .strip-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .strip-divider { width: 1px; height: 24px; background: rgba(11,28,58,0.15); }
+
+  /* ── PROBLEM ── */
+  #problem { background: var(--white); }
+
+  .problem-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+    margin-top: 8px;
+  }
+
+  .problem-list { list-style: none; margin-top: 8px; }
+
+  .problem-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(11,28,58,0.08);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--navy);
+    font-weight: 400;
+  }
+
+  .p-icon {
+    flex-shrink: 0;
+    width: 24px; height: 24px;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--gold);
+  }
+
+  .problem-callout {
+    padding: 26px 30px;
+    border-left: 3px solid var(--gold);
+    background: var(--off-white);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--navy);
+    font-style: italic;
+    margin-top: 28px;
+  }
+
+  /* ── OFFER ── */
+  #offer { background: var(--navy); }
+
+  #offer h2 { color: var(--white); }
+  #offer .section-intro { color: rgba(255,255,255,0.6); }
+
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 56px;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .offer-card {
+    padding: 34px 30px;
+    background: rgba(255,255,255,0.03);
+    border-top: 2px solid var(--gold);
+  }
+
+  .offer-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .offer-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px; font-weight: 600;
+    color: var(--white);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .offer-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ── PHASES ── */
+  #how { background: var(--off-white); }
+
+  .phase-list {
+    margin-top: 56px;
+    display: grid;
+    gap: 2px;
+    background: rgba(11,28,58,0.08);
+  }
+
+  .phase-row {
+    display: grid;
+    grid-template-columns: 90px 260px 1fr;
+    gap: 28px;
+    padding: 28px 32px;
+    background: var(--white);
+    align-items: start;
+  }
+
+  .phase-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px; font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .phase-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 600;
+    color: var(--navy);
+    line-height: 1.25;
+    padding-top: 4px;
+  }
+
+  .phase-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    font-weight: 300;
+    padding-top: 5px;
+  }
+
+  /* ── FIT ── */
+  #fit { background: var(--white); }
+
+  .fit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 56px;
+    background: rgba(11,28,58,0.08);
+  }
+
+  .fit-col { background: var(--white); padding: 40px 36px; }
+
+  .fit-col.fit-no { background: var(--off-white); }
+
+  .fit-col-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+
+  .fit-list { list-style: none; }
+
+  .fit-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 11px 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--navy);
+    font-weight: 400;
+    border-bottom: 1px solid rgba(11,28,58,0.06);
+  }
+
+  .fit-list li:last-child { border-bottom: none; }
+
+  .fit-mark {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    margin-top: 1px;
+  }
+
+  .mark-yes { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.4); }
+  .mark-no  { background: rgba(11,28,58,0.05); color: var(--text-muted); border: 1px solid rgba(11,28,58,0.15); }
+
+  /* ── PRICING ── */
+  #pricing { background: var(--navy); }
+
+  #pricing h2 { color: var(--white); }
+  #pricing .section-intro { color: rgba(255,255,255,0.6); }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 56px;
+    max-width: 900px;
+  }
+
+  .price-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 40px 36px;
+    position: relative;
+  }
+
+  .price-card.featured { border: 1px solid var(--gold); background: rgba(201,168,76,0.06); }
+
+  .price-flag {
+    position: absolute;
+    top: -12px; left: 36px;
+    padding: 4px 12px;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .price-tier {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 54px; font-weight: 600;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .price-amount span { font-size: 20px; color: rgba(255,255,255,0.45); }
+
+  .price-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 26px;
+  }
+
+  .price-list { list-style: none; }
+
+  .price-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 9px 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+  }
+
+  .price-tick {
+    color: var(--gold);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .price-cta { margin-top: 30px; display: block; text-align: center; }
+
+  .pricing-foot {
+    margin-top: 36px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.4);
+    max-width: 760px;
+  }
+
+  /* ── SCOPE NOTE ── */
+  #scope { background: var(--off-white); padding: 72px 5%; }
+
+  .scope-box {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 44px;
+    background: var(--white);
+    border-left: 3px solid var(--gold);
+  }
+
+  .scope-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+
+  .scope-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .scope-text strong { color: var(--navy); font-weight: 600; }
+
+  /* ── CTA ── */
+  #contact { background: var(--gold-pale); text-align: center; }
+
+  #contact h2 { color: var(--navy); margin-bottom: 16px; }
+  #contact .section-intro { margin: 0 auto 44px; }
+
+  .cta-group {
+    display: flex; justify-content: center; gap: 16px; align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-navy {
+    padding: 16px 40px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-navy:hover { background: var(--navy-mid); }
+
+  .contact-note {
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .contact-note a {
+    color: var(--navy);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 44px 5%;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+
+  .footer-brand { display: flex; align-items: center; gap: 12px; }
+
+  .footer-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .footer-meta {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; gap: 48px; }
+    .problem-layout { grid-template-columns: 1fr; gap: 40px; }
+    .offer-grid { grid-template-columns: 1fr; }
+    .phase-row { grid-template-columns: 1fr; gap: 8px; padding: 24px; }
+    .fit-grid { grid-template-columns: 1fr; }
+    .price-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="vetops-shield.png" alt="VetOps Financial" class="nav-logo-img">
+    <span class="nav-wordmark">VetOps Financial</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#offer">The Gate</a></li>
+    <li><a href="#enforce">What We Prove</a></li>
+    <li><a href="#how">Method</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="margincommand.html">MarginCommand</a></li>
+    <li><a href="#contact" class="nav-cta">Request a Gate</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">Founder Release Readiness · A VetOps Financial Division</div>
+      <h1>Your App Works.<br><em>Now Prove It's</em><br>Ready to Release.</h1>
+      <p class="hero-sub">You built it fast with Cursor, Claude Code, Lovable, Bolt, or Replit. Before real users, real data, and real payments touch it, get an evidence-backed release decision on the one workflow that can't fail — signed by a human, bound to your exact code state.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-primary">Founding Partner — $1,500</a>
+        <a href="#how" class="btn-ghost">See the Method</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-label">The Four Dispositions</div>
+        <div class="dispo-row">
+          <div class="dispo-chip chip-go">GO</div>
+          <div class="dispo-desc">No known release-blocking condition within the assessed scope. Evidence attached. Residual risks stated.</div>
+        </div>
+        <div class="dispo-row">
+          <div class="dispo-chip chip-cgo">Conditional Go</div>
+          <div class="dispo-desc">Releasable under specific, measurable conditions — each with an owner and a deadline.</div>
+        </div>
+        <div class="dispo-row">
+          <div class="dispo-chip chip-nogo">No-Go</div>
+          <div class="dispo-desc">A confirmed blocker makes release irresponsible within scope. You get the exact evidence and the fix path.</div>
+        </div>
+        <div class="dispo-row">
+          <div class="dispo-chip chip-hold">Hold</div>
+          <div class="dispo-desc">Insufficient evidence to responsibly decide. We never convert unknown into pass.</div>
+        </div>
+        <div class="hero-card-foot">Every disposition is signed by a named human adjudicator and bound to one workflow, one frozen commit, and a stated validity window.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div id="strip">
+  <div class="strip-inner">
+    <div class="strip-item"><div class="strip-dot"></div>Next.js · Supabase · Firebase · Stripe</div>
+    <div class="strip-divider"></div>
+    <div class="strip-item"><div class="strip-dot"></div>Fixed Scope · Fixed Price</div>
+    <div class="strip-divider"></div>
+    <div class="strip-item"><div class="strip-dot"></div>Staging-Only · Written Rules of Engagement</div>
+    <div class="strip-divider"></div>
+    <div class="strip-item"><div class="strip-dot"></div>Veteran-Owned · SDVOSB</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-inner">
+    <div class="problem-layout">
+      <div>
+        <div class="section-label">The Release-Confidence Gap</div>
+        <h2>Built Fast.<br><em>Verified Before</em><br>Exposure.</h2>
+        <p class="section-intro">AI coding agents let you build working software faster than any founder can independently verify it. That's not a code-quality problem — it's a release-confidence problem. The app compiles, the demo lands, and the question that keeps you from shipping stays unanswered.</p>
+        <div class="problem-callout">"A product can pass every happy-path test and still be missing the controls nobody wrote — because nobody asked for them."</div>
+      </div>
+      <div>
+        <ul class="problem-list">
+          <li><div class="p-icon">01</div>Server-side authorization that actually gates the final database write — not just the button in the UI.</li>
+          <li><div class="p-icon">02</div>Tenant and object-ownership boundaries: can one user reach another user's records?</li>
+          <li><div class="p-icon">03</div>Row-level security and storage policies that enforce what the app assumes.</li>
+          <li><div class="p-icon">04</div>Webhook signature verification, replay protection, and idempotency on payment events.</li>
+          <li><div class="p-icon">05</div>Secrets confined to trusted contexts — not shipped to the browser bundle.</li>
+          <li><div class="p-icon">06</div>Fail-safe behavior when a dependency dies mid-transaction.</li>
+        </ul>
+        <p class="section-intro" style="margin-top:24px;font-size:14px;">Surface scanners flag known bad patterns. A control that was never written produces no finding. We test authorization, tenant boundaries, the enforcement of your business rules and math, and final side effects — the controls scanners may not prove.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENFORCEMENT DIFFERENTIATOR -->
+<section id="enforce" style="background:var(--gold-pale);">
+  <div class="section-inner">
+    <div class="section-label">What Scanners Can't Prove</div>
+    <h2>Your Rules. Your Math.<br><em>Actually Enforced.</em></h2>
+    <p class="section-intro">A scanner matches known-bad patterns. It cannot tell whether the price you charge, the margin you save, or the access you grant can be bypassed, tampered with, or skipped on the way to your database. That gap — a business rule the app is supposed to hold but doesn't — is the failure that sinks AI-built apps. It's the boundary we hold, and the one automated tools structurally can't.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:48px;background:rgba(11,28,58,0.10);">
+      <div style="background:var(--off-white);padding:38px 34px;">
+        <div class="offer-num" style="color:var(--gold);margin-bottom:14px;">You Own What's Correct</div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.6;color:var(--navy);font-style:italic;font-weight:500;">"Every saved record must satisfy margin = (price − cost) ÷ price, and a write that violates it must be rejected."</p>
+        <p style="font-size:13.5px;line-height:1.65;color:var(--text-muted);margin-top:16px;font-weight:300;">You state the rule, the formula, the step that can't be skipped. Whether the formula is the right business call stays yours — we don't invent or judge your math.</p>
+      </div>
+      <div style="background:var(--off-white);padding:38px 34px;">
+        <div class="offer-num" style="color:var(--gold);margin-bottom:14px;">We Prove It's Enforced</div>
+        <p style="font-size:15px;line-height:1.7;color:var(--navy);font-weight:400;">We prove your app honors that rule at the final write — and that no direct API call, replayed event, stale session, or tampered value can persist a number or an action that breaks it.</p>
+        <p style="font-size:13.5px;line-height:1.65;color:var(--text-muted);margin-top:16px;font-weight:300;">We prove the code obeys the rule you set and resists bypass. That is a decision an automated scanner cannot make — there is no pattern to match, only your logic to enforce.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section id="offer">
+  <div class="section-inner">
+    <div class="section-label">The Service</div>
+    <h2>The Critical Workflow<br><em>Release Gate.</em></h2>
+    <p class="section-intro">One customer, one application, one frozen code state, one critical workflow — checkout to entitlement, signup to authenticated access, upload to authorized retrieval. A bounded decision, not a scanner dump.</p>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <div class="offer-num">You Receive</div>
+        <div class="offer-headline">A Human-Signed Release Disposition</div>
+        <p class="offer-desc">GO, CONDITIONAL GO, NO-GO, or HOLD — with plain-language rationale, precise blockers, release conditions, residual risks, and the exact software state it applies to.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-num">Backed By</div>
+        <div class="offer-headline">Reproducible Evidence</div>
+        <p class="offer-desc">Commands, test inputs, outputs, code locations, and configuration states — preserved so you can reproduce the result rather than trust it on authority. Negative-path tests attempt the prohibited paths: wrong user, wrong tenant, replayed event, direct API call.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-num">Then</div>
+        <div class="offer-headline">Fix Tickets + Re-Verification</div>
+        <p class="offer-desc">Implementation-ready remediation tickets scoped for your developer or your coding agent — acceptance criteria and required tests included. One targeted re-verification cycle confirms the fixes actually closed the gaps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-label">Method</div>
+    <h2>Six Steps to a<br><em>Defensible Decision.</em></h2>
+    <p class="section-intro">Agents investigate. Deterministic methods prove. A human adjudicates. Discovery, remediation, and verification stay separated — the agent that built your app is never the judge of its own work.</p>
+    <div class="phase-list">
+      <div class="phase-row">
+        <div class="phase-num">01</div>
+        <div class="phase-name">Scope &amp; Freeze</div>
+        <div class="phase-desc">We define the workflow, actors, intended and prohibited outcomes, and freeze the exact commit. Written rules of engagement before any testing. Staging only, least privilege, non-destructive by default.</div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">02</div>
+        <div class="phase-name">Trace to the Final Sink</div>
+        <div class="phase-desc">The workflow is mapped from entry point through identity, session, tenant context, business rules, and final authorization — down to the database write, file, entitlement, or payment state it actually produces. Alternate paths inventoried: direct APIs, webhooks, retries, background jobs.</div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">03</div>
+        <div class="phase-name">Invariants Before Tools</div>
+        <div class="phase-desc">Your business rules become testable invariants — what must always be true, regardless of implementation. Controls are selected from recognized standards (OWASP ASVS, NIST guidance) and your stack's official documentation.</div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">04</div>
+        <div class="phase-name">Independent Review + Negative Testing</div>
+        <div class="phase-desc">Fresh-context review passes and deterministic verification — builds, tests, policy checks, and safe adversarial attempts at the paths that must fail. Unknown is never converted into pass.</div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">05</div>
+        <div class="phase-name">Human Adjudication</div>
+        <div class="phase-desc">A named human reviews invariant status, evidence sufficiency, blockers, and residual risk — then signs the disposition. Severity is not the same as release effect; a medium finding can block, a high finding can wait. We tell you which is which and why.</div>
+      </div>
+      <div class="phase-row">
+        <div class="phase-num">06</div>
+        <div class="phase-name">Walkthrough, Fix, Re-Verify</div>
+        <div class="phase-desc">A plain-language walkthrough of the decision and what must happen before release. You or your agent implement the tickets; we independently re-verify the agreed blockers within the included 14-day window.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIT -->
+<section id="fit">
+  <div class="section-inner">
+    <div class="section-label">Fit</div>
+    <h2>Built for Founders<br><em>Shipping AI-Built Apps.</em></h2>
+    <div class="fit-grid">
+      <div class="fit-col">
+        <div class="fit-col-title">The Gate is for you if —</div>
+        <ul class="fit-list">
+          <li><div class="fit-mark mark-yes">✓</div>You have a working, production-intent web app built materially with AI coding tools.</li>
+          <li><div class="fit-mark mark-yes">✓</div>Your stack is Next.js with Supabase or Firebase — often with Stripe.</li>
+          <li><div class="fit-mark mark-yes">✓</div>You're approaching launch, onboarding real users, or enabling payments.</li>
+          <li><div class="fit-mark mark-yes">✓</div>You can provide source access and a staging environment.</li>
+          <li><div class="fit-mark mark-yes">✓</div>You want a clear release recommendation — fast, at a fixed price.</li>
+        </ul>
+      </div>
+      <div class="fit-col fit-no">
+        <div class="fit-col-title">Not designed for —</div>
+        <ul class="fit-list">
+          <li><div class="fit-mark mark-no">—</div>Active security incidents or suspected ongoing compromise.</li>
+          <li><div class="fit-mark mark-no">—</div>Systems requiring formal regulatory certification or attestation opinions.</li>
+          <li><div class="fit-mark mark-no">—</div>Applications storing raw payment-card data or regulated health data.</li>
+          <li><div class="fit-mark mark-no">—</div>Native mobile, blockchain, or large enterprise environments.</li>
+          <li><div class="fit-mark mark-no">—</div>Anyone seeking a public "security badge" without scope and limitations attached.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-label">Pricing</div>
+    <h2>Fixed Scope.<br><em>Fixed Price.</em></h2>
+    <p class="section-intro">Priced by defined scope and assurance effort — never by fear, and never by finding count. Custom scope is quoted in writing before testing begins.</p>
+    <div class="price-grid">
+      <div class="price-card featured">
+        <div class="price-flag">First 5 Qualified Founders</div>
+        <div class="price-tier">Founding Partner</div>
+        <div class="price-amount">$1,500<span> fixed</span></div>
+        <div class="price-note">In exchange: one 60-minute feedback interview. That's the whole ask.</div>
+        <ul class="price-list">
+          <li><span class="price-tick">✓</span>One critical workflow, one frozen code state</li>
+          <li><span class="price-tick">✓</span>Independent review + safe negative testing</li>
+          <li><span class="price-tick">✓</span>Human-signed release disposition with evidence</li>
+          <li><span class="price-tick">✓</span>Implementation-ready remediation tickets</li>
+          <li><span class="price-tick">✓</span>One targeted re-verification within 14 days</li>
+          <li><span class="price-tick">✓</span>Customer walkthrough of the decision</li>
+        </ul>
+        <a href="mailto:support@vetopsfinancial.com?subject=Founding%20Partner%20%E2%80%94%20Critical%20Workflow%20Release%20Gate" class="btn-primary price-cta">Request a Founding Slot</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Standard Gate</div>
+        <div class="price-amount">$2,250<span> fixed</span></div>
+        <div class="price-note">Standard rate after the founding-partner cohort closes.</div>
+        <ul class="price-list">
+          <li><span class="price-tick">✓</span>Same engagement envelope and evidence standard</li>
+          <li><span class="price-tick">✓</span>Same included re-verification cycle</li>
+          <li><span class="price-tick">✓</span>Three-business-day delivery objective*</li>
+          <li><span class="price-tick">✓</span>Critical blockers flagged as soon as confirmed — before the final report</li>
+        </ul>
+        <a href="mailto:support@vetopsfinancial.com?subject=Critical%20Workflow%20Release%20Gate%20Inquiry" class="btn-ghost price-cta">Join the Waitlist</a>
+      </div>
+    </div>
+    <p class="pricing-foot">*Delivery objective begins when your engagement is Ready for Review (access, staging, and test accounts confirmed). It is an operating objective during our pilot period, not a guaranteed service-level agreement. The included re-verification covers agreed blockers on one remediation state submitted within 14 calendar days.</p>
+  </div>
+</section>
+
+<!-- SCOPE NOTE -->
+<section id="scope">
+  <div class="scope-box">
+    <div class="scope-title">What this is — and what it isn't.</div>
+    <p class="scope-text">The Release Gate is an <strong>evidence-backed release recommendation for one defined workflow at one frozen software state</strong>. It is not a comprehensive penetration test, a certification, a compliance attestation, or a promise that your application is vulnerability-free. A GO means no known release-blocking condition was identified within the assessed scope and evidence — with residual risks and exclusions stated in writing. <strong>You remain the release authority.</strong> We believe a narrow conclusion that is fully supported beats a broad claim that can't be defended — and we'll never convert insufficient evidence into a pass to meet a deadline. Yours or ours.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Founding Partner Cohort · Now Forming</div>
+    <h2>Launch With<br><em>Evidence.</em></h2>
+    <p class="section-intro">Tell us what you built, what stack it runs on, and which workflow keeps you up at night. We'll tell you within one business day whether the Gate fits — and exactly what we'd need to start.</p>
+    <div class="cta-group">
+      <a href="mailto:support@vetopsfinancial.com?subject=Founding%20Partner%20%E2%80%94%20Critical%20Workflow%20Release%20Gate" class="btn-navy">Request a Release Gate</a>
+      <a href="index.html" class="btn-primary">VetOps Financial Home</a>
+    </div>
+    <p class="contact-note">Direct line: <a href="mailto:support@vetopsfinancial.com">support@vetopsfinancial.com</a> &nbsp;·&nbsp; Raeford, North Carolina &nbsp;·&nbsp; Veteran-Owned</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="vetops-shield.png" alt="VetOps Financial" style="height:36px;width:auto;display:block;">
+      <span class="footer-wordmark">VetOps Financial</span>
+    </div>
+    <div class="footer-meta">
+      © 2026 VetOps Financial, LLC · Raeford, NC<br>
+      SDVOSB · Veteran-Owned · All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
