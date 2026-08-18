@@ -346,6 +346,56 @@
   }
   .yield-truth strong { font-weight: 600; }
 
+  /* Programs & Infrastructure */
+  #programs { padding: 88px 5%; background: var(--off-white); }
+  .programs-inner { max-width: 1000px; margin: 0 auto; }
+  .programs-inner > .section-intro { max-width: 640px; }
+  .program-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    margin-top: 44px;
+    background: rgba(11,28,58,0.08);
+  }
+  .program-card {
+    min-height: 220px;
+    padding: 34px;
+    background: var(--white);
+    border-top: 2px solid var(--gold);
+    color: var(--navy);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .program-card:hover { background: var(--gold-pale); transform: translateY(-2px); }
+  .program-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .program-status {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .program-detail { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+  .program-badge {
+    display: block;
+    width: min(100%, 320px);
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+    margin-bottom: 18px;
+  }
+  .program-note { margin-top: 18px; font-size: 11px; line-height: 1.5; color: var(--text-muted); }
+
   /* ── PRICING ── */
   #pricing { padding: 96px 5%; background: var(--white); }
   .pricing-inner { max-width: 900px; margin: 0 auto; text-align: center; }
@@ -464,7 +514,8 @@
     .hero-text { min-width: 0; max-width: 100%; }
     .hero-pain { max-width: calc(100vw - 46px); }
     .hero-dashboard { display: none; }
-    .pain-grid, .steps, .module-grid, .pricing-grid, .yield-inner { grid-template-columns: 1fr; }
+    .pain-grid, .steps, .module-grid, .pricing-grid, .yield-inner, .program-grid { grid-template-columns: 1fr; }
+    .program-card { min-height: 0; padding: 30px 24px; }
     .steps::before { display: none; }
     .nav-right .nav-link { display: none; }
     .nav-by { display: none; }
@@ -622,6 +673,27 @@
     <div style="margin-top:28px;">
       <a href="#pilot" class="btn-gold">Request Pilot Access</a>
     </div>
+  </div>
+</section>
+<!-- PROGRAMS & INFRASTRUCTURE -->
+<section id="programs">
+  <div class="programs-inner">
+    <div class="section-label">Programs &amp; Infrastructure</div>
+    <h2>Programs &amp;<br><em>Infrastructure.</em></h2>
+    <p class="section-intro">Program participation and cloud infrastructure supporting the controlled MarginCommand beta.</p>
+    <div class="program-grid">
+      <a class="program-card" href="https://cloud.google.com/startup" target="_blank" rel="noopener noreferrer">
+        <div class="program-name">Google for Startups Cloud Program</div>
+        <div class="program-status">Member</div>
+        <p class="program-detail">Member of the Google for Startups Cloud Program</p>
+        <p class="program-detail"><strong>Built on Google Cloud</strong></p>
+      </a>
+      <a class="program-card" href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer">
+        <img class="program-badge" src="assets/programs/nvidia-inception-program-badge-rgb-for-screen.jpg" alt="NVIDIA Inception member badge" width="501" height="217">
+        <div class="program-name">NVIDIA Inception member</div>
+      </a>
+    </div>
+    <p class="program-note">Program participation and technology use do not imply partnership or endorsement.</p>
   </div>
 </section>
 <!-- PAIN -->
