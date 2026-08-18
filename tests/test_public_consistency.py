@@ -53,6 +53,10 @@ DEMO_VIDEO = (
 DEMO_VIDEO_URL = (
     "assets/video/MarginCommand_Community_Dinner_Natural_Cadence_83s.mp4"
 )
+SHORT_COMMERCIAL_VIDEO = (
+    REPOSITORY_ROOT / "assets/video/margincommandv1.mp4"
+)
+SHORT_COMMERCIAL_VIDEO_URL = "assets/video/margincommandv1.mp4"
 CLOUDFLARE_MAX_ASSET_BYTES = 25 * 1024 * 1024
 PROMOTED_BETA_URL = "https://margincommand-app-e7fq2xpfwa-ue.a.run.app"
 PILOT_APPLICATION_URL = (
@@ -167,6 +171,30 @@ class PublicConsistencyTests(unittest.TestCase):
         ]
         self.assertEqual([], founderrelease_links)
 
+    def test_homepage_uses_ongoing_founder_operated_proof(self):
+        text = parse_page(REPOSITORY_ROOT / "index.html").visible_text
+        required = (
+            "Ongoing",
+            "founder-operated use",
+            "Built in the Business.",
+            "Used on Real Work.",
+            "used for months",
+            "representative examples",
+            "not independent customer validation",
+            "Wedding Reception",
+            "Church Fundraiser",
+            "Drop-off Event",
+        )
+        for copy in required:
+            with self.subTest(copy=copy):
+                self.assertIn(copy, text)
+        self.assertNotIn(
+            "3 founder-operated jobs exercised",
+            text.lower(),
+        )
+        self.assertNotIn("Every operator", text)
+        self.assertNotIn("Almost none", text)
+
     def test_founderrelease_is_noindex(self):
         page = parse_page(REPOSITORY_ROOT / "founderrelease.html")
         robots_values = [
@@ -232,11 +260,16 @@ class PublicConsistencyTests(unittest.TestCase):
                     parse_page(page).visible_text,
                 )
 
-    def test_demo_video_exists_under_25_mib(self):
-        self.assertTrue(DEMO_VIDEO.is_file(), f"Missing {DEMO_VIDEO}")
-        self.assertLess(DEMO_VIDEO.stat().st_size, CLOUDFLARE_MAX_ASSET_BYTES)
+    def test_margincommand_video_assets_exist_under_25_mib(self):
+        for video in (SHORT_COMMERCIAL_VIDEO, DEMO_VIDEO):
+            with self.subTest(video=video.name):
+                self.assertTrue(video.is_file(), f"Missing {video}")
+                self.assertLess(
+                    video.stat().st_size,
+                    CLOUDFLARE_MAX_ASSET_BYTES,
+                )
 
-    def test_demo_video_is_referenced_by_both_margincommand_surfaces(self):
+    def test_both_margincommand_videos_are_referenced_by_both_surfaces(self):
         for page in MARGINCOMMAND_PAGES:
             with self.subTest(page=page.name):
                 sources = [
@@ -244,22 +277,58 @@ class PublicConsistencyTests(unittest.TestCase):
                     for tag, attrs in parse_page(page).tags
                     if tag == "source"
                 ]
-                self.assertIn(DEMO_VIDEO_URL, sources)
+                self.assertEqual(
+                    [SHORT_COMMERCIAL_VIDEO_URL, DEMO_VIDEO_URL],
+                    sources,
+                )
 
-    def test_demo_video_has_controls_playsinline_and_metadata_preload(self):
+    def test_both_videos_have_safe_controls_and_accessible_fallbacks(self):
         for page in MARGINCOMMAND_PAGES:
             with self.subTest(page=page.name):
+                parsed = parse_page(page)
                 videos = [
                     attrs
-                    for tag, attrs in parse_page(page).tags
+                    for tag, attrs in parsed.tags
                     if tag == "video"
                 ]
-                self.assertEqual(1, len(videos))
-                video = videos[0]
-                self.assertIn("controls", video)
-                self.assertIn("playsinline", video)
-                self.assertEqual("metadata", video.get("preload"))
-                self.assertNotIn("autoplay", video)
+                self.assertEqual(2, len(videos))
+                for video in videos:
+                    self.assertIn("controls", video)
+                    self.assertIn("playsinline", video)
+                    self.assertEqual("metadata", video.get("preload"))
+                    self.assertNotIn("autoplay", video)
+                    self.assertTrue(video.get("aria-label", "").strip())
+                hrefs = [href for _, href in parsed.links]
+                self.assertIn(SHORT_COMMERCIAL_VIDEO_URL, hrefs)
+                self.assertIn(DEMO_VIDEO_URL, hrefs)
+                self.assertIn(
+                    ("See the Full Workflow", "#product-demo"),
+                    parsed.links,
+                )
+
+    def test_margincommand_sections_follow_the_commercial_funnel(self):
+        expected = [
+            "hero",
+            "commercial-short",
+            "pain",
+            "workflow",
+            "yield",
+            "how",
+            "modules",
+            "proof",
+            "product-demo",
+            "programs",
+            "pricing",
+            "pilot",
+        ]
+        for page in MARGINCOMMAND_PAGES:
+            with self.subTest(page=page.name):
+                section_ids = [
+                    attrs.get("id")
+                    for tag, attrs in parse_page(page).tags
+                    if tag == "section" and attrs.get("id") in expected
+                ]
+                self.assertEqual(expected, section_ids)
 
     def test_margincommand_dashboards_are_explicitly_illustrative(self):
         for page in MARGINCOMMAND_PAGES:
@@ -283,6 +352,98 @@ class PublicConsistencyTests(unittest.TestCase):
                     "Drop-off Event · Founder-operated · Bulk",
                     text,
                 )
+
+    def test_margincommand_hero_uses_ongoing_proof_without_speed_claim(self):
+        for page in MARGINCOMMAND_PAGES:
+            with self.subTest(page=page.name):
+                text = parse_page(page).visible_text
+                required = (
+                    "Ongoing",
+                    "Founder-operated use",
+                    "Connected",
+                    "Quote → Proposal",
+                    "one workflow",
+                    "$20",
+                )
+                for copy in required:
+                    self.assertIn(copy, text)
+                self.assertNotIn("Founder-operated jobs exercised", text)
+                self.assertNotIn("60s", text)
+                self.assertNotIn("~60 seconds", text)
+
+    def test_margincommand_publishes_paid_pilot_and_standard_pricing(self):
+        required = (
+            "CURRENT CONTROLLED PILOT",
+            "Founding Pilot",
+            "$20",
+            "Controlled paid beta for qualified owner-operated businesses.",
+            "Credit card required upon accepted paid pilot activation.",
+            "PUBLISHED STANDARD PRICING",
+            "Starter",
+            "$37",
+            "Pro",
+            "$79",
+            "RECOMMENDED",
+            "Pro+",
+            "$149",
+            "Limited availability during controlled commercialization.",
+            "AI and document-processing usage allowances apply.",
+            "Pilot Access Required",
+        )
+        forbidden = (
+            "60 Days Free",
+            "60 days free",
+            "No card required",
+            "no card required",
+            "Start Free Pilot",
+            "Free Pilot",
+            "Try It Free",
+            "Unlimited jobs",
+            "Unlimited AI",
+            "MOST POPULAR",
+            "Most Popular",
+            "live support",
+            "24/7 support",
+            "dedicated account manager",
+            "No payment information required",
+            "Buy Now",
+            "Subscribe",
+            "Checkout",
+            "Enter Card",
+            "Start Subscription",
+        )
+        for page in MARGINCOMMAND_PAGES:
+            with self.subTest(page=page.name):
+                text = parse_page(page).visible_text.replace("$ ", "$")
+                for copy in required:
+                    self.assertIn(copy, text)
+                for copy in forbidden:
+                    self.assertNotIn(copy, text)
+
+    def test_margincommand_pricing_preserves_payment_and_ai_boundaries(self):
+        required = (
+            "Operator-owned payment-link workflow",
+            "MarginCommand does not process payments",
+            "route funds",
+            "act as merchant of record",
+            "AI-assisted advisory workflows",
+            "AI output is advisory",
+            "operator reviews and approves",
+        )
+        forbidden = (
+            "AI automatically updates",
+            "AI autonomously prices",
+            "AI automatically books",
+            "AI automatically changes actuals",
+            "AI manages your finances",
+        )
+        for page in MARGINCOMMAND_PAGES:
+            with self.subTest(page=page.name):
+                text = parse_page(page).visible_text
+                for copy in required:
+                    self.assertIn(copy, text)
+                for copy in forbidden:
+                    self.assertNotIn(copy, text)
 
     def test_margincommand_uses_anonymous_operator_discovery_evidence(self):
         quote = (
@@ -345,9 +506,10 @@ class PublicConsistencyTests(unittest.TestCase):
                 links = [
                     href
                     for text, href in parse_page(page).links
-                    if text == "Apply for Pilot Access"
+                    if text == "Apply for $20 Pilot"
                 ]
-                self.assertEqual([PILOT_APPLICATION_URL], links)
+                self.assertGreaterEqual(len(links), 2)
+                self.assertEqual([PILOT_APPLICATION_URL] * len(links), links)
 
 
 if __name__ == "__main__":
