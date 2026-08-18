@@ -191,6 +191,15 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px; color: var(--gold); letter-spacing: 0.1em;
   }
+  .dashboard-provenance {
+    padding: 9px 16px;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    background: rgba(201,168,76,0.06);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; line-height: 1.5; letter-spacing: 0.08em;
+    text-transform: uppercase; color: rgba(255,255,255,0.62);
+  }
+  .dashboard-provenance-mobile { display: none; }
   .dash-dot-row { display: flex; gap: 5px; }
   .dash-dot { width: 8px; height: 8px; border-radius: 50%; }
   .dash-body { padding: 20px; }
@@ -438,7 +447,7 @@
   .price-cta.solid { background: var(--gold); color: var(--navy); transition: background 0.2s; }
   .price-cta.solid:hover { background: var(--gold-light); }
 
-  /* ── TESTIMONIAL ── */
+  /* ── OPERATOR DISCOVERY ── */
   #proof { padding: 80px 5%; background: var(--gold-pale); }
   .proof-inner { max-width: 860px; margin: 0 auto; text-align: center; }
   .proof-quote {
@@ -448,6 +457,9 @@
   }
   .proof-attr { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
   .proof-attr strong { color: var(--navy); }
+  .proof-interpretation { max-width: 720px; margin: 28px auto 0; color: var(--text-muted); font-size: 15px; line-height: 1.7; }
+  .proof-founder { margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(11,28,58,0.12); }
+  .proof-founder-label { margin-bottom: 10px; color: var(--gold); font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
 
   /* ── PILOT CTA ── */
   #pilot {
@@ -516,6 +528,14 @@
     .hero-text { min-width: 0; max-width: 100%; }
     .hero-pain { max-width: calc(100vw - 46px); }
     .hero-dashboard { display: none; }
+    .dashboard-provenance-mobile {
+      display: block;
+      padding: 12px 14px;
+      border: 1px solid rgba(201,168,76,0.22);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px; line-height: 1.5; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.62);
+    }
     .pain-grid, .steps, .module-grid, .pricing-grid, .yield-inner, .program-grid { grid-template-columns: 1fr; }
     .program-card { min-height: 0; padding: 30px 24px; }
     .steps::before { display: none; }
@@ -592,6 +612,7 @@
 </div>
 </div>
 </div>
+<div class="dashboard-provenance-mobile">Illustrative founder-operated workflow dashboard</div>
 <!-- MOCK DASHBOARD -->
 <div class="hero-dashboard">
 <div class="dash-topbar">
@@ -602,6 +623,7 @@
 <div class="dash-dot" style="background:#3DAA6E"></div>
 </div>
 </div>
+<div class="dashboard-provenance">Illustrative founder-operated workflow dashboard</div>
 <div class="dash-body">
 <div class="dash-label">Pipeline · Active Jobs</div>
 <div class="kpi-row">
@@ -615,7 +637,7 @@
 </div>
 <div class="kpi-card">
 <div class="kpi-val">$20,100</div>
-<div class="kpi-lbl">Pipeline Value</div>
+<div class="kpi-lbl">Illustrative Job Value</div>
 </div>
 <div class="kpi-card">
 <div class="kpi-val green">+1.6%</div>
@@ -1016,12 +1038,18 @@
 <p class="section-intro" style="margin:28px auto 0;text-align:center;font-size:13px;">Published beta pricing is being tested during controlled commercialization.</p>
 </div>
 </section>
-<!-- PROOF QUOTE -->
+<!-- OPERATOR DISCOVERY -->
 <section id="proof">
 <div class="proof-inner">
-<div class="proof-quote">"The pricing error isn't a math problem. It's a visibility problem. Every operator knows their food cost. Almost none of them know their actual yield-adjusted margin until the job is already done."</div>
+<div class="section-label">Customer Discovery</div>
+<div class="proof-quote">"I did a deep dive into QuickBooks for my original location and found out my profit margins are 5%. Food cost averages 39% and payroll costs 42%. We do nearly $60K in sales a month. How do I boost these margins? I can't think of the answer."</div>
+<div class="proof-attr"><strong>Owner, fast-casual BBQ &amp; catering business</strong><br/>Customer discovery · Business identity withheld</div>
+<p class="proof-interpretation">The problem is not simply calculating a margin. It is understanding what drove it—and what to change before the next job.</p>
+<div class="proof-founder">
+<div class="proof-founder-label">Founder</div>
 <div class="proof-attr"><strong>Brian Penrod, DBA</strong>  ·  Founder &amp; CEO, VetOps Financial  ·  Creator, MarginCommand  ·  Owner, Bud Wiser's BBQ LLC  ·  CSM (Ret.), U.S. Army Special Forces</div>
 <div class="proof-attr" style="margin-top:10px;font-size:10px;">Doctor of Business Administration with a finance concentration</div>
+</div>
 </div>
 </section>
 <!-- PILOT CTA -->

@@ -261,6 +261,73 @@ class PublicConsistencyTests(unittest.TestCase):
                 self.assertEqual("metadata", video.get("preload"))
                 self.assertNotIn("autoplay", video)
 
+    def test_margincommand_dashboards_are_explicitly_illustrative(self):
+        for page in MARGINCOMMAND_PAGES:
+            with self.subTest(page=page.name):
+                text = parse_page(page).visible_text
+                self.assertNotIn("Pipeline Value", text)
+                self.assertIn("Illustrative Job Value", text)
+                self.assertIn(
+                    "Illustrative founder-operated workflow dashboard",
+                    text,
+                )
+                self.assertIn(
+                    "Wedding Reception · Founder-operated · 175pp",
+                    text,
+                )
+                self.assertIn(
+                    "Church Fundraiser · Founder-operated · 300pp",
+                    text,
+                )
+                self.assertIn(
+                    "Drop-off Event · Founder-operated · Bulk",
+                    text,
+                )
+
+    def test_margincommand_uses_anonymous_operator_discovery_evidence(self):
+        quote = (
+            "I did a deep dive into QuickBooks for my original location "
+            "and found out my profit margins are 5%. Food cost averages "
+            "39% and payroll costs 42%. We do nearly $60K in sales a "
+            "month. How do I boost these margins? I can't think of the "
+            "answer."
+        )
+        required = (
+            "Customer Discovery",
+            quote,
+            "Owner, fast-casual BBQ & catering business",
+            "Customer discovery · Business identity withheld",
+            "The problem is not simply calculating a margin. It is "
+            "understanding what drove it—and what to change before the "
+            "next job.",
+            "Brian Penrod, DBA",
+            "Founder & CEO, VetOps Financial",
+            "Creator, MarginCommand",
+            "Owner, Bud Wiser's BBQ LLC",
+            "CSM (Ret.), U.S. Army Special Forces",
+            "Doctor of Business Administration with a finance concentration",
+        )
+        forbidden = (
+            "Every operator",
+            "Almost none",
+            "Testimonial",
+            "Customer testimonial",
+            "MarginCommand user",
+            "MarginCommand customer",
+            "Paying customer",
+            "Pilot result",
+            "User result",
+            "Case study",
+            "MarginCommand-discovered result",
+        )
+        for page in MARGINCOMMAND_PAGES:
+            with self.subTest(page=page.name):
+                text = parse_page(page).visible_text
+                for copy in required:
+                    self.assertIn(copy, text)
+                for copy in forbidden:
+                    self.assertNotIn(copy, text)
+
     def test_beta_login_url_remains_promoted_f5_url(self):
         for page in MARGINCOMMAND_PAGES:
             with self.subTest(page=page.name):
