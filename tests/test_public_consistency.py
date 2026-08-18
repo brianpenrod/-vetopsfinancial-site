@@ -60,6 +60,7 @@ PILOT_APPLICATION_URL = (
     "1FAIpQLSfiqyKsns1R0NEWjN9HYnwVzwx4WiN5mdiIr_Ykz0b-8dr32Q/"
     "viewform?usp=publish-editor"
 )
+FAVICON_URL = "vetops-shield.png"
 
 
 class PublicPageParser(HTMLParser):
@@ -119,6 +120,21 @@ def parse_page(page):
 
 
 class PublicConsistencyTests(unittest.TestCase):
+    def test_public_pages_declare_existing_favicon(self):
+        self.assertTrue(
+            (REPOSITORY_ROOT / FAVICON_URL).is_file(),
+            f"Missing {FAVICON_URL}",
+        )
+        for page in PUBLIC_PAGES:
+            with self.subTest(page=page.name):
+                favicons = [
+                    attrs.get("href", "")
+                    for tag, attrs in parse_page(page).tags
+                    if tag == "link"
+                    and "icon" in attrs.get("rel", "").lower().split()
+                ]
+                self.assertIn(FAVICON_URL, favicons)
+
     def test_public_pages_use_fayetteville(self):
         for page in PUBLIC_PAGES:
             with self.subTest(page=page.name):
