@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VetOps Financial | Veteran-Owned Operational Technology</title>
+<title>VetOps Financial | MarginCommand Job-Margin Software</title>
+<meta name="description" content="VetOps Financial develops MarginCommand, a quote-to-actual job-margin workflow for owner-operated businesses.">
+<link rel="canonical" href="https://vetopsfinancial.com/">
+<link rel="icon" href="vetops-shield.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -365,7 +368,7 @@
   }
 
   /* ── DIVISIONS ── */
-  #divisions { background: var(--white); }
+  #margincommand { background: var(--white); }
 
   .divisions-header {
     display: flex; justify-content: space-between; align-items: flex-end;
@@ -698,14 +701,82 @@
     font-weight: 300;
   }
 
+  /* Programs & Infrastructure */
+  #programs { background: var(--white); }
+
+  .program-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    margin-top: 48px;
+    background: rgba(11,28,58,0.08);
+  }
+
+  .program-card {
+    min-height: 230px;
+    padding: 36px;
+    background: var(--off-white);
+    border-top: 2px solid var(--gold);
+    color: var(--navy);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .program-card:hover {
+    background: var(--gold-pale);
+    transform: translateY(-2px);
+  }
+
+  .program-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .program-status {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .program-detail {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .program-badge {
+    display: block;
+    width: min(100%, 320px);
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+    margin-bottom: 18px;
+  }
+
+  .program-note {
+    margin-top: 18px;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
   /* ── CTA ── */
-  #contact {
+  #pilot {
     background: var(--gold-pale);
     text-align: center;
   }
 
-  #contact h2 { color: var(--navy); margin-bottom: 16px; }
-  #contact .section-intro { margin: 0 auto 44px; }
+  #pilot h2 { color: var(--navy); margin-bottom: 16px; }
+  #pilot .section-intro { margin: 0 auto 44px; }
 
   .cta-group {
     display: flex; justify-content: center; gap: 16px; align-items: center;
@@ -784,6 +855,8 @@
     .division-cards { grid-template-columns: 1fr; }
     .founder-layout { grid-template-columns: 1fr; }
     .validation-grid { grid-template-columns: 1fr; }
+    .program-grid { grid-template-columns: 1fr; }
+    .program-card { min-height: 0; padding: 30px 24px; }
     .nav-links { display: none; }
     .divisions-header { flex-direction: column; align-items: flex-start; gap: 16px; }
   }
@@ -798,11 +871,11 @@
     <span class="nav-wordmark">VetOps Financial</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#divisions">Divisions</a></li>
-    <li><a href="margincommand.html">MarginCommand</a></li>
-    <li><a href="founderrelease.html">Release Readiness</a></li>
-    <li><a href="#founder">Leadership</a></li>
+    <li><a href="#margincommand">MarginCommand</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
     <li><a href="#validation">Validation</a></li>
+    <li><a href="#founder">Founder</a></li>
+    <li><a href="#pilot">Pilot</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
 </nav>
@@ -813,34 +886,33 @@
   <div class="hero-glow"></div>
   <div class="hero-content">
     <div class="hero-left">
-      <div class="hero-badge">SDVOSB · Veteran-Owned · Raeford, NC</div>
-      <h1>Operational<br>Precision.<br><em>Financial Clarity.</em></h1>
-      <p class="hero-sub">VetOps Financial builds workflow technology for operators who cannot afford the gap between what they quote and what they earn. Founded by a 29-year Special Forces Command Sergeant Major.</p>
+      <div class="hero-badge">Veteran-Owned · Fayetteville, NC</div>
+      <h1>VetOps Financial develops<br><em>MarginCommand.</em></h1>
+      <p class="hero-sub"><strong>Quote the job. Approve actuals. Improve the next quote.</strong><br><br>MarginCommand is a quote-to-actual job-margin workflow for owner-operated businesses. It helps operators estimate a job using realistic material, labor, travel, yield, and other direct-cost assumptions; create customer documents; review approved actual costs after the work; and use the variance to improve future quotes.</p>
       <div class="hero-actions">
-        <a href="#divisions" class="btn-primary">View Divisions</a>
-        <a href="#contact" class="btn-ghost">Investor Inquiries</a>
+        <a href="margincommand.html" class="btn-primary">Explore MarginCommand</a>
+        <a href="margincommand.html#pilot" class="btn-ghost">Request Pilot Access</a>
       </div>
     </div>
     <div class="hero-right">
       <div class="hero-card">
-        <div class="hero-card-label">Command Metrics · Beachhead Validation</div>
+        <div class="hero-card-label">MarginCommand · Commercialization Stage</div>
         <div class="stat-grid">
           <div class="stat-item">
-            <div class="stat-num">85<span>%+</span></div>
-            <div class="stat-label">Gross margin target at scale</div>
+            <div class="stat-num" style="font-size:28px;">Working</div>
+            <div class="stat-label">MVP</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">60<span>s</span></div>
-            <div class="stat-label">Quote-to-estimate workflow</div>
+            <div class="stat-num" style="font-size:28px;">Controlled</div>
+            <div class="stat-label">beta</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">3<span>x</span></div>
-            <div class="stat-num" style="font-size:16px;color:rgba(255,255,255,0.4);margin-top:0"></div>
-            <div class="stat-label">Real job datasets validated</div>
+            <div class="stat-num" style="font-size:28px;">Ongoing</div>
+            <div class="stat-label">founder-operated use</div>
           </div>
           <div class="stat-item">
             <div class="stat-num">29<span>yr</span></div>
-            <div class="stat-label">Special Forces operational experience</div>
+            <div class="stat-label">operational leadership</div>
           </div>
         </div>
         <div class="hero-divider"></div>
@@ -859,80 +931,52 @@
 <!-- CREDIBILITY STRIP -->
 <div id="credibility">
   <div class="cred-inner">
-    <div class="cred-item"><div class="cred-dot"></div>PenFed VEP Cohort 2026</div>
+    <div class="cred-item"><div class="cred-dot"></div>PenFed Veteran Entrepreneur Program / FounderTrac 2026 · $5,000 grant recipient</div>
     <div class="cred-divider"></div>
-    <div class="cred-item"><div class="cred-dot"></div>SDVOSB Eligible</div>
+    <div class="cred-item"><div class="cred-dot"></div>Veteran-Owned</div>
     <div class="cred-divider"></div>
-    <div class="cred-item"><div class="cred-dot"></div>DBA · Liberty University 2025</div>
+    <div class="cred-item"><div class="cred-dot"></div>Doctor of Business Administration with a finance concentration</div>
     <div class="cred-divider"></div>
-    <div class="cred-item"><div class="cred-dot"></div>Live MVP · Bud Wiser's BBQ Validated</div>
+    <div class="cred-item"><div class="cred-dot"></div>Working MVP · Controlled beta</div>
     <div class="cred-divider"></div>
-    <div class="cred-item"><div class="cred-dot"></div>Raeford, North Carolina</div>
+    <div class="cred-item"><div class="cred-dot"></div>Fayetteville, North Carolina</div>
   </div>
 </div>
 
-<!-- DIVISIONS -->
-<section id="divisions">
+<!-- MARGINCOMMAND -->
+<section id="margincommand">
   <div class="section-inner">
     <div class="divisions-header">
       <div>
-        <div class="section-label">Portfolio Architecture</div>
-        <h2>Four Divisions.<br><em>One Doctrine.</em></h2>
+        <div class="section-label">Commercialization Focus</div>
+        <h2>One Product.<br><em>One Commercialization Mission.</em></h2>
       </div>
-      <p class="section-intro" style="max-width:360px;font-size:14px;">A phased campaign structure. Each division activates on proven gates — not ambition. MarginCommand is the main effort; Founder Release Readiness is the active revenue engine.</p>
+      <p class="section-intro" style="max-width:520px;font-size:14px;">VetOps Financial is commercializing MarginCommand, a focused quote-to-actual job-margin workflow for very small owner-operated businesses. The initial beachhead is owner-operated event catering, especially BBQ and off-premise catering, where food yield, labor, travel, supplies, and fixed-price commitments make job economics difficult to see before the work is complete.</p>
     </div>
     <div class="division-cards">
-
-      <!-- MarginCommand -->
       <a href="margincommand.html" class="division-card featured" style="text-decoration:none;">
-        <div class="division-num">Division I · Main Effort</div>
+        <div class="division-num">Working MVP · Controlled Beta</div>
         <div class="division-name">MarginCommand</div>
-        <div class="division-tagline">Quote. Track. Close the Gap.</div>
-        <p class="division-desc">Pilot-ready workflow for owner-operator service businesses. Quote to proposal/invoice to operator-owned payment link to receipt capture, approved actuals, and Mission Control margin review. Beachhead: BBQ caterers and food truck operators where yield-loss pricing error is a physical constant.</p>
+        <div class="division-tagline">Quote the job. Approve actuals. Improve the next quote.</div>
+        <p class="division-desc">A focused quote-to-actual workflow for owner-operated fixed-price job businesses, starting with owner-operated event caterers, especially BBQ and off-premise catering.</p>
         <div class="division-card-footer">
           <div class="division-status status-active">
-            <span class="status-dot"></span>Active · MVP Live
+            <span class="status-dot"></span>Pilot Commercialization
           </div>
           <span class="division-card-cta">Explore MarginCommand →</span>
         </div>
       </a>
-
-      <!-- Founder Release Readiness -->
-      <a href="founderrelease.html" class="division-card" style="text-decoration:none;">
-        <div class="division-num">Division II · Revenue Engine</div>
-        <div class="division-name">Founder Release<br>Readiness</div>
-        <div class="division-tagline">Built Fast. Verified Before Exposure.</div>
-        <p class="division-desc">Evidence-backed release gates for founders shipping AI-built software. One critical workflow, one frozen code state, safe negative testing, and a human-signed GO / CONDITIONAL GO / NO-GO / HOLD disposition with reproducible evidence and fix tickets. Founding-partner cohort now forming.</p>
+      <div id="how-it-works" class="division-card">
+        <div class="division-num">How It Works</div>
+        <div class="division-name">One Job File.<br>Quote to Actual.</div>
+        <div class="division-tagline">Operator visibility and approval</div>
+        <p class="division-desc">Estimate the job using realistic material, labor, travel, yield, and other direct-cost assumptions. Create customer documents from the approved quote, review actual costs after the work, and use the variance to improve future quotes. AI assists; operators approve. Operator-owned payment links keep funds outside VetOps Financial.</p>
         <div class="division-card-footer">
           <div class="division-status status-active">
-            <span class="status-dot"></span>Active · Founding Partners
+            <span class="status-dot"></span>Used on Real Founder-Operated Catering Work
           </div>
-          <span class="division-card-cta">Explore Release Readiness →</span>
-        </div>
-      </a>
-
-      <!-- GovReady -->
-      <div class="division-card">
-        <div class="division-num">Division III · Adjacency</div>
-        <div class="division-name">GovReady AI<br>/ Drone Ops</div>
-        <div class="division-tagline">Mission Cost. Mission Record.</div>
-        <p class="division-desc">Mission-cost, documentation, and compliance-heavy workflow extension for inspection-focused drone operators and federal-adjacent service teams. Built on the same workflow spine as MarginCommand. Activates when Division I is standing on its own legs.</p>
-        <div class="division-status status-adjacency">
-          <span class="status-dot"></span>Planning Phase
         </div>
       </div>
-
-      <!-- Kinetic Zero -->
-      <div class="division-card">
-        <div class="division-num">Division IV · R&D</div>
-        <div class="division-name">Kinetic Zero</div>
-        <div class="division-tagline">Quant Research. Prop Trading.</div>
-        <p class="division-desc">Quantitative research and proprietary trading arm. Develops reproducible research, model governance, risk doctrine, and controlled live execution. Operates as a disciplined R&D and prop lab — not a pooled outside-capital fund at this stage.</p>
-        <div class="division-status status-adjacency">
-          <span class="status-dot"></span>Dormant · R&D
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -976,7 +1020,7 @@
             <div class="cred-icon">
               <svg viewBox="0 0 12 12"><path d="M6 0L7.5 4.5H12L8.25 7.25L9.75 12L6 9.25L2.25 12L3.75 7.25L0 4.5H4.5Z"/></svg>
             </div>
-            Doctor of Business Administration (DBA) · Liberty University · 2025
+            Doctor of Business Administration with a finance concentration · Liberty University · 2025
           </li>
           <li>
             <div class="cred-icon">
@@ -994,11 +1038,11 @@
             <div class="cred-icon">
               <svg viewBox="0 0 12 12"><path d="M6 0L7.5 4.5H12L8.25 7.25L9.75 12L6 9.25L2.25 12L3.75 7.25L0 4.5H4.5Z"/></svg>
             </div>
-            PenFed Veteran Entrepreneur Program · FounderTrac Cohort · 2026
+            PenFed Veteran Entrepreneur Program / FounderTrac 2026 · $5,000 grant recipient
           </li>
         </ul>
         <div class="founder-quote">
-          "The pricing error isn't a math problem. It's a visibility problem. Every operator knows their food cost. Almost none of them know their actual yield-adjusted margin until the job is already done."
+          "MarginCommand has been used for months inside the founder's operating catering business to connect real quotes, approved actuals, and the next pricing decision."
         </div>
       </div>
     </div>
@@ -1008,40 +1052,62 @@
 <!-- VALIDATION -->
 <section id="validation">
   <div class="section-inner">
-    <div class="section-label">Ground Truth</div>
-    <h2>Validated on<br><em>Real Jobs.</em></h2>
-    <p class="section-intro">MarginCommand was built inside Bud Wiser's BBQ — a functioning catering operation. Every module has real job data behind it.</p>
+    <div class="section-label">Founder-Operated Validation</div>
+    <h2>Built in the Business.<br><em>Used on Real Work.</em></h2>
+    <p class="section-intro">MarginCommand has been used for months inside the founder's operating catering business to support real catering work. The three documented jobs below are representative examples of that broader founder-operated use—not independent customer validation.</p>
     <div class="validation-grid">
       <div class="validation-card">
-        <div class="val-event">Job #1 · Wedding Reception</div>
-        <div class="val-headline">Wedding Catering — Full Job Cost Capture</div>
-        <p class="val-desc">Complete estimate-to-actuals cycle. Yield-loss coefficients applied. Variance report generated. Invoice reconciled against actual material and labor burn.</p>
+        <div class="val-event">Job #1 · Founder-Operated</div>
+        <div class="val-headline">Wedding Reception</div>
+        <p class="val-desc">Founder-operated catering job used to exercise the estimate, customer-document, approved-actuals, and variance-review workflow.</p>
       </div>
       <div class="validation-card">
-        <div class="val-event">Job #2 · Church Fundraiser</div>
-        <div class="val-headline">High-Volume Event — Margin Visibility</div>
-        <p class="val-desc">High-count plate event. Real cost decomposition across protein, sides, labor, and transport. Mission Control dashboard stress-tested against live actuals.</p>
+        <div class="val-event">Job #2 · Founder-Operated</div>
+        <div class="val-headline">Church Fundraiser</div>
+        <p class="val-desc">Founder-operated catering job used to exercise cost decomposition across protein, sides, labor, travel, and approved actuals.</p>
       </div>
       <div class="validation-card">
-        <div class="val-event">Job #3 · Drop-off Event</div>
-        <div class="val-headline">Drop-off Catering — CPA Bridge Output</div>
-        <p class="val-desc">Drop-off format with reduced labor overhead. CPA Bridge export validated against job records. Pricing model tightened based on actual yield data.</p>
+        <div class="val-event">Job #3 · Founder-Operated</div>
+        <div class="val-headline">Drop-off Event</div>
+        <p class="val-desc">Founder-operated catering job used to exercise the quote-to-actual record, margin review, and bookkeeping/AAR export.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section id="contact">
+<!-- PROGRAMS & INFRASTRUCTURE -->
+<section id="programs">
   <div class="section-inner">
-    <div class="section-label">Investor &amp; Program Inquiries</div>
-    <h2>Ready to<br><em>Talk.</em></h2>
-    <p class="section-intro">VetOps Financial is currently in active fundraising and program engagement. PenFed VEP cohort submission in progress.</p>
-    <div class="cta-group">
-      <a href="mailto:support@vetopsfinancial.com" class="btn-navy">Contact Founder</a>
-      <a href="margincommand.html" class="btn-primary">View MarginCommand</a>
+    <div class="section-label">Programs &amp; Infrastructure</div>
+    <h2>Programs &amp;<br><em>Infrastructure.</em></h2>
+    <p class="section-intro">Program participation and cloud infrastructure supporting controlled MarginCommand commercialization.</p>
+    <div class="program-grid">
+      <a class="program-card" href="https://cloud.google.com/startup" target="_blank" rel="noopener noreferrer">
+        <div class="program-name">Google for Startups Cloud Program</div>
+        <div class="program-status">Member</div>
+        <p class="program-detail">Member of the Google for Startups Cloud Program</p>
+        <p class="program-detail"><strong>Built on Google Cloud</strong></p>
+      </a>
+      <a class="program-card" href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer">
+        <img class="program-badge" src="assets/programs/nvidia-inception-program-badge-rgb-for-screen.jpg" alt="NVIDIA Inception member badge" width="501" height="217">
+        <div class="program-name">NVIDIA Inception member</div>
+      </a>
     </div>
-    <p class="contact-note">Direct line: <a href="mailto:support@vetopsfinancial.com">support@vetopsfinancial.com</a> &nbsp;·&nbsp; Raeford, North Carolina</p>
+    <p class="program-note">Program participation and technology use do not imply partnership or endorsement.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="pilot">
+  <div id="contact" class="section-inner">
+    <div class="section-label">Founding Pilot</div>
+    <h2>Founding Pilot.<br><em>$20 per Month.</em></h2>
+    <p class="section-intro">VetOps Financial is accepting a limited number of qualified owner-operated businesses into MarginCommand's controlled paid pilot. Application and acceptance are required before activation.</p>
+    <div class="cta-group">
+      <a href="margincommand.html#pilot" class="btn-navy">View $20 Founding Pilot</a>
+      <a href="margincommand.html" class="btn-primary">Explore MarginCommand</a>
+    </div>
+    <p class="contact-note">Contact: <a href="mailto:support@vetopsfinancial.com">support@vetopsfinancial.com</a> &nbsp;·&nbsp; Fayetteville, North Carolina</p>
   </div>
 </section>
 
@@ -1053,8 +1119,8 @@
       <span class="footer-wordmark">VetOps Financial</span>
     </div>
     <div class="footer-meta">
-      © 2026 VetOps Financial, LLC · Raeford, NC<br>
-      SDVOSB · Veteran-Owned · All Rights Reserved
+      © 2026 VetOps Financial, LLC · Fayetteville, NC<br>
+      Veteran-Owned · All Rights Reserved
     </div>
   </div>
 </footer>

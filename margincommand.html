@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MarginCommand | Know Your Margin Before You Invoice</title>
+<link rel="icon" href="vetops-shield.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -189,6 +190,15 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px; color: var(--gold); letter-spacing: 0.1em;
   }
+  .dashboard-provenance {
+    padding: 9px 16px;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    background: rgba(201,168,76,0.06);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; line-height: 1.5; letter-spacing: 0.08em;
+    text-transform: uppercase; color: rgba(255,255,255,0.62);
+  }
+  .dashboard-provenance-mobile { display: none; }
   .dash-dot-row { display: flex; gap: 5px; }
   .dash-dot { width: 8px; height: 8px; border-radius: 50%; }
   .dash-body { padding: 20px; }
@@ -346,13 +356,71 @@
   }
   .yield-truth strong { font-weight: 600; }
 
+  /* Programs & Infrastructure */
+  #programs { padding: 88px 5%; background: var(--off-white); }
+  .programs-inner { max-width: 1000px; margin: 0 auto; }
+  .programs-inner > .section-intro { max-width: 640px; }
+  .program-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    margin-top: 44px;
+    background: rgba(11,28,58,0.08);
+  }
+  .program-card {
+    min-height: 220px;
+    padding: 34px;
+    background: var(--white);
+    border-top: 2px solid var(--gold);
+    color: var(--navy);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .program-card:hover { background: var(--gold-pale); transform: translateY(-2px); }
+  .program-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .program-status {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .program-detail { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+  .program-badge {
+    display: block;
+    width: min(100%, 320px);
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+    margin-bottom: 18px;
+  }
+  .program-note { margin-top: 18px; font-size: 11px; line-height: 1.5; color: var(--text-muted); }
+
   /* ── PRICING ── */
   #pricing { padding: 96px 5%; background: var(--white); }
-  .pricing-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .pricing-inner { max-width: 1120px; margin: 0 auto; text-align: center; }
   #pricing h2 { margin-bottom: 12px; }
-  #pricing .section-intro { margin: 0 auto 56px; text-align: center; }
-  .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: rgba(11,28,58,0.08); text-align: left; }
-  .price-card { background: var(--white); padding: 44px 40px; position: relative; }
+  #pricing .section-intro { margin: 0 auto 40px; text-align: center; }
+  .pricing-context { margin: 0 auto 24px; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+  .founding-pilot-card { margin-bottom: 56px; padding: 42px; background: var(--navy); border-top: 3px solid var(--gold); color: var(--white); text-align: left; }
+  .founding-pilot-grid { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 48px; align-items: start; }
+  .founding-pilot-price { font-family: 'Cormorant Garamond', serif; font-size: 58px; font-weight: 600; line-height: 1; color: var(--white); margin: 14px 0 6px; }
+  .founding-pilot-price span { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.5); }
+  .founding-pilot-position { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.66); margin-bottom: 24px; }
+  .pilot-terms { margin: 18px 0; font-size: 12px; line-height: 1.6; color: rgba(255,255,255,0.66); }
+  .pilot-terms strong { color: var(--white); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; background: rgba(11,28,58,0.08); text-align: left; }
+  .price-card { background: var(--white); padding: 38px 30px; position: relative; }
   .price-card.featured { background: var(--navy); }
   .price-badge {
     position: absolute; top: 20px; right: 20px;
@@ -368,7 +436,9 @@
   .price-num sup { font-size: 28px; vertical-align: super; }
   .price-period { font-size: 12px; color: var(--text-muted); margin-bottom: 28px; margin-top: 4px; }
   .price-card.featured .price-period { color: rgba(255,255,255,0.4); }
-  .price-features { list-style: none; margin-bottom: 32px; }
+  .price-position { min-height: 42px; margin-bottom: 18px; font-size: 13px; line-height: 1.55; color: var(--text-muted); }
+  .price-card.featured .price-position { color: rgba(255,255,255,0.58); }
+  .price-features { list-style: none; margin-bottom: 26px; }
   .price-features li {
     display: flex; align-items: flex-start; gap: 10px;
     padding: 9px 0; border-bottom: 1px solid rgba(11,28,58,0.06);
@@ -385,8 +455,11 @@
   .price-cta.outline:hover { background: var(--off-white); }
   .price-cta.solid { background: var(--gold); color: var(--navy); transition: background 0.2s; }
   .price-cta.solid:hover { background: var(--gold-light); }
+  .price-status { display: block; width: 100%; padding: 14px; border: 1px solid rgba(11,28,58,0.14); color: var(--text-muted); text-align: center; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .price-card.featured .price-status { border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.6); }
+  .pricing-note { max-width: 820px; margin: 28px auto 0; font-size: 12px; line-height: 1.7; color: var(--text-muted); }
 
-  /* ── TESTIMONIAL ── */
+  /* ── OPERATOR DISCOVERY ── */
   #proof { padding: 80px 5%; background: var(--gold-pale); }
   .proof-inner { max-width: 860px; margin: 0 auto; text-align: center; }
   .proof-quote {
@@ -394,8 +467,12 @@
     font-size: clamp(22px, 3vw, 34px); font-weight: 500; font-style: italic;
     color: var(--navy); line-height: 1.45; margin-bottom: 28px;
   }
+  .founding-pilot-card .price-features li { border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.72); }
   .proof-attr { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
   .proof-attr strong { color: var(--navy); }
+  .proof-interpretation { max-width: 720px; margin: 28px auto 0; color: var(--text-muted); font-size: 15px; line-height: 1.7; }
+  .proof-founder { margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(11,28,58,0.12); }
+  .proof-founder-label { margin-bottom: 10px; color: var(--gold); font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
 
   /* ── PILOT CTA ── */
   #pilot {
@@ -464,7 +541,17 @@
     .hero-text { min-width: 0; max-width: 100%; }
     .hero-pain { max-width: calc(100vw - 46px); }
     .hero-dashboard { display: none; }
-    .pain-grid, .steps, .module-grid, .pricing-grid, .yield-inner { grid-template-columns: 1fr; }
+    .dashboard-provenance-mobile {
+      display: block;
+      padding: 12px 14px;
+      border: 1px solid rgba(201,168,76,0.22);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px; line-height: 1.5; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.62);
+    }
+    .pain-grid, .steps, .module-grid, .pricing-grid, .founding-pilot-grid, .yield-inner, .program-grid { grid-template-columns: 1fr; }
+    .founding-pilot-card { padding: 32px 24px; }
+    .program-card { min-height: 0; padding: 30px 24px; }
     .steps::before { display: none; }
     .nav-right .nav-link { display: none; }
     .nav-by { display: none; }
@@ -524,16 +611,16 @@
       </div>
       <div class="hero-proof">
         <div class="proof-item">
-          <div class="proof-num">60s</div>
-          <div class="proof-label">Quote to proposal</div>
+          <div class="proof-num">Connected</div>
+          <div class="proof-label">Quote → Proposal · one workflow</div>
         </div>
         <div class="proof-item">
-          <div class="proof-num">3</div>
-          <div class="proof-label">Real jobs validated</div>
+          <div class="proof-num">Ongoing</div>
+          <div class="proof-label">Founder-operated use</div>
         </div>
         <div class="proof-item">
-          <div class="proof-num">$37</div>
-          <div class="proof-label">Starts at / mo</div>
+          <div class="proof-num">$20</div>
+          <div class="proof-label">Founding pilot / mo</div>
         </div>
         <div class="proof-item">
           <div class="proof-num">0</div>
@@ -541,6 +628,8 @@
         </div>
       </div>
     </div>
+
+    <div class="dashboard-provenance-mobile">Illustrative founder-operated workflow dashboard</div>
 
     <!-- MOCK DASHBOARD -->
     <div class="hero-dashboard">
@@ -552,6 +641,7 @@
           <div class="dash-dot" style="background:#3DAA6E"></div>
         </div>
       </div>
+      <div class="dashboard-provenance">Illustrative founder-operated workflow dashboard</div>
       <div class="dash-body">
         <div class="dash-label">Pipeline · Active Jobs</div>
         <div class="kpi-row">
@@ -565,7 +655,7 @@
           </div>
           <div class="kpi-card">
             <div class="kpi-val">$20,100</div>
-            <div class="kpi-lbl">Pipeline Value</div>
+            <div class="kpi-lbl">Illustrative Job Value</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-val green">+1.6%</div>
@@ -575,15 +665,15 @@
         <div class="dash-divider"></div>
         <div class="dash-label">Job Tracker · Est. vs Actual</div>
         <div class="job-row">
-          <span class="job-name">Wedding Reception · 175pp</span>
+          <span class="job-name">Wedding Reception · Founder-operated · 175pp</span>
           <span class="job-margin ok">62.1% ✓</span>
         </div>
         <div class="job-row">
-          <span class="job-name">Church Fundraiser · 300pp</span>
+          <span class="job-name">Church Fundraiser · Founder-operated · 300pp</span>
           <span class="job-margin gold">54.8% →</span>
         </div>
         <div class="job-row">
-          <span class="job-name">Drop-off Event · Bulk</span>
+          <span class="job-name">Drop-off Event · Founder-operated · Bulk</span>
           <span class="job-margin warn">38.2% ✗</span>
         </div>
         <div class="dash-alert">
@@ -595,32 +685,36 @@
 
   </div>
 </section>
-<!-- COMMERCIAL VIDEO -->
-<section id="commercial" style="padding:96px 5%;background:#070F1E;">
+<!-- SHORT COMMERCIAL -->
+<section id="commercial-short" style="padding:88px 5%;background:var(--off-white);">
   <div style="max-width:1100px;margin:0 auto;text-align:center;">
-    <div class="section-label">Product Demo</div>
-    <h2 style="color:var(--white);margin-bottom:16px;">
-      See MarginCommand<br><em>in 15 Seconds.</em>
+    <div class="section-label">MarginCommand</div>
+    <h2 style="color:var(--navy);margin-bottom:16px;">
+      MarginCommand<br><em>in 15 Seconds.</em>
     </h2>
-    <p class="section-intro" style="color:rgba(255,255,255,0.58);margin:0 auto 36px;max-width:680px;">
-      Quote the job. Send the proposal. Attach your payment link. Capture receipts.
-      Approve actuals. Know whether the job made money.
+    <p class="section-intro" style="margin:0 auto 36px;max-width:680px;">
+      See the job-margin problem—and the workflow MarginCommand is built to solve.
     </p>
 
-    <div style="border:1px solid rgba(201,168,76,0.22);background:rgba(255,255,255,0.04);padding:12px;box-shadow:0 24px 80px rgba(0,0,0,0.35);">
+    <div style="border:1px solid rgba(11,28,58,0.12);background:var(--navy);padding:12px;box-shadow:0 24px 70px rgba(11,28,58,0.18);">
       <video
         controls
         playsinline
         preload="metadata"
+        width="1920"
+        height="1080"
+        aria-label="MarginCommand 15-second commercial"
         style="width:100%;height:auto;display:block;background:#000;"
       >
         <source src="assets/video/margincommandv1.mp4" type="video/mp4">
-        Your browser does not support this video. Email support@vetopsfinancial.com for the demo.
+        Your browser does not support this video. <a href="assets/video/margincommandv1.mp4">Open the 15-second MarginCommand commercial MP4.</a>
       </video>
     </div>
 
+    <p style="margin-top:16px;font-size:12px;"><a href="assets/video/margincommandv1.mp4" style="color:var(--gold);">Open or download the 15-second MP4</a></p>
+
     <div style="margin-top:28px;">
-      <a href="#pilot" class="btn-gold">Request Pilot Access</a>
+      <a href="#product-demo" class="btn-gold">See the Full Workflow</a>
     </div>
   </div>
 </section>
@@ -744,7 +838,7 @@
     <!-- BOTTOM BAR -->
     <div style="margin-top:2px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.12);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
       <div style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:300;">Pilot-ready beta workflow: quote to proposal/invoice to payment status to receipt review to approved actuals to margin review.</div>
-      <a href="#pilot" class="btn-gold" style="white-space:nowrap;">Try It Free</a>
+      <a href="#pilot" class="btn-gold" style="white-space:nowrap;">View $20 Pilot Details</a>
     </div>
   </div>
 </section>
@@ -753,7 +847,7 @@
 <section id="yield">
   <div class="yield-inner">
     <div class="yield-math">
-      <div class="math-label">// YIELD-LOSS CALCULATION · BRISKET · 175 GUESTS</div>
+      <div class="math-label">// ILLUSTRATIVE YIELD-LOSS SCENARIO · BRISKET · 175 GUESTS</div>
       <div class="math-row"><span>Served per guest</span><span class="math-val">0.50 lb cooked</span></div>
       <div class="math-row"><span>Total cooked needed</span><span class="math-val">87.5 lb</span></div>
       <div class="math-row"><span>Yield coefficient (brisket)</span><span class="math-val highlight">0.62</span></div>
@@ -770,9 +864,9 @@
     <div class="yield-content">
       <div class="section-label">The Yield-Loss Engine</div>
       <h2>The Math Is<br><em>Already Wrong.</em></h2>
-      <p class="section-intro">MarginCommand's Yield-Loss Engine applies protein-specific cooking coefficients automatically. You enter what you plan to serve. The system calculates what you need to buy — before the invoice goes out.</p>
+      <p class="section-intro">MarginCommand starts with configurable, product-specific yield assumptions. Operators can adjust them for the cut, cooking process, service method, and their own operating history, then compare the estimate with approved actual results to improve future jobs.</p>
       <div class="yield-truth">
-        <strong>The yield-loss coefficient is a physical constant.</strong> It does not change based on how you feel about the job. Brisket is 62% yield. Pulled pork is 58%. Ribs are 45%. MarginCommand knows this — and prices every quote around it automatically.
+        <strong>Illustrative scenario using a 62% brisket yield assumption; not a universal yield rate.</strong> Operators calibrate the assumption with their own approved actual results before using it to improve future quotes.
       </div>
     </div>
   </div>
@@ -790,7 +884,7 @@
         <div class="step-num">01</div>
         <div class="step-name">Quick Quote</div>
         <p class="step-desc">Build a catering or service-job estimate from headcount, menu mix, yield loss, labor, mileage, and supplies. The quote is the source record for the rest of the workflow.</p>
-        <div class="step-time">~60 seconds</div>
+        <div class="step-time">Connected workflow</div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
@@ -916,9 +1010,9 @@
         <div class="module-icon">
           <svg viewBox="0 0 24 24"><path d="M4 17l5-5 4 4 7-8M4 21h16M4 3h16"/></svg>
         </div>
-        <div class="module-name">Cost-to-Serve / Google Cloud Roadmap</div>
-        <div class="module-sub">Planned Cloud and Analytics Path</div>
-        <p class="module-desc">Planned path for Cloud Run hosting, Cloud Storage receipt handling, audit logs, cost-to-serve visibility, and margin analytics as the beta matures.</p>
+        <div class="module-name">Google Cloud Infrastructure</div>
+        <div class="module-sub">Built on Google Cloud</div>
+        <p class="module-desc">MarginCommand runs as a controlled beta on Google Cloud. Gemini-assisted outputs remain advisory, and operators approve financial updates.</p>
       </div>
 
     </div>
@@ -937,63 +1031,177 @@
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="pricing-inner">
-    <div class="section-label">Simple Pricing</div>
-    <h2>No Contracts.<br><em>No Surprises.</em></h2>
-    <p class="section-intro">Month-to-month. Cancel any time. Pilot operators get 60 days free — no card required.</p>
-    <div class="pricing-grid">
-
-      <div class="price-card">
-        <div class="price-tier">Starter</div>
-        <div class="price-num"><sup>$</sup>37</div>
-        <div class="price-period">per month · billed monthly</div>
-        <ul class="price-features">
-          <li><span class="feat-check">✓</span> Quick Quote workflow</li>
-          <li><span class="feat-check">✓</span> Proposal &amp; invoice PDFs</li>
-          <li><span class="feat-check">✓</span> Operator-owned payment link tracking</li>
-          <li><span class="feat-check">✓</span> Receipt capture and approved actuals</li>
-          <li><span class="feat-check">✓</span> CPA Bridge / Job AAR export</li>
-          <li><span class="feat-check">✓</span> Email support</li>
-        </ul>
-        <a href="#pilot" class="price-cta outline">Start Free Pilot</a>
-      </div>
-
-      <div class="price-card featured">
-        <div class="price-badge">Most Popular</div>
-        <div class="price-tier">Pro</div>
-        <div class="price-num" style="color:var(--white)"><sup>$</sup>79</div>
-        <div class="price-period">per month · billed monthly</div>
-        <ul class="price-features">
-          <li><span class="feat-check">✓</span> Everything in Starter</li>
-          <li><span class="feat-check">✓</span> Unlimited jobs per month</li>
-          <li><span class="feat-check">✓</span> Mission Control margin review</li>
-          <li><span class="feat-check">✓</span> Gemini receipt review assistance</li>
-          <li><span class="feat-check">✓</span> Multi-event pipeline view</li>
-          <li><span class="feat-check">✓</span> Priority support</li>
-        </ul>
-        <a href="#pilot" class="price-cta solid">Start Free Pilot</a>
-      </div>
-
+<!-- OPERATOR DISCOVERY -->
+<section id="proof">
+  <div class="proof-inner">
+    <div class="section-label">Customer Discovery</div>
+    <div class="proof-quote">"I did a deep dive into QuickBooks for my original location and found out my profit margins are 5%. Food cost averages 39% and payroll costs 42%. We do nearly $60K in sales a month. How do I boost these margins? I can't think of the answer."</div>
+    <div class="proof-attr"><strong>Owner, fast-casual BBQ &amp; catering business</strong><br>Customer discovery · Business identity withheld</div>
+    <p class="proof-interpretation">The problem is not simply calculating a margin. It is understanding what drove it—and what to change before the next job.</p>
+    <div class="proof-founder">
+      <div class="proof-founder-label">Founder</div>
+      <div class="proof-attr"><strong>Brian Penrod, DBA</strong> &nbsp;·&nbsp; Founder &amp; CEO, VetOps Financial &nbsp;·&nbsp; Creator, MarginCommand &nbsp;·&nbsp; Owner, Bud Wiser's BBQ LLC &nbsp;·&nbsp; CSM (Ret.), U.S. Army Special Forces</div>
+      <div class="proof-attr" style="margin-top:10px;font-size:10px;">Doctor of Business Administration with a finance concentration</div>
     </div>
   </div>
 </section>
 
-<!-- PROOF QUOTE -->
-<section id="proof">
-  <div class="proof-inner">
-    <div class="proof-quote">"The pricing error isn't a math problem. It's a visibility problem. Every operator knows their food cost. Almost none of them know their actual yield-adjusted margin until the job is already done."</div>
-    <div class="proof-attr"><strong>Brian Penrod, DBA</strong> &nbsp;·&nbsp; Founder, MarginCommand &nbsp;·&nbsp; Owner, Bud Wiser's BBQ LLC &nbsp;·&nbsp; CSM (Ret.), U.S. Army Special Forces</div>
+<!-- PRODUCT DEMO -->
+<section id="product-demo" style="padding:96px 5%;background:#070F1E;">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <div class="section-label">Product Demo</div>
+    <h2 style="color:var(--white);margin-bottom:16px;">
+      See MarginCommand<br><em>in 83 Seconds.</em>
+    </h2>
+    <p class="section-intro" style="color:rgba(255,255,255,0.58);margin:0 auto 36px;max-width:680px;">
+      Follow one job through quote, proposal/invoice, operator-owned payment link, receipt review, approved actuals, margin review, and AAR/export.
+    </p>
+
+    <div style="border:1px solid rgba(201,168,76,0.22);background:rgba(255,255,255,0.04);padding:12px;box-shadow:0 24px 80px rgba(0,0,0,0.35);">
+      <video
+        controls
+        playsinline
+        preload="metadata"
+        width="1920"
+        height="1080"
+        aria-label="MarginCommand 83-second quote-to-actual workflow demo"
+        style="width:100%;height:auto;display:block;background:#000;"
+      >
+        <source src="assets/video/MarginCommand_Community_Dinner_Natural_Cadence_83s.mp4" type="video/mp4">
+        Your browser does not support this video. <a href="assets/video/MarginCommand_Community_Dinner_Natural_Cadence_83s.mp4">Open the 83-second MarginCommand demo MP4.</a>
+      </video>
+    </div>
+
+    <p style="color:rgba(255,255,255,0.58);font-size:13px;line-height:1.7;max-width:760px;margin:24px auto 0;">Workflow summary: build and approve the quote; create the proposal and invoice; attach the operator's payment link; review receipts; approve actual costs; compare quoted and actual margin; then export the job AAR.</p>
+    <p style="margin-top:10px;font-size:12px;"><a href="assets/video/MarginCommand_Community_Dinner_Natural_Cadence_83s.mp4" style="color:var(--gold);">Open or download the 83-second MP4</a></p>
+
+    <div style="margin-top:28px;">
+      <a href="#pilot" class="btn-gold">View $20 Pilot Details</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS & INFRASTRUCTURE -->
+<section id="programs">
+  <div class="programs-inner">
+    <div class="section-label">Programs &amp; Infrastructure</div>
+    <h2>Programs &amp;<br><em>Infrastructure.</em></h2>
+    <p class="section-intro">Program participation and cloud infrastructure supporting the controlled MarginCommand beta.</p>
+    <div class="program-grid">
+      <a class="program-card" href="https://cloud.google.com/startup" target="_blank" rel="noopener noreferrer">
+        <div class="program-name">Google for Startups Cloud Program</div>
+        <div class="program-status">Member</div>
+        <p class="program-detail">Member of the Google for Startups Cloud Program</p>
+        <p class="program-detail"><strong>Built on Google Cloud</strong></p>
+      </a>
+      <a class="program-card" href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer">
+        <img class="program-badge" src="assets/programs/nvidia-inception-program-badge-rgb-for-screen.jpg" alt="NVIDIA Inception member badge" width="501" height="217">
+        <div class="program-name">NVIDIA Inception member</div>
+      </a>
+    </div>
+    <p class="program-note">Program participation and technology use do not imply partnership or endorsement.</p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="pricing-inner">
+    <div class="section-label">Commercial Pricing</div>
+    <h2>Pilot Today.<br><em>Clear Path Forward.</em></h2>
+    <p class="section-intro">Founding Pilot access is currently $20/month for accepted operators. Standard MarginCommand pricing is published below so operators can see the path after pilot.</p>
+
+    <div class="pricing-context">CURRENT CONTROLLED PILOT</div>
+    <div class="founding-pilot-card">
+      <div class="founding-pilot-grid">
+        <div>
+          <div class="price-tier">Founding Pilot</div>
+          <div class="founding-pilot-price">$20<span>/month</span></div>
+          <p class="founding-pilot-position">Controlled paid beta for qualified owner-operated businesses.</p>
+          <p class="pilot-terms"><strong>Month-to-month.</strong><br>Credit card required upon accepted paid pilot activation.</p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiqyKsns1R0NEWjN9HYnwVzwx4WiN5mdiIr_Ykz0b-8dr32Q/viewform?usp=publish-editor" target="_blank" rel="noopener" class="price-cta solid">Apply for $20 Pilot</a>
+        </div>
+        <ul class="price-features">
+          <li><span class="feat-check">✓</span> Complete quote-to-actual workflow</li>
+          <li><span class="feat-check">✓</span> Proposal and invoice PDFs</li>
+          <li><span class="feat-check">✓</span> Operator-owned payment-link workflow</li>
+          <li><span class="feat-check">✓</span> Receipt capture and review</li>
+          <li><span class="feat-check">✓</span> Operator-approved actuals</li>
+          <li><span class="feat-check">✓</span> Margin review and AAR/export</li>
+          <li><span class="feat-check">✓</span> AI-assisted advisory workflows</li>
+          <li><span class="feat-check">✓</span> Direct founder onboarding and structured feedback</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pricing-context">PUBLISHED STANDARD PRICING</div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Starter</div>
+        <div class="price-num"><sup>$</sup>37</div>
+        <div class="price-period">per month · published standard price</div>
+        <p class="price-position">Core owner-operator workflow</p>
+        <ul class="price-features">
+          <li><span class="feat-check">✓</span> Quick Quote workflow</li>
+          <li><span class="feat-check">✓</span> Proposal &amp; invoice PDFs</li>
+          <li><span class="feat-check">✓</span> Operator-owned payment-link tracking</li>
+          <li><span class="feat-check">✓</span> Receipt capture</li>
+          <li><span class="feat-check">✓</span> Operator-approved actuals</li>
+          <li><span class="feat-check">✓</span> Job-level margin review</li>
+          <li><span class="feat-check">✓</span> CPA Bridge / Job AAR export</li>
+          <li><span class="feat-check">✓</span> Core AI advisory assistance</li>
+          <li><span class="feat-check">✓</span> Email support</li>
+        </ul>
+        <div class="price-status">Pilot Access Required</div>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge">RECOMMENDED</div>
+        <div class="price-tier">Pro</div>
+        <div class="price-num" style="color:var(--white)"><sup>$</sup>79</div>
+        <div class="price-period">per month · published standard price</div>
+        <p class="price-position">Expanded advisory and margin-review workflow</p>
+        <ul class="price-features">
+          <li><span class="feat-check">✓</span> Everything in Starter</li>
+          <li><span class="feat-check">✓</span> Expanded AI advisory usage</li>
+          <li><span class="feat-check">✓</span> Gemini receipt-review assistance</li>
+          <li><span class="feat-check">✓</span> Quote Brief and Margin AAR assistance</li>
+          <li><span class="feat-check">✓</span> Mission Control margin review</li>
+          <li><span class="feat-check">✓</span> Multi-job pipeline/history views</li>
+          <li><span class="feat-check">✓</span> Higher monthly AI/document-review allowance</li>
+          <li><span class="feat-check">✓</span> Priority email support</li>
+        </ul>
+        <div class="price-status">Pilot Access Required</div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Pro+</div>
+        <div class="price-num"><sup>$</sup>149</div>
+        <div class="price-period">per month · published standard price</div>
+        <p class="price-position">For higher-volume operators</p>
+        <ul class="price-features">
+          <li><span class="feat-check">✓</span> Everything in Pro</li>
+          <li><span class="feat-check">✓</span> Designed for higher-volume use</li>
+          <li><span class="feat-check">✓</span> Highest monthly AI/document-review allowance</li>
+          <li><span class="feat-check">✓</span> Expanded job-history and margin-analysis capacity</li>
+          <li><span class="feat-check">✓</span> Priority onboarding</li>
+          <li><span class="feat-check">✓</span> Priority support</li>
+          <li><span class="feat-check">✓</span> Early access to advanced MarginCommand capabilities</li>
+        </ul>
+        <p class="price-position">Limited availability during controlled commercialization.</p>
+        <div class="price-status">Pilot Access Required</div>
+      </div>
+    </div>
+    <p class="pricing-note">AI and document-processing usage allowances apply. Exact standard-plan allowances will be published before standard plan activation as MarginCommand completes controlled commercialization.</p>
+    <p class="pricing-note">All AI output is advisory: AI suggests; the operator reviews and approves; an authorized system write follows.</p>
   </div>
 </section>
 
 <!-- PILOT CTA -->
 <section id="pilot">
   <div class="pilot-glow"></div>
-  <div class="section-label">Pilot Program</div>
-  <h2 style="color:var(--white);margin-bottom:12px;">Limited Spots.<br><em>60 Days Free.</em></h2>
-  <p class="section-intro">We're running a structured pilot-ready beta with a small group of BBQ caterers and food truck operators. No cost. Real jobs. Operators keep control of payment links, AI review, and financial approvals.</p>
+  <div class="section-label">Paid Pilot</div>
+  <h2 style="color:var(--white);margin-bottom:12px;">Founding Pilot.<br><em>$20 per Month.</em></h2>
+  <p class="section-intro">MarginCommand is accepting a limited number of owner-operated businesses into its controlled paid pilot. Accepted operators receive founder-led onboarding, full quote-to-actual workflow access, and AI-assisted advisory features while helping shape the commercial product.</p>
   <div class="pilot-spots"><div class="pulse"></div>Accepting applications now</div>
   <div class="pilot-form" style="max-width:520px;">
   <a
@@ -1003,12 +1211,13 @@
     class="pilot-submit"
     style="width:100%;text-decoration:none;display:flex;align-items:center;justify-content:center;"
   >
-    Apply for Pilot Access
+    Apply for $20 Pilot
   </a>
 </div>
 
 <p class="pilot-note">
-  Applications route directly to Brian. No payment information required. Or email:
+  Application required · Month-to-month · Credit card required upon accepted activation<br>
+  Applications route directly to Brian; activation occurs only after acceptance. Or email:
   <a href="mailto:support@vetopsfinancial.com" style="color:rgba(255,255,255,0.5);">support@vetopsfinancial.com</a>
 </p>
 </section>
@@ -1029,7 +1238,7 @@
       <a href="#pilot">Pilot</a>
       <a href="mailto:support@vetopsfinancial.com">Contact</a>
     </div>
-    <div class="foot-copy">© 2026 VetOps Financial, LLC<br>SDVOSB · Raeford, NC</div>
+    <div class="foot-copy">© 2026 VetOps Financial, LLC<br>Veteran-Owned · Fayetteville, NC</div>
   </div>
 </footer>
 
