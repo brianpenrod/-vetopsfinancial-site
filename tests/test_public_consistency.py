@@ -162,6 +162,28 @@ class PublicConsistencyTests(unittest.TestCase):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, text)
 
+    def test_homepage_preserves_review_anchor_and_canonical_explore_links(self):
+        homepage = parse_page(REPOSITORY_ROOT / "index.html")
+        self.assertIn(("MarginCommand", "#margincommand"), homepage.links)
+
+        explore_links = [
+            href
+            for text, href in homepage.links
+            if "Explore MarginCommand" in text
+        ]
+        self.assertTrue(explore_links, "No Explore MarginCommand links found")
+        self.assertEqual(["/margincommand"] * len(explore_links), explore_links)
+
+    def test_homepage_sequences_beachhead_before_gated_expansion(self):
+        text = parse_page(REPOSITORY_ROOT / "index.html").visible_text
+        sequencing = (
+            "The beachhead is owner-operated event catering. The same "
+            "quote-to-actual mechanism applies to any fixed-price job "
+            "business — custom woodworking and small trade contractors "
+            "are the first expansion markets, gated on catering validation."
+        )
+        self.assertIn(sequencing, text)
+
     def test_homepage_has_no_founderrelease_link(self):
         homepage = parse_page(REPOSITORY_ROOT / "index.html")
         founderrelease_links = [
@@ -445,7 +467,7 @@ class PublicConsistencyTests(unittest.TestCase):
                 for copy in forbidden:
                     self.assertNotIn(copy, text)
 
-    def test_margincommand_uses_anonymous_operator_discovery_evidence(self):
+    def test_margincommand_labels_quote_as_public_operator_signal(self):
         quote = (
             "I did a deep dive into QuickBooks for my original location "
             "and found out my profit margins are 5%. Food cost averages "
@@ -454,10 +476,11 @@ class PublicConsistencyTests(unittest.TestCase):
             "answer."
         )
         required = (
-            "Customer Discovery",
+            "Public Operator Signal",
+            "From public operator forums:",
             quote,
-            "Owner, fast-casual BBQ & catering business",
-            "Customer discovery · Business identity withheld",
+            "Fast-casual BBQ & catering operator · public forum post",
+            "Public operator signal · not a MarginCommand customer or interview",
             "The problem is not simply calculating a margin. It is "
             "understanding what drove it—and what to change before the "
             "next job.",
@@ -469,12 +492,14 @@ class PublicConsistencyTests(unittest.TestCase):
             "Doctor of Business Administration with a finance concentration",
         )
         forbidden = (
+            "Customer Discovery",
+            "Owner, fast-casual BBQ & catering business",
+            "Customer discovery · Business identity withheld",
             "Every operator",
             "Almost none",
             "Testimonial",
             "Customer testimonial",
             "MarginCommand user",
-            "MarginCommand customer",
             "Paying customer",
             "Pilot result",
             "User result",
