@@ -14,6 +14,10 @@ MARGINCOMMAND_PAGES = (
     REPOSITORY_ROOT / "margincommand.html",
     REPOSITORY_ROOT / "margincommand_pilot_links_live.html",
 )
+ACTIVE_V9_PAGES = (
+    REPOSITORY_ROOT / "index.html",
+    *MARGINCOMMAND_PAGES,
+)
 PROGRAM_PAGES = (
     REPOSITORY_ROOT / "index.html",
     *MARGINCOMMAND_PAGES,
@@ -46,11 +50,22 @@ NVIDIA_BADGE = (
 NVIDIA_BADGE_URL = (
     "assets/programs/nvidia-inception-program-badge-rgb-for-screen.jpg"
 )
-DEMO_VIDEO = (
+FINAL_DEMO_VIDEO = (
+    REPOSITORY_ROOT
+    / "assets/video/MarginCommand_MICRO_Website_Optimized_v9.mp4"
+)
+FINAL_DEMO_VIDEO_URL = (
+    "https://media.vetopsfinancial.com/"
+    "MarginCommand_MICRO_Website_Optimized_v9.mp4"
+)
+PAGES_FINAL_DEMO_VIDEO_URL = (
+    "assets/video/MarginCommand_MICRO_Website_Optimized_v9.mp4"
+)
+RETAINED_DEMO_VIDEO = (
     REPOSITORY_ROOT
     / "assets/video/MarginCommand_Community_Dinner_Natural_Cadence_83s.mp4"
 )
-DEMO_VIDEO_URL = (
+RETAINED_DEMO_VIDEO_URL = (
     "assets/video/MarginCommand_Community_Dinner_Natural_Cadence_83s.mp4"
 )
 SHORT_COMMERCIAL_VIDEO = (
@@ -162,6 +177,65 @@ class PublicConsistencyTests(unittest.TestCase):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, text)
 
+    def test_homepage_preserves_review_anchor_and_canonical_explore_links(self):
+        homepage = parse_page(REPOSITORY_ROOT / "index.html")
+        self.assertIn(("MarginCommand", "#margincommand"), homepage.links)
+
+        explore_links = [
+            href
+            for text, href in homepage.links
+            if "Explore MarginCommand" in text
+        ]
+        self.assertTrue(explore_links, "No Explore MarginCommand links found")
+        self.assertEqual(["/margincommand"] * len(explore_links), explore_links)
+
+    def test_homepage_sequences_beachhead_before_gated_expansion(self):
+        text = parse_page(REPOSITORY_ROOT / "index.html").visible_text
+        sequencing = (
+            "The beachhead is owner-operated event catering. The same "
+            "quote-to-actual mechanism applies to any fixed-price job "
+            "business — custom woodworking and small trade contractors "
+            "are the first expansion markets, gated on catering validation."
+        )
+        self.assertIn(sequencing, text)
+
+    def test_homepage_primary_demo_uses_optimized_v9(self):
+        homepage = parse_page(REPOSITORY_ROOT / "index.html")
+        sources = [
+            attrs.get("src", "")
+            for tag, attrs in homepage.tags
+            if tag == "source"
+        ]
+        self.assertEqual([FINAL_DEMO_VIDEO_URL], sources)
+        self.assertNotIn(RETAINED_DEMO_VIDEO_URL, sources)
+
+        hrefs = [href for _, href in homepage.links]
+        self.assertIn(FINAL_DEMO_VIDEO_URL, hrefs)
+        self.assertNotIn(RETAINED_DEMO_VIDEO_URL, hrefs)
+
+    def test_active_v9_players_use_r2_range_delivery(self):
+        for page in ACTIVE_V9_PAGES:
+            with self.subTest(page=page.name):
+                parsed = parse_page(page)
+                sources = [
+                    attrs.get("src", "")
+                    for tag, attrs in parsed.tags
+                    if tag == "source"
+                ]
+                v9_sources = [
+                    src
+                    for src in sources
+                    if src.endswith(
+                        "MarginCommand_MICRO_Website_Optimized_v9.mp4"
+                    )
+                ]
+                hrefs = [href for _, href in parsed.links]
+
+                self.assertEqual([FINAL_DEMO_VIDEO_URL], v9_sources)
+                self.assertIn(FINAL_DEMO_VIDEO_URL, hrefs)
+                self.assertNotIn(PAGES_FINAL_DEMO_VIDEO_URL, sources)
+                self.assertNotIn(PAGES_FINAL_DEMO_VIDEO_URL, hrefs)
+
     def test_homepage_has_no_founderrelease_link(self):
         homepage = parse_page(REPOSITORY_ROOT / "index.html")
         founderrelease_links = [
@@ -261,7 +335,11 @@ class PublicConsistencyTests(unittest.TestCase):
                 )
 
     def test_margincommand_video_assets_exist_under_25_mib(self):
-        for video in (SHORT_COMMERCIAL_VIDEO, DEMO_VIDEO):
+        for video in (
+            SHORT_COMMERCIAL_VIDEO,
+            FINAL_DEMO_VIDEO,
+            RETAINED_DEMO_VIDEO,
+        ):
             with self.subTest(video=video.name):
                 self.assertTrue(video.is_file(), f"Missing {video}")
                 self.assertLess(
@@ -278,9 +356,10 @@ class PublicConsistencyTests(unittest.TestCase):
                     if tag == "source"
                 ]
                 self.assertEqual(
-                    [SHORT_COMMERCIAL_VIDEO_URL, DEMO_VIDEO_URL],
+                    [SHORT_COMMERCIAL_VIDEO_URL, FINAL_DEMO_VIDEO_URL],
                     sources,
                 )
+                self.assertNotIn(RETAINED_DEMO_VIDEO_URL, sources)
 
     def test_both_videos_have_safe_controls_and_accessible_fallbacks(self):
         for page in MARGINCOMMAND_PAGES:
@@ -300,7 +379,8 @@ class PublicConsistencyTests(unittest.TestCase):
                     self.assertTrue(video.get("aria-label", "").strip())
                 hrefs = [href for _, href in parsed.links]
                 self.assertIn(SHORT_COMMERCIAL_VIDEO_URL, hrefs)
-                self.assertIn(DEMO_VIDEO_URL, hrefs)
+                self.assertIn(FINAL_DEMO_VIDEO_URL, hrefs)
+                self.assertNotIn(RETAINED_DEMO_VIDEO_URL, hrefs)
                 self.assertIn(
                     ("See the Full Workflow", "#product-demo"),
                     parsed.links,
@@ -445,7 +525,7 @@ class PublicConsistencyTests(unittest.TestCase):
                 for copy in forbidden:
                     self.assertNotIn(copy, text)
 
-    def test_margincommand_uses_anonymous_operator_discovery_evidence(self):
+    def test_margincommand_labels_quote_as_public_operator_signal(self):
         quote = (
             "I did a deep dive into QuickBooks for my original location "
             "and found out my profit margins are 5%. Food cost averages "
@@ -454,10 +534,11 @@ class PublicConsistencyTests(unittest.TestCase):
             "answer."
         )
         required = (
-            "Customer Discovery",
+            "Public Operator Signal",
+            "From public operator forums:",
             quote,
-            "Owner, fast-casual BBQ & catering business",
-            "Customer discovery · Business identity withheld",
+            "Fast-casual BBQ & catering operator · public forum post",
+            "Public operator signal · not a MarginCommand customer or interview",
             "The problem is not simply calculating a margin. It is "
             "understanding what drove it—and what to change before the "
             "next job.",
@@ -469,12 +550,14 @@ class PublicConsistencyTests(unittest.TestCase):
             "Doctor of Business Administration with a finance concentration",
         )
         forbidden = (
+            "Customer Discovery",
+            "Owner, fast-casual BBQ & catering business",
+            "Customer discovery · Business identity withheld",
             "Every operator",
             "Almost none",
             "Testimonial",
             "Customer testimonial",
             "MarginCommand user",
-            "MarginCommand customer",
             "Paying customer",
             "Pilot result",
             "User result",
