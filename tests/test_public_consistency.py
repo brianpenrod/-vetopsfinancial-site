@@ -14,6 +14,10 @@ MARGINCOMMAND_PAGES = (
     REPOSITORY_ROOT / "margincommand.html",
     REPOSITORY_ROOT / "margincommand_pilot_links_live.html",
 )
+ACTIVE_V9_PAGES = (
+    REPOSITORY_ROOT / "index.html",
+    *MARGINCOMMAND_PAGES,
+)
 PROGRAM_PAGES = (
     REPOSITORY_ROOT / "index.html",
     *MARGINCOMMAND_PAGES,
@@ -51,6 +55,10 @@ FINAL_DEMO_VIDEO = (
     / "assets/video/MarginCommand_MICRO_Website_Optimized_v9.mp4"
 )
 FINAL_DEMO_VIDEO_URL = (
+    "https://media.vetopsfinancial.com/"
+    "MarginCommand_MICRO_Website_Optimized_v9.mp4"
+)
+PAGES_FINAL_DEMO_VIDEO_URL = (
     "assets/video/MarginCommand_MICRO_Website_Optimized_v9.mp4"
 )
 RETAINED_DEMO_VIDEO = (
@@ -204,6 +212,29 @@ class PublicConsistencyTests(unittest.TestCase):
         hrefs = [href for _, href in homepage.links]
         self.assertIn(FINAL_DEMO_VIDEO_URL, hrefs)
         self.assertNotIn(RETAINED_DEMO_VIDEO_URL, hrefs)
+
+    def test_active_v9_players_use_r2_range_delivery(self):
+        for page in ACTIVE_V9_PAGES:
+            with self.subTest(page=page.name):
+                parsed = parse_page(page)
+                sources = [
+                    attrs.get("src", "")
+                    for tag, attrs in parsed.tags
+                    if tag == "source"
+                ]
+                v9_sources = [
+                    src
+                    for src in sources
+                    if src.endswith(
+                        "MarginCommand_MICRO_Website_Optimized_v9.mp4"
+                    )
+                ]
+                hrefs = [href for _, href in parsed.links]
+
+                self.assertEqual([FINAL_DEMO_VIDEO_URL], v9_sources)
+                self.assertIn(FINAL_DEMO_VIDEO_URL, hrefs)
+                self.assertNotIn(PAGES_FINAL_DEMO_VIDEO_URL, sources)
+                self.assertNotIn(PAGES_FINAL_DEMO_VIDEO_URL, hrefs)
 
     def test_homepage_has_no_founderrelease_link(self):
         homepage = parse_page(REPOSITORY_ROOT / "index.html")
