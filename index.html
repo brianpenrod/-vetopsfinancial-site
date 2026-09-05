@@ -4,1143 +4,138 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VetOps Financial | MarginCommand Job-Margin Software</title>
-<meta name="description" content="VetOps Financial develops MarginCommand, a quote-to-actual job-margin workflow for owner-operated businesses.">
+<meta name="description" content="Connect your quote, job costs, and final margin with MarginCommand. Built by an operator in Fayetteville, North Carolina. Apply for founder-led beta onboarding.">
 <link rel="canonical" href="https://vetopsfinancial.com/">
+<meta property="og:title" content="MarginCommand by VetOps Financial">
+<meta property="og:description" content="Know what your next job should earn—and what it actually did.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vetopsfinancial.com/">
+<meta property="og:image" content="https://vetopsfinancial.com/vetops-logo.png">
 <link rel="icon" href="vetops-shield.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0B1C3A;
-    --navy-mid: #122347;
-    --navy-light: #1A3060;
-    --gold: #C9A84C;
-    --gold-light: #E2C06A;
-    --gold-pale: #F5EDD6;
-    --white: #FFFFFF;
-    --off-white: #F8F6F1;
-    --text-muted: #6B7A99;
-    --border: rgba(201,168,76,0.2);
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--white);
-    color: var(--navy);
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5%;
-    height: 72px;
-    background: rgba(11,28,58,0.97);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo {
-    display: flex; align-items: center; gap: 12px;
-    text-decoration: none;
-  }
-
-  .nav-emblem {
-    width: 38px; height: 38px;
-    border: 2px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; font-weight: 700;
-    color: var(--gold);
-    letter-spacing: 0.05em;
-  }
-
-  .nav-logo-img {
-    height: 42px; width: auto;
-    display: block;
-  }
-
-  .nav-wordmark {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; font-weight: 600;
-    color: var(--white);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .nav-links {
-    display: flex; align-items: center; gap: 36px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    font-size: 12px; font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--gold); }
-
-  .nav-cta {
-    font-size: 11px !important;
-    padding: 8px 20px;
-    border: 1px solid var(--gold) !important;
-    color: var(--gold) !important;
-    letter-spacing: 0.14em !important;
-  }
-
-  .nav-cta:hover { background: var(--gold); color: var(--navy) !important; }
-
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    background: var(--navy);
-    display: flex; align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding-top: 72px;
-  }
-
-  .hero-grid-overlay {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-
-  .hero-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
-    top: 50%; left: 60%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  .hero-content {
-    position: relative; z-index: 2;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 5%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .hero-left {}
-
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 14px;
-    border: 1px solid var(--border);
-    font-size: 10px; font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 28px;
-    animation: fadeUp 0.8s ease both;
-  }
-
-  .hero-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-  }
-
-  h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(42px, 5vw, 72px);
-    font-weight: 600;
-    line-height: 1.05;
-    color: var(--white);
-    margin-bottom: 24px;
-    animation: fadeUp 0.8s 0.1s ease both;
-  }
-
-  h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .hero-sub {
-    font-size: 16px;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.65);
-    max-width: 480px;
-    margin-bottom: 44px;
-    font-weight: 300;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
-
-  .hero-actions {
-    display: flex; gap: 16px; align-items: center;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
-
-  .btn-primary {
-    padding: 14px 32px;
-    background: var(--gold);
-    color: var(--navy);
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none; cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-
-  .btn-ghost {
-    padding: 14px 32px;
-    background: transparent;
-    color: rgba(255,255,255,0.7);
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid rgba(255,255,255,0.2);
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-  }
-
-  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-
-  .hero-right {
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
-
-  .hero-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(201,168,76,0.15);
-    padding: 40px;
-  }
-
-  .hero-card-label {
-    font-size: 10px; font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 24px;
-  }
-
-  .stat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
-
-  .stat-item {}
-
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px; font-weight: 600;
-    color: var(--white);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .stat-num span { color: var(--gold); }
-
-  .stat-label {
-    font-size: 11px; font-weight: 400;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.06em;
-    line-height: 1.4;
-  }
-
-  .hero-divider {
-    width: 100%; height: 1px;
-    background: rgba(201,168,76,0.15);
-    margin: 28px 0;
-  }
-
-  .hero-founder {
-    display: flex; align-items: center; gap: 14px;
-  }
-
-  .founder-avatar {
-    width: 44px; height: 44px;
-    background: var(--navy-light);
-    border: 2px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; font-weight: 700;
-    color: var(--gold);
-    flex-shrink: 0;
-  }
-
-  .founder-info { }
-
-  .founder-name {
-    font-size: 13px; font-weight: 600;
-    color: var(--white);
-    margin-bottom: 2px;
-  }
-
-  .founder-title {
-    font-size: 11px;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 0.04em;
-  }
-
-  /* ── SECTION BASE ── */
-  section { padding: 100px 5%; }
-
-  .section-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-size: 10px; font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-
-  h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 4vw, 52px);
-    font-weight: 600;
-    line-height: 1.1;
-    color: var(--navy);
-    margin-bottom: 20px;
-  }
-
-  h2 em { font-style: italic; color: var(--gold); }
-
-  .section-intro {
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text-muted);
-    max-width: 580px;
-    font-weight: 300;
-  }
-
-  /* ── CREDIBILITY STRIP ── */
-  #credibility {
-    padding: 28px 5%;
-    background: var(--off-white);
-    border-top: 1px solid rgba(11,28,58,0.08);
-    border-bottom: 1px solid rgba(11,28,58,0.08);
-  }
-
-  .cred-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex; align-items: center;
-    gap: 48px;
-    flex-wrap: wrap;
-  }
-
-  .cred-item {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--navy);
-  }
-
-  .cred-dot {
-    width: 6px; height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .cred-divider {
-    width: 1px; height: 24px;
-    background: rgba(11,28,58,0.15);
-  }
-
-  /* ── DIVISIONS ── */
-  #margincommand { background: var(--white); }
-
-  .divisions-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 64px;
-  }
-
-  .division-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
-    background: rgba(11,28,58,0.08);
-  }
-
-  .division-card {
-    background: var(--white);
-    padding: 44px 36px;
-    position: relative;
-    transition: background 0.3s;
-    cursor: default;
-  }
-
-  .division-card:hover { background: var(--off-white); }
-
-  .division-card.featured {
-    background: var(--navy);
-  }
-
-  .division-card.featured:hover { background: var(--navy-mid); }
-
-  .division-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-  }
-
-  .division-card.featured .division-num { color: var(--gold); }
-
-  .division-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px; font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 6px;
-    line-height: 1.1;
-  }
-
-  .division-card.featured .division-name { color: var(--white); }
-
-  .division-tagline {
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-  }
-
-  .division-desc {
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--text-muted);
-    margin-bottom: 28px;
-    font-weight: 300;
-  }
-
-  .division-card.featured .division-desc { color: rgba(255,255,255,0.6); }
-
-  .division-status {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-size: 10px; font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 5px 12px;
-    border: 1px solid;
-  }
-
-  .status-active {
-    color: var(--gold);
-    border-color: rgba(201,168,76,0.4);
-    background: rgba(201,168,76,0.08);
-  }
-
-  .status-adjacency {
-    color: var(--text-muted);
-    border-color: rgba(107,122,153,0.3);
-  }
-
-  .division-card.featured .status-active {
-    background: rgba(201,168,76,0.15);
-  }
-
-  .division-card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    flex-wrap: wrap;
-  }
-
-  .division-card-cta {
-    display: inline-flex;
-    align-items: center;
-    color: var(--gold);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding-bottom: 4px;
-    border-bottom: 1px solid rgba(201,168,76,0.55);
-  }
-
-  .status-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: currentColor;
-  }
-
-  /* ── FOUNDER ── */
-  #founder {
-    background: var(--off-white);
-  }
-
-  .founder-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .founder-portrait {
-    position: relative;
-  }
-
-  .portrait-frame {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background: var(--navy);
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .portrait-img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    filter: contrast(1.05) saturate(0.95);
-  }
-
-  .portrait-frame::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(11,28,58,0.15) 0%, transparent 35%, transparent 60%, rgba(11,28,58,0.85) 100%);
-    pointer-events: none;
-  }
-
-  .portrait-credential {
-    margin-top: 18px;
-    display: flex; align-items: stretch; gap: 14px;
-    padding: 14px;
-    background: var(--navy);
-    border-left: 3px solid var(--gold);
-    position: relative;
-  }
-
-  .credential-img-wrap {
-    width: 80px; flex-shrink: 0;
-    background: var(--navy-mid);
-    overflow: hidden;
-    position: relative;
-  }
-
-  .credential-img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center 35%;
-    display: block;
-  }
-
-  .credential-text {
-    flex: 1;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 4px 0;
-  }
-
-  .credential-eyebrow {
-    font-size: 9px; font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 4px;
-  }
-
-  .credential-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px; font-weight: 600;
-    color: var(--white);
-    line-height: 1.2;
-    margin-bottom: 4px;
-  }
-
-  .credential-detail {
-    font-size: 11px;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.4;
-  }
-
-  .portrait-initials {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 120px; font-weight: 700;
-    color: rgba(201,168,76,0.15);
-    user-select: none;
-    line-height: 1;
-  }
-
-  .portrait-overlay {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 32px;
-    background: linear-gradient(transparent, rgba(11,28,58,0.95));
-    z-index: 2;
-  }
-
-  .portrait-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 600;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-
-  .portrait-rank {
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 0.1em;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-
-  .portrait-border {
-    position: absolute;
-    bottom: -12px; right: -12px;
-    width: 100%; height: 100%;
-    border: 2px solid var(--gold);
-    z-index: -1;
-  }
-
-  .founder-content {}
-
-  .credential-list {
-    list-style: none;
-    margin-top: 32px;
-    margin-bottom: 36px;
-  }
-
-  .credential-list li {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(11,28,58,0.08);
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--navy);
-    font-weight: 400;
-  }
-
-  .cred-icon {
-    flex-shrink: 0;
-    width: 24px; height: 24px;
-    background: var(--navy);
-    display: flex; align-items: center; justify-content: center;
-    margin-top: 1px;
-  }
-
-  .cred-icon svg { width: 12px; height: 12px; fill: var(--gold); }
-
-  .founder-quote {
-    padding: 24px 28px;
-    border-left: 3px solid var(--gold);
-    background: white;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: var(--navy);
-    font-style: italic;
-  }
-
-  /* ── VALIDATION ── */
-  #validation {
-    background: var(--navy);
-    color: var(--white);
-  }
-
-  #validation h2 { color: var(--white); }
-  #validation .section-intro { color: rgba(255,255,255,0.6); }
-
-  .validation-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 56px;
-    background: rgba(255,255,255,0.05);
-  }
-
-  .validation-card {
-    padding: 36px 32px;
-    background: rgba(255,255,255,0.03);
-    border-top: 2px solid var(--gold);
-  }
-
-  .val-event {
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
-
-  .val-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 600;
-    color: var(--white);
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-
-  .val-desc {
-    font-size: 13px;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.6;
-    font-weight: 300;
-  }
-
-  /* Programs & Infrastructure */
-  #programs { background: var(--white); }
-
-  .program-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2px;
-    margin-top: 48px;
-    background: rgba(11,28,58,0.08);
-  }
-
-  .program-card {
-    min-height: 230px;
-    padding: 36px;
-    background: var(--off-white);
-    border-top: 2px solid var(--gold);
-    color: var(--navy);
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transition: background 0.2s, transform 0.2s;
-  }
-
-  .program-card:hover {
-    background: var(--gold-pale);
-    transform: translateY(-2px);
-  }
-
-  .program-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 1.2;
-    margin-bottom: 8px;
-  }
-
-  .program-status {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 14px;
-  }
-
-  .program-detail {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--text-muted);
-  }
-
-  .program-badge {
-    display: block;
-    width: min(100%, 320px);
-    height: auto;
-    object-fit: contain;
-    object-position: left center;
-    margin-bottom: 18px;
-  }
-
-  .program-note {
-    margin-top: 18px;
-    font-size: 11px;
-    line-height: 1.5;
-    color: var(--text-muted);
-  }
-
-  /* ── CTA ── */
-  #pilot {
-    background: var(--gold-pale);
-    text-align: center;
-  }
-
-  #pilot h2 { color: var(--navy); margin-bottom: 16px; }
-  #pilot .section-intro { margin: 0 auto 44px; }
-
-  .cta-group {
-    display: flex; justify-content: center; gap: 16px; align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .btn-navy {
-    padding: 16px 40px;
-    background: var(--navy);
-    color: var(--white);
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none; cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .btn-navy:hover { background: var(--navy-mid); }
-
-  .contact-note {
-    margin-top: 28px;
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-
-  .contact-note a {
-    color: var(--navy);
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy);
-    padding: 44px 5%;
-    border-top: 1px solid rgba(201,168,76,0.15);
-  }
-
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 20px;
-  }
-
-  .footer-brand {
-    display: flex; align-items: center; gap: 12px;
-  }
-
-  .footer-wordmark {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px; font-weight: 600;
-    color: var(--white);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .footer-meta {
-    font-size: 11px;
-    color: rgba(255,255,255,0.35);
-    text-align: right;
-    line-height: 1.6;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    .hero-content { grid-template-columns: 1fr; gap: 48px; }
-    .hero-right { display: none; }
-    .division-cards { grid-template-columns: 1fr; }
-    .founder-layout { grid-template-columns: 1fr; }
-    .validation-grid { grid-template-columns: 1fr; }
-    .program-grid { grid-template-columns: 1fr; }
-    .program-card { min-height: 0; padding: 30px 24px; }
-    .nav-links { display: none; }
-    .divisions-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-  }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/refresh.css">
+<script src="assets/js/site.js" defer></script>
 </head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">
-    <img src="vetops-shield.png" alt="VetOps Financial" class="nav-logo-img">
-    <span class="nav-wordmark">VetOps Financial</span>
-  </a>
-  <ul class="nav-links">
+<body class="homepage">
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="site-nav" aria-label="Main navigation">
+  <a href="#hero" class="nav-logo" aria-label="VetOps Financial home"><img src="vetops-shield.png" alt="" width="40" height="40"><span>VetOps Financial</span></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" hidden>Menu</button>
+  <ul class="nav-menu" id="site-menu">
     <li><a href="#margincommand">MarginCommand</a></li>
-    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#how-it-works">How it works</a></li>
     <li><a href="#validation">Validation</a></li>
     <li><a href="#founder">Founder</a></li>
-    <li><a href="#pilot">Pilot</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
+    <li><a href="margincommand.html#pilot" class="nav-primary">Request pilot access</a></li>
   </ul>
 </nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-grid-overlay"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-left">
-      <div class="hero-badge">Veteran-Owned · Fayetteville, NC</div>
-      <h1>VetOps Financial develops<br><em>MarginCommand.</em></h1>
-      <p class="hero-sub"><strong>Quote the job. Approve actuals. Improve the next quote.</strong><br><br>MarginCommand is a quote-to-actual job-margin workflow for owner-operated businesses. It helps operators estimate a job using realistic material, labor, travel, yield, and other direct-cost assumptions; create customer documents; review approved actual costs after the work; and use the variance to improve future quotes.</p>
-      <div class="hero-actions">
-        <a href="/margincommand" class="btn-primary">Explore MarginCommand</a>
-        <a href="margincommand.html#pilot" class="btn-ghost">Request Pilot Access</a>
+<main id="main">
+  <section class="home-hero" id="hero" aria-labelledby="hero-heading">
+    <div class="page-width hero-layout">
+      <div class="hero-copy">
+        <p class="eyebrow hero-eyebrow">Veteran-Owned · Fayetteville, NC</p>
+        <h1 id="hero-heading">Know what your next job should earn—<em>and what it actually did.</em></h1>
+        <p class="hero-description">MarginCommand connects your quote, job costs, and final margin—so the next pricing decision starts with better information.</p>
+        <div class="action-row"><a href="#how-it-works" class="button button-gold" data-play-demo>Watch the demo</a><a href="margincommand.html#pilot" class="text-action">Request pilot access <span aria-hidden="true">→</span></a></div>
+        <p class="hero-offer">Controlled beta · Founder-led onboarding</p>
       </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-card">
-        <div class="hero-card-label">MarginCommand · Commercialization Stage</div>
-        <div class="stat-grid">
-          <div class="stat-item">
-            <div class="stat-num" style="font-size:28px;">Working</div>
-            <div class="stat-label">MVP</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num" style="font-size:28px;">Controlled</div>
-            <div class="stat-label">beta</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num" style="font-size:28px;">Ongoing</div>
-            <div class="stat-label">founder-operated use</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">29<span>yr</span></div>
-            <div class="stat-label">operational leadership</div>
-          </div>
-        </div>
-        <div class="hero-divider"></div>
-        <div class="hero-founder">
-          <div class="founder-avatar">BP</div>
-          <div class="founder-info">
-            <div class="founder-name">Brian Penrod, DBA</div>
-            <div class="founder-title">Founder &amp; CEO · Command Sergeant Major (Ret.)</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CREDIBILITY STRIP -->
-<div id="credibility">
-  <div class="cred-inner">
-    <div class="cred-item"><div class="cred-dot"></div>PenFed Veteran Entrepreneur Program / FounderTrac 2026 · $5,000 grant recipient</div>
-    <div class="cred-divider"></div>
-    <div class="cred-item"><div class="cred-dot"></div>Veteran-Owned</div>
-    <div class="cred-divider"></div>
-    <div class="cred-item"><div class="cred-dot"></div>Doctor of Business Administration with a finance concentration</div>
-    <div class="cred-divider"></div>
-    <div class="cred-item"><div class="cred-dot"></div>Working MVP · Controlled beta</div>
-    <div class="cred-divider"></div>
-    <div class="cred-item"><div class="cred-dot"></div>Fayetteville, North Carolina</div>
-  </div>
-</div>
-
-<!-- MARGINCOMMAND -->
-<section id="margincommand">
-  <div class="section-inner">
-    <div class="divisions-header">
-      <div>
-        <div class="section-label">Commercialization Focus</div>
-        <h2>One Product.<br><em>One Commercialization Mission.</em></h2>
-      </div>
-      <p class="section-intro" style="max-width:520px;font-size:14px;">VetOps Financial is commercializing MarginCommand, a focused quote-to-actual job-margin workflow for very small owner-operated businesses. The initial beachhead is owner-operated event catering, especially BBQ and off-premise catering, where food yield, labor, travel, supplies, and fixed-price commitments make job economics difficult to see before the work is complete. The beachhead is owner-operated event catering. The same quote-to-actual mechanism applies to any fixed-price job business — custom woodworking and small trade contractors are the first expansion markets, gated on catering validation.</p>
-    </div>
-    <div class="division-cards">
-      <a href="/margincommand" class="division-card featured" style="text-decoration:none;">
-        <div class="division-num">Working MVP · Controlled Beta</div>
-        <div class="division-name">MarginCommand</div>
-        <div class="division-tagline">Quote the job. Approve actuals. Improve the next quote.</div>
-        <p class="division-desc">A focused quote-to-actual workflow for owner-operated fixed-price job businesses, starting with owner-operated event caterers, especially BBQ and off-premise catering.</p>
-        <div class="division-card-footer">
-          <div class="division-status status-active">
-            <span class="status-dot"></span>Pilot Commercialization
-          </div>
-          <span class="division-card-cta">Explore MarginCommand →</span>
-        </div>
-      </a>
-      <div id="how-it-works" class="division-card">
-        <div class="division-num">How It Works</div>
-        <div class="division-name">One Job File.<br>Quote to Actual.</div>
-        <div class="division-tagline">Operator visibility and approval</div>
-        <p class="division-desc">Estimate the job using realistic material, labor, travel, yield, and other direct-cost assumptions. Create customer documents from the approved quote, review actual costs after the work, and use the variance to improve future quotes. AI assists; operators approve. Operator-owned payment links keep funds outside VetOps Financial.</p>
-        <div class="division-card-footer">
-          <div class="division-status status-active">
-            <span class="status-dot"></span>Used on Real Founder-Operated Catering Work
-          </div>
-        </div>
-      </div>
-    </div>
-    <div style="max-width:1100px;margin:48px auto 0;">
-      <div style="border:1px solid rgba(201,168,76,0.22);background:rgba(10,31,60,0.04);padding:12px;box-shadow:0 24px 80px rgba(0,0,0,0.12);">
-        <video
-          controls
-          playsinline
-          preload="metadata"
-          width="1920"
-          height="1080"
-          aria-label="MarginCommand optimized v9 quote-to-actual workflow demo"
-          style="width:100%;height:auto;display:block;background:#000;"
-        >
+      <div class="hero-media" id="how-it-works">
+        <p class="media-label">Product demo · Sample catering job</p>
+        <video id="homepage-demo" controls playsinline preload="metadata" width="1280" height="720" poster="assets/images/margincommand-demo-costs.jpg" aria-label="MarginCommand optimized v9 quote-to-actual workflow demo" aria-describedby="demo-description">
           <source src="https://media.vetopsfinancial.com/MarginCommand_MICRO_Website_Optimized_v9.mp4" type="video/mp4">
-          Your browser does not support this video. <a href="https://media.vetopsfinancial.com/MarginCommand_MICRO_Website_Optimized_v9.mp4">Open the final MarginCommand demo MP4.</a>
+          Your browser does not support this video.
         </video>
+        <div class="media-caption"><a class="demo-action" href="#how-it-works" data-play-demo><span class="play-symbol" aria-hidden="true">▶</span> Watch the demo <span class="duration">(2:43)</span></a><a class="media-download" href="https://media.vetopsfinancial.com/MarginCommand_MICRO_Website_Optimized_v9.mp4">Open MP4</a></div>
+        <p id="demo-description" class="media-note">Quote, customer documents, receipt review, and operator-approved actuals. Representative sample job from founder-operated catering inputs.</p>
       </div>
-      <p style="margin-top:10px;font-size:12px;text-align:center;"><a href="https://media.vetopsfinancial.com/MarginCommand_MICRO_Website_Optimized_v9.mp4" style="color:var(--navy);">Open or download the final MarginCommand demo MP4</a></p>
     </div>
-  </div>
-</section>
-
-<!-- FOUNDER -->
-<section id="founder">
-  <div class="section-inner">
-    <div class="founder-layout">
-      <div class="founder-portrait">
-        <div class="portrait-frame">
-          <img src="founder-bbq-1.jpg" alt="Brian Penrod, founder and BBQ operator" class="portrait-img">
-          <div class="portrait-overlay">
-            <div class="portrait-name">Brian Penrod</div>
-            <div class="portrait-rank">Command Sergeant Major (Ret.) · Founder &amp; CEO</div>
-          </div>
+  </section>
+  <div class="proof-band"><div class="page-width proof-columns">
+    <div><h2>Built in a working business</h2><p>Ongoing founder-operated use on real catering work.</p></div>
+    <div><h2>Outside-operator discovery</h2><p>Conversations and workflow validation across owner-operated businesses.</p></div>
+    <div><h2>Founder-led beta onboarding</h2><p>Work directly with Brian to get started and share feedback.</p></div>
+  </div></div>
+  <section class="home-section workflow-section" id="margincommand" aria-labelledby="workflow-heading">
+    <div class="page-width">
+      <h2 id="workflow-heading">One job. <em>A clearer next decision.</em></h2>
+      <p class="intro">Quote the job. Approve actuals. Improve the next quote.</p>
+      <ol class="workflow-steps">
+        <li><span class="step-marker" aria-hidden="true">01</span><div><h3>Quote the work</h3><p>Build the estimate from materials, labor, travel, yield, and other direct costs.</p></div></li>
+        <li><span class="step-marker" aria-hidden="true">02</span><div><h3>Review actual costs</h3><p>Keep receipts and reviewed costs with the job. You approve the actuals.</p></div></li>
+        <li><span class="step-marker" aria-hidden="true">03</span><div><h3>Improve the next quote</h3><p>Compare the estimate with the result. See what changed before pricing the next job.</p></div></li>
+      </ol>
+      <div class="workflow-footer"><a class="inline-link" href="/margincommand">Explore MarginCommand <span aria-hidden="true">→</span></a><p>AI assists; operators approve. Payments stay with your provider.</p></div>
+    </div>
+  </section>
+  <section class="home-section learning-section" id="validation" aria-labelledby="learning-heading">
+    <div class="page-width">
+      <div class="learning-layout">
+        <div>
+          <p class="eyebrow">Customer discovery · September 2026</p>
+          <h2 id="learning-heading">What operators<br>taught us.</h2>
+          <p class="intro">Good software starts with listening to the people doing the work.</p>
+          <p>Discovery and beta onboarding have expanded into woodworking, jewelry, gunsmithing, and construction. Those conversations are shaping MarginCommand's ongoing development.</p>
+          <p class="learning-context">Our starting market remains owner-operated event catering. Adjacent workflows are being explored through discovery and controlled beta learning.</p>
         </div>
-        <div class="portrait-credential">
-          <div class="credential-img-wrap">
-            <img src="founder-bbq-2.jpg" alt="SCA competition ribbon" class="credential-img">
-          </div>
-          <div class="credential-text">
-            <div class="credential-eyebrow">Competition BBQ · Award-Winning</div>
-            <div class="credential-headline">Operator. Competitor.</div>
-            <div class="credential-detail">Multiple awards including Grand Championship — validated in the same beachhead MarginCommand serves.</div>
-          </div>
+        <div class="learning-rows">
+          <article><h3>Start with the way I price.</h3><p>Operators already have pricing habits and hard-earned judgment. That is the starting point for a useful workflow.</p></article>
+          <article><h3>Make missing costs visible.</h3><p>A quote can look complete while labor or materials are still unknown. Our design priority is to make those gaps clear.</p></article>
+          <article><h3>Keep me in control.</h3><p>AI can assist with review. The operator makes the decision and approves financial updates.</p></article>
         </div>
-        <div class="portrait-border"></div>
       </div>
-      <div class="founder-content">
-        <div class="section-label">Leadership</div>
-        <h2>Built by an<br><em>Operator.</em></h2>
-        <p class="section-intro">The same discipline that runs a Special Forces team now runs a SaaS company. No gap between what is planned and what is executed.</p>
-        <ul class="credential-list">
-          <li>
-            <div class="cred-icon">
-              <svg viewBox="0 0 12 12"><path d="M6 0L7.5 4.5H12L8.25 7.25L9.75 12L6 9.25L2.25 12L3.75 7.25L0 4.5H4.5Z"/></svg>
-            </div>
-            29 years U.S. Army Special Forces · Command Sergeant Major (Retired)
-          </li>
-          <li>
-            <div class="cred-icon">
-              <svg viewBox="0 0 12 12"><path d="M6 0L7.5 4.5H12L8.25 7.25L9.75 12L6 9.25L2.25 12L3.75 7.25L0 4.5H4.5Z"/></svg>
-            </div>
-            Doctor of Business Administration with a finance concentration · Liberty University · 2025
-          </li>
-          <li>
-            <div class="cred-icon">
-              <svg viewBox="0 0 12 12"><path d="M6 0L7.5 4.5H12L8.25 7.25L9.75 12L6 9.25L2.25 12L3.75 7.25L0 4.5H4.5Z"/></svg>
-            </div>
-            Python · SQL · Advanced Data Science · Streamlit SaaS Development
-          </li>
-          <li>
-            <div class="cred-icon">
-              <svg viewBox="0 0 12 12"><path d="M6 0L7.5 4.5H12L8.25 7.25L9.75 12L6 9.25L2.25 12L3.75 7.25L0 4.5H4.5Z"/></svg>
-            </div>
-            Owner-operator · Bud Wiser's BBQ LLC · Primary validation source
-          </li>
-          <li>
-            <div class="cred-icon">
-              <svg viewBox="0 0 12 12"><path d="M6 0L7.5 4.5H12L8.25 7.25L9.75 12L6 9.25L2.25 12L3.75 7.25L0 4.5H4.5Z"/></svg>
-            </div>
-            PenFed Veteran Entrepreneur Program / FounderTrac 2026 · $5,000 grant recipient
-          </li>
+      <details class="evidence-details">
+        <summary>Built in the Business. Used on Real Work. <span>See the founder-operated foundation</span></summary>
+        <div class="evidence-content">
+          <p>MarginCommand has been used for months in the founder's catering business. The following are representative examples of founder-operated use, not independent customer validation.</p>
+          <ul><li><strong>Wedding Reception:</strong> estimates, customer documents, and variance review.</li><li><strong>Church Fundraiser:</strong> protein, sides, labor, travel, and approved actuals.</li><li><strong>Drop-off Event:</strong> quote-to-actual records, margin review, and export.</li></ul>
+          <p>The beachhead is owner-operated event catering. The same quote-to-actual mechanism applies to any fixed-price job business — custom woodworking and small trade contractors are the first expansion markets, gated on catering validation.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+  <section class="home-section founder-section" id="founder" aria-labelledby="founder-heading">
+    <div class="page-width founder-layout">
+      <figure><img src="founder-bbq-1.jpg" width="1600" height="1067" loading="lazy" alt="Brian Penrod at work as a BBQ operator"><figcaption>Brian Penrod · Owner, Bud Wiser's BBQ LLC</figcaption></figure>
+      <div class="founder-copy">
+        <h2 id="founder-heading">Built by an operator.</h2>
+        <p class="founder-name">Brian Penrod, DBA <span>Founder &amp; CEO, VetOps Financial</span></p>
+        <p>29 years in U.S. Army Special Forces. A Doctor of Business Administration with a finance concentration. And firsthand experience running a catering business.</p>
+        <p>VetOps Financial develops MarginCommand to connect the price an operator quotes with the costs and decisions that follow.</p>
+        <ul class="founder-selections">
+          <li><strong>Selected for the Harvard Business School Foundry pilot</strong><span>Through the PenFed Veteran Entrepreneur Program</span></li>
+          <li><strong>Selected for Military Founders Lab</strong><span>WWP Founders Track · 26C</span></li>
+          <li><strong>PenFed Veteran Entrepreneur Program / FounderTrac 2026</strong><span>$5,000 grant recipient</span></li>
         </ul>
-        <div class="founder-quote">
-          "MarginCommand has been used for months inside the founder's operating catering business to connect real quotes, approved actuals, and the next pricing decision."
-        </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- VALIDATION -->
-<section id="validation">
-  <div class="section-inner">
-    <div class="section-label">Founder-Operated Validation</div>
-    <h2>Built in the Business.<br><em>Used on Real Work.</em></h2>
-    <p class="section-intro">MarginCommand has been used for months inside the founder's operating catering business to support real catering work. The three documented jobs below are representative examples of that broader founder-operated use—not independent customer validation.</p>
-    <div class="validation-grid">
-      <div class="validation-card">
-        <div class="val-event">Job #1 · Founder-Operated</div>
-        <div class="val-headline">Wedding Reception</div>
-        <p class="val-desc">Founder-operated catering job used to exercise the estimate, customer-document, approved-actuals, and variance-review workflow.</p>
+  </section>
+  <section class="home-section programs-section" id="programs" aria-label="Programs and infrastructure">
+    <div class="page-width">
+      <div class="programs-row">
+        <div><h2>Member of the Google for Startups Cloud Program</h2><p>Built on Google Cloud</p><a href="https://cloud.google.com/startup" class="inline-link" target="_blank" rel="noopener noreferrer">About the program <span aria-hidden="true">↗</span></a></div>
+        <div class="nvidia-program"><img src="assets/programs/nvidia-inception-program-badge-rgb-for-screen.jpg" width="501" height="217" loading="lazy" alt="NVIDIA Inception member badge"><div><h2>NVIDIA Inception member</h2><a href="https://www.nvidia.com/en-us/startups/" class="inline-link" target="_blank" rel="noopener noreferrer">About the program <span aria-hidden="true">↗</span></a></div></div>
       </div>
-      <div class="validation-card">
-        <div class="val-event">Job #2 · Founder-Operated</div>
-        <div class="val-headline">Church Fundraiser</div>
-        <p class="val-desc">Founder-operated catering job used to exercise cost decomposition across protein, sides, labor, travel, and approved actuals.</p>
-      </div>
-      <div class="validation-card">
-        <div class="val-event">Job #3 · Founder-Operated</div>
-        <div class="val-headline">Drop-off Event</div>
-        <p class="val-desc">Founder-operated catering job used to exercise the quote-to-actual record, margin review, and bookkeeping/AAR export.</p>
+      <p class="program-note">Program participation and technology use do not imply partnership or endorsement.</p>
+    </div>
+  </section>
+  <section class="home-section pilot-section" id="pilot" aria-labelledby="pilot-heading">
+    <div class="page-width">
+      <h2 id="pilot-heading">Bring your next job.</h2>
+      <p class="pilot-price">Founding pilot · $20/month</p>
+      <p class="pilot-description">Work directly with the founder to explore your workflow, get started, and help shape MarginCommand.</p>
+      <a href="margincommand.html#pilot" class="button button-gold">Request pilot access</a>
+      <p class="pilot-process">Apply. Discuss fit with Brian. Activate after acceptance.</p>
+      <p class="pilot-terms">Month-to-month · Credit card required upon accepted activation.</p>
+      <div class="pilot-faq">
+        <details><summary>Is this available to any business?</summary><p>Access is through an accepted controlled pilot. The first market is owner-operated catering; other job-based workflows are evaluated individually during discovery and onboarding.</p></details>
+        <details><summary>Does MarginCommand process payments?</summary><p>No. Attach your business-owned payment link. Funds stay with your payment provider. Payment status is tracked manually during beta.</p></details>
+        <details><summary>Does AI make financial decisions for me?</summary><p>No. AI output is advisory. You review and approve actual costs before they become part of the financial record.</p></details>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- PROGRAMS & INFRASTRUCTURE -->
-<section id="programs">
-  <div class="section-inner">
-    <div class="section-label">Programs &amp; Infrastructure</div>
-    <h2>Programs &amp;<br><em>Infrastructure.</em></h2>
-    <p class="section-intro">Program participation and cloud infrastructure supporting controlled MarginCommand commercialization.</p>
-    <div class="program-grid">
-      <a class="program-card" href="https://cloud.google.com/startup" target="_blank" rel="noopener noreferrer">
-        <div class="program-name">Google for Startups Cloud Program</div>
-        <div class="program-status">Member</div>
-        <p class="program-detail">Member of the Google for Startups Cloud Program</p>
-        <p class="program-detail"><strong>Built on Google Cloud</strong></p>
-      </a>
-      <a class="program-card" href="https://www.nvidia.com/en-us/startups/" target="_blank" rel="noopener noreferrer">
-        <img class="program-badge" src="assets/programs/nvidia-inception-program-badge-rgb-for-screen.jpg" alt="NVIDIA Inception member badge" width="501" height="217">
-        <div class="program-name">NVIDIA Inception member</div>
-      </a>
-    </div>
-    <p class="program-note">Program participation and technology use do not imply partnership or endorsement.</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section id="pilot">
-  <div id="contact" class="section-inner">
-    <div class="section-label">Founding Pilot</div>
-    <h2>Founding Pilot.<br><em>$20 per Month.</em></h2>
-    <p class="section-intro">VetOps Financial is accepting a limited number of qualified owner-operated businesses into MarginCommand's controlled paid pilot. Application and acceptance are required before activation.</p>
-    <div class="cta-group">
-      <a href="margincommand.html#pilot" class="btn-navy">View $20 Founding Pilot</a>
-      <a href="/margincommand" class="btn-primary">Explore MarginCommand</a>
-    </div>
-    <p class="contact-note">Contact: <a href="mailto:support@vetopsfinancial.com">support@vetopsfinancial.com</a> &nbsp;·&nbsp; Fayetteville, North Carolina</p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="vetops-shield.png" alt="VetOps Financial" style="height:36px;width:auto;display:block;">
-      <span class="footer-wordmark">VetOps Financial</span>
-    </div>
-    <div class="footer-meta">
-      © 2026 VetOps Financial, LLC · Fayetteville, NC<br>
-      Veteran-Owned · All Rights Reserved
-    </div>
-  </div>
-</footer>
-
+  </section>
+</main>
+<footer class="site-footer" id="contact"><div class="page-width"><span>© 2026 VetOps Financial, LLC</span><span>Veteran-Owned · Fayetteville, NC</span><a href="mailto:support@vetopsfinancial.com">support@vetopsfinancial.com</a></div></footer>
 </body>
 </html>
