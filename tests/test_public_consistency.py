@@ -172,7 +172,7 @@ class PublicConsistencyTests(unittest.TestCase):
     def test_homepage_is_margincommand_only(self):
         text = parse_page(REPOSITORY_ROOT / "index.html").visible_text
         self.assertIn("VetOps Financial develops MarginCommand", text)
-        self.assertIn("One Product. One Commercialization Mission.", text)
+        self.assertIn("Know what your next job should earn", text)
         for forbidden in FORBIDDEN_HOMEPAGE_PORTFOLIO:
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, text)

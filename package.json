@@ -1,0 +1,8 @@
+{
+  "name": "vetopsfinancial-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/preview.mjs"
+  }
+}
