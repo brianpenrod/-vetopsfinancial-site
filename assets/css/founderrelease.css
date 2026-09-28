@@ -1,4 +1,4 @@
-/* Reuse the company design system and the original, unaltered Blender renders. */
+/* Original Blender still for the Missing Piece film, within the company design system. */
 .frr-page .frr-hero{padding:52px 0 0}
 .frr-page .frr-hero-grid{grid-template-columns:.92fr 1.08fr;gap:26px;min-height:478px}
 .frr-page .frr-hero h1{font-size:clamp(57px,5.6vw,80px);max-width:610px}
@@ -26,3 +26,5 @@
 @media(max-width:900px){.frr-page .frr-hero-grid{grid-template-columns:1fr;gap:28px;min-height:0}.frr-page .frr-hero h1{font-size:clamp(56px,8vw,72px);max-width:720px}.frr-page .frr-hero-copy>p{max-width:600px}.frr-capsule{width:100%;max-width:680px;margin-inline:auto!important}.frr-capsule figcaption{margin-top:0}.frr-page .frr-status{margin-top:32px}}
 @media(max-width:640px){.frr-page .frr-hero{padding-top:38px}.frr-page .frr-hero h1{font-size:53px}.frr-page .frr-hero-copy>p{font-size:15px;margin-top:23px}.frr-page .frr-hero .cta-row{gap:6px 22px}.frr-capsule picture{width:80%;max-width:330px;margin:auto}.frr-capsule img{aspect-ratio:3/4}.frr-capsule figcaption{padding-top:0;margin-top:20px}.frr-page .frr-status{display:block;padding:22px 0}.frr-page .frr-status p{margin-top:8px}.frr-page .frr-body{padding:48px 0}}
 @media(max-width:360px){.frr-page .frr-hero h1{font-size:41px}.frr-page .frr-hero-copy>p{font-size:14px}}
+
+@media(max-width:640px){.frr-capsule picture{width:100%;max-width:none}.frr-capsule img{aspect-ratio:8/5}}
