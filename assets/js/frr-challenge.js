@@ -72,7 +72,7 @@ if (challenge) {
     next.hidden = true;
     next.textContent = index === 2 ? 'See the takeaway →' : 'Next scenario →';
     live.textContent = '';
-    if (focus) title.focus({ preventScroll: true });
+    if (focus) title.focus();
   }
   choices.forEach((button, option) => {
     button.addEventListener('click', () => {
@@ -88,7 +88,7 @@ if (challenge) {
       takeaway.textContent = scenarios[index].takeaway;
       next.hidden = false;
       live.textContent = `${scenarios[index].takeaway} ${scenarios[index].answers[option]}`;
-      next.focus({ preventScroll: true });
+      next.focus();
     });
   });
   next.addEventListener('click', () => {
@@ -99,7 +99,7 @@ if (challenge) {
     } else {
       stage.hidden = true;
       summary.hidden = false;
-      summary.querySelector('h3').focus({ preventScroll: true });
+      summary.querySelector('h3').focus();
       live.textContent = 'Three scenarios explored. These examples do not assess your app.';
     }
   });
