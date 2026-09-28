@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.superpowers/
+.qa/
+node_modules/

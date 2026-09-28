@@ -9,15 +9,13 @@ PUBLIC_PAGES = (
     REPOSITORY_ROOT / "margincommand.html",
     REPOSITORY_ROOT / "margincommand_pilot_links_live.html",
     REPOSITORY_ROOT / "founderrelease.html",
+    REPOSITORY_ROOT / "studio.html",
 )
 MARGINCOMMAND_PAGES = (
     REPOSITORY_ROOT / "margincommand.html",
     REPOSITORY_ROOT / "margincommand_pilot_links_live.html",
 )
-ACTIVE_V9_PAGES = (
-    REPOSITORY_ROOT / "index.html",
-    *MARGINCOMMAND_PAGES,
-)
+ACTIVE_V9_PAGES = MARGINCOMMAND_PAGES
 PROGRAM_PAGES = (
     REPOSITORY_ROOT / "index.html",
     *MARGINCOMMAND_PAGES,
@@ -139,6 +137,25 @@ def parse_page(page):
 
 
 class PublicConsistencyTests(unittest.TestCase):
+    def test_studio_exposes_finished_media_and_contact(self):
+        page = REPOSITORY_ROOT / "studio.html"
+        self.assertTrue(page.is_file(), "Studio page is missing")
+        parsed = parse_page(page)
+        self.assertIn("Your work deserves to be seen.", parsed.visible_text)
+        self.assertIn("studio@vetopsfinancial.com", parsed.visible_text)
+        videos = [a for t, a in parsed.tags if t == "video"]
+        self.assertEqual(4, len(videos))
+        for video in videos:
+            self.assertIn("controls", video)
+            self.assertIn("playsinline", video)
+            self.assertTrue(video.get("poster"))
+            self.assertNotIn("autoplay", video)
+        for name in ("watch", "ring", "bbq", "plaque"):
+            self.assertTrue((REPOSITORY_ROOT / f"assets/studio/{name}.mp4").is_file())
+            self.assertTrue((REPOSITORY_ROOT / f"assets/studio/{name}-hd.mp4").is_file())
+            self.assertTrue((REPOSITORY_ROOT / f"assets/studio/{name}.jpg").is_file())
+            self.assertTrue(any(f"assets/studio/{name}-hd.mp4" in href for _, href in parsed.links))
+
     def test_public_pages_declare_existing_favicon(self):
         self.assertTrue(
             (REPOSITORY_ROOT / FAVICON_URL).is_file(),
@@ -169,49 +186,29 @@ class PublicConsistencyTests(unittest.TestCase):
                 for forbidden in FORBIDDEN_IDENTITY:
                     self.assertNotIn(forbidden, text)
 
-    def test_homepage_is_margincommand_only(self):
-        text = parse_page(REPOSITORY_ROOT / "index.html").visible_text
-        self.assertIn("VetOps Financial develops MarginCommand", text)
-        self.assertIn("Know what your next job should earn", text)
-        for forbidden in FORBIDDEN_HOMEPAGE_PORTFOLIO:
-            with self.subTest(forbidden=forbidden):
-                self.assertNotIn(forbidden, text)
+    def test_homepage_presents_company_and_three_offerings(self):
+        page = parse_page(REPOSITORY_ROOT / "index.html")
+        for name, destination in (("VetOps Studio", "/studio"), ("MarginCommand", "/margincommand"), ("Founders Release", "/founderrelease")):
+            self.assertIn(name, page.visible_text)
+            self.assertIn(destination, [href for _, href in page.links])
+        self.assertIn("Practical software.", page.visible_text)
+        self.assertIn("Powerful digital experiences.", page.visible_text)
 
-    def test_homepage_preserves_review_anchor_and_canonical_explore_links(self):
+    def test_homepage_preserves_previous_anchor_destinations(self):
+        parsed = parse_page(REPOSITORY_ROOT / "index.html")
+        ids = {attrs.get("id") for _, attrs in parsed.tags}
+        self.assertTrue({"hero", "margincommand", "how-it-works", "validation", "founder", "pilot", "contact"}.issubset(ids))
+
+    def test_contact_links_use_company_addresses(self):
+        for page in PUBLIC_PAGES:
+            emails = [href for _, href in parse_page(page).links if href.startswith("mailto:")]
+            self.assertTrue(emails, page.name)
+            self.assertTrue(all("@vetopsfinancial.com" in href for href in emails), page.name)
+
+    def test_homepage_links_to_margincommand_demo_without_loading_it(self):
         homepage = parse_page(REPOSITORY_ROOT / "index.html")
-        self.assertIn(("MarginCommand", "#margincommand"), homepage.links)
-
-        explore_links = [
-            href
-            for text, href in homepage.links
-            if "Explore MarginCommand" in text
-        ]
-        self.assertTrue(explore_links, "No Explore MarginCommand links found")
-        self.assertEqual(["/margincommand"] * len(explore_links), explore_links)
-
-    def test_homepage_sequences_beachhead_before_gated_expansion(self):
-        text = parse_page(REPOSITORY_ROOT / "index.html").visible_text
-        sequencing = (
-            "The beachhead is owner-operated event catering. The same "
-            "quote-to-actual mechanism applies to any fixed-price job "
-            "business — custom woodworking and small trade contractors "
-            "are the first expansion markets, gated on catering validation."
-        )
-        self.assertIn(sequencing, text)
-
-    def test_homepage_primary_demo_uses_optimized_v9(self):
-        homepage = parse_page(REPOSITORY_ROOT / "index.html")
-        sources = [
-            attrs.get("src", "")
-            for tag, attrs in homepage.tags
-            if tag == "source"
-        ]
-        self.assertEqual([FINAL_DEMO_VIDEO_URL], sources)
-        self.assertNotIn(RETAINED_DEMO_VIDEO_URL, sources)
-
-        hrefs = [href for _, href in homepage.links]
-        self.assertIn(FINAL_DEMO_VIDEO_URL, hrefs)
-        self.assertNotIn(RETAINED_DEMO_VIDEO_URL, hrefs)
+        self.assertFalse([attrs for tag, attrs in homepage.tags if tag == "video"])
+        self.assertIn("/margincommand#product-demo", [href for _, href in homepage.links])
 
     def test_active_v9_players_use_r2_range_delivery(self):
         for page in ACTIVE_V9_PAGES:
@@ -236,52 +233,31 @@ class PublicConsistencyTests(unittest.TestCase):
                 self.assertNotIn(PAGES_FINAL_DEMO_VIDEO_URL, sources)
                 self.assertNotIn(PAGES_FINAL_DEMO_VIDEO_URL, hrefs)
 
-    def test_homepage_has_no_founderrelease_link(self):
-        homepage = parse_page(REPOSITORY_ROOT / "index.html")
-        founderrelease_links = [
-            href
-            for _, href in homepage.links
-            if "founderrelease" in href.lower()
-        ]
-        self.assertEqual([], founderrelease_links)
+    def test_all_pages_provide_shared_primary_destinations(self):
+        for page in PUBLIC_PAGES:
+            parsed = parse_page(page)
+            hrefs = {href for _, href in parsed.links}
+            self.assertTrue({"/", "/studio", "/margincommand", "/founderrelease"}.issubset(hrefs), page.name)
+            current = [attrs for tag, attrs in parsed.tags if tag == "a" and attrs.get("aria-current") == "page"]
+            self.assertEqual(1, len(current), page.name)
 
-    def test_homepage_uses_ongoing_founder_operated_proof(self):
+    def test_homepage_distinguishes_development_and_available_services(self):
         text = parse_page(REPOSITORY_ROOT / "index.html").visible_text
-        required = (
-            "Ongoing",
-            "founder-operated use",
-            "Built in the Business.",
-            "Used on Real Work.",
-            "used for months",
-            "representative examples",
-            "not independent customer validation",
-            "Wedding Reception",
-            "Church Fundraiser",
-            "Drop-off Event",
-        )
-        for copy in required:
-            with self.subTest(copy=copy):
-                self.assertIn(copy, text)
-        self.assertNotIn(
-            "3 founder-operated jobs exercised",
-            text.lower(),
-        )
-        self.assertNotIn("Every operator", text)
-        self.assertNotIn("Almost none", text)
+        self.assertIn("In development", text)
+        self.assertIn("Controlled beta", text)
+        self.assertIn("Websites", text)
+        self.assertIn("Brian Penrod, DBA", text)
 
-    def test_founderrelease_is_noindex(self):
+    def test_founderrelease_has_public_development_status_without_prices(self):
         page = parse_page(REPOSITORY_ROOT / "founderrelease.html")
-        robots_values = [
-            meta.get("content", "").lower()
-            for meta in page.metas
-            if meta.get("name", "").lower() == "robots"
-        ]
-        self.assertIn("noindex, nofollow", robots_values)
-        canonicals = [
-            attrs.get("href", "")
-            for tag, attrs in page.tags
-            if tag == "link" and attrs.get("rel", "").lower() == "canonical"
-        ]
+        self.assertIn("In development", page.visible_text)
+        self.assertIn("Pricing to be announced", page.visible_text)
+        self.assertNotIn("$", page.visible_text)
+        for old_offer in ("Request a Gate", "Founding Partner", "three-business-day", "Ready to Release."):
+            self.assertNotIn(old_offer.lower(), page.visible_text.lower())
+        robots = [meta.get("content", "").lower() for meta in page.metas if meta.get("name") == "robots"]
+        self.assertNotIn("noindex, nofollow", robots)
+        canonicals = [attrs.get("href") for tag, attrs in page.tags if tag == "link" and attrs.get("rel") == "canonical"]
         self.assertIn("https://vetopsfinancial.com/founderrelease", canonicals)
 
     def test_yield_copy_is_configurable_not_physical_constant(self):
