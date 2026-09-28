@@ -32,27 +32,27 @@
 **Files:** Create studio.html, assets/css/company.css, assets/js/studio.js, assets/studio/*; update tests/test_public_consistency.py with Studio-specific checks.
 **Interfaces:** Consumes the supplied four MP4s and existing brand fonts/favicon. Produces /studio, shared .company-nav markup, .site-shell theme, data-video-panel and data-video-toggle behavior.
 
-- [ ] Update checks for Studio media sources, dimensions, manual playback links, and studio email. Run the focused checks; expect failure because studio.html does not exist.
-- [ ] Create web video derivatives and posters. Implement the approved six-section Studio page and native playback with optional silent hero preview.
-- [ ] Run focused Studio checks; expect all pass. Commit task.
+- [x] Update checks for Studio media sources, dimensions, manual playback links, and studio email. Run the focused checks; expect failure because studio.html does not exist.
+- [x] Create web video derivatives and posters. Implement the approved six-section Studio page and native playback with optional silent hero preview.
+- [x] Run focused Studio checks; expect all pass. Commit task.
 
 ### Task 2: Company structure and restored FRR
 
 **Files:** Modify index.html, founderrelease.html, margincommand.html, margincommand_pilot_links_live.html, assets/css/company.css, assets/js/site.js, tests/test_public_consistency.py; add sitemap.xml and robots.txt.
 **Interfaces:** Consumes .company-nav and .site-shell. Produces the four-page shared navigation and FRR public development page.
 
-- [ ] Replace obsolete campaign-specific test expectations with navigation, balanced homepage, FRR status and no-price checks. Run tests; expect failures on the old homepage and FRR copy.
-- [ ] Implement the company homepage and development-status FRR page; add shared navigation to both MarginCommand surfaces without changing their product content.
-- [ ] Keep former homepage deep-link targets useful and retain original product destinations. Update canonical and search metadata.
-- [ ] Run python3 -m unittest discover -s tests -v; expect a green suite. Commit task.
+- [x] Replace obsolete campaign-specific test expectations with navigation, balanced homepage, FRR status and no-price checks. Run tests; expect failures on the old homepage and FRR copy.
+- [x] Implement the company homepage and development-status FRR page; add shared navigation to both MarginCommand surfaces without changing their product content.
+- [x] Keep former homepage deep-link targets useful and retain original product destinations. Update canonical and search metadata.
+- [x] Run python3 -m unittest discover -s tests -v; expect a green suite. Commit task.
 
 ### Task 3: Browser verification and reviewable handoff
 
 **Files:** Add a concise build log and deployment/readme notes; fix only concrete issues found in QA.
 **Interfaces:** Consumes all pages and native preview server. Produces a reviewed branch and preview/package for Brian.
 
-- [ ] Start npm run dev. Check all routes on desktop, tablet, and phone widths, including menu, reduced-motion, posters, actual video playback and contact destinations.
-- [ ] Capture browser screenshots and compare with the visual reference. Fix overflow, unreadable text, missing assets, or broken interactions.
-- [ ] Run full Python checks and JavaScript syntax checks. Expect no failures.
-- [ ] Obtain one fresh whole-branch review, address material findings, and commit verified changes.
-- [ ] Deliver an accessible preview and branch/package with production publication left for Brian to review.
+- [x] Start npm run dev. Check all routes on desktop, tablet, and phone widths, including menu, reduced-motion, posters, actual video playback and contact destinations.
+- [x] Capture browser screenshots and compare with the visual reference. Fix overflow, unreadable text, missing assets, or broken interactions.
+- [x] Run full Python checks and JavaScript syntax checks. Expect no failures.
+- [x] Obtain one fresh whole-branch review, address material findings, and commit verified changes.
+- [x] Deliver an accessible preview and branch/package with production publication left for Brian to review.
