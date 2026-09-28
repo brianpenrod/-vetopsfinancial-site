@@ -137,6 +137,15 @@ def parse_page(page):
 
 
 class PublicConsistencyTests(unittest.TestCase):
+    def test_same_page_links_have_existing_targets(self):
+        for page in PUBLIC_PAGES:
+            parsed = parse_page(page)
+            ids = {attrs["id"] for _, attrs in parsed.tags if attrs.get("id")}
+            for _, href in parsed.links:
+                if href.startswith("#") and len(href) > 1:
+                    with self.subTest(page=page.name, href=href):
+                        self.assertIn(href[1:], ids)
+
     def test_studio_exposes_finished_media_and_contact(self):
         page = REPOSITORY_ROOT / "studio.html"
         self.assertTrue(page.is_file(), "Studio page is missing")
