@@ -31,6 +31,11 @@
             Your browser does not support video. Use the Open film link below.
           </video>
         </div>
+        <div class="frr-film-seek" data-film-seek hidden>
+          <label class="frr-film-description" for="frr-film-position">Film position</label>
+          <input id="frr-film-position" type="range" min="0" max="18" step="0.1" value="0" aria-valuetext="0 seconds of 18 seconds">
+          <span class="frr-film-clock" data-film-clock aria-hidden="true">0:00 / 0:18</span>
+        </div>
         <div class="frr-film-controls">
           <button class="film-toggle" type="button" data-film-toggle aria-controls="frr-film" hidden>Play film</button>
           <span class="frr-film-duration">18 seconds · Silent</span>
