@@ -16,4 +16,6 @@ Verification:
 - Desktop screenshot compared directly with the approved concept; review capture: `frr-challenge-desktop.jpg`.
 - The media shown on the page is a real Blender still. The full-resolution film will replace it after the separate Brev render.
 
+Subsequent update: the finished Brev film is now integrated. See [the film integration review](2026-09-28-frr-film.md).
+
 Scope: preview branch only. Production/main was not changed. No private architecture diagram was added.
