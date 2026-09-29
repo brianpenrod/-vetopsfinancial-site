@@ -6,7 +6,7 @@
 
 <meta name="theme-color" content="#111518"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/refresh.css"><link rel="stylesheet" href="assets/css/company.css"><link rel="stylesheet" href="assets/css/founderrelease.css"><link rel="stylesheet" href="assets/css/frr-challenge.css"><script src="assets/js/site.js" defer></script><script src="assets/js/frr-challenge.js" defer></script></head><body class="site-shell frr-page"><a class="skip-link" href="#main">Skip to content</a>
+<link rel="stylesheet" href="assets/css/refresh.css"><link rel="stylesheet" href="assets/css/company.css"><link rel="stylesheet" href="assets/css/founderrelease.css"><link rel="stylesheet" href="assets/css/frr-challenge.css"><script src="assets/js/site.js" defer></script><script src="assets/js/frr-challenge.js" defer></script><script src="assets/js/frr-film.js" defer></script></head><body class="site-shell frr-page"><a class="skip-link" href="#main">Skip to content</a>
 <nav class="company-nav" aria-label="Main navigation">
 <a class="company-brand" href="/" aria-label="VetOps Financial home"><img src="vetops-shield.png" alt="" width="31" height="35">VetOps Financial</a>
 <button class="menu-toggle" type="button" aria-controls="site-menu" aria-expanded="false" hidden>Menu</button>
@@ -24,11 +24,21 @@
           <a class="small-link" href="#contact">Contact Brian</a>
         </div>
       </div>
-      <figure class="frr-capsule">
-        <picture>
-          <img src="assets/img/frr/missing-piece-poster.webp" width="1200" height="750" fetchpriority="high" alt="Original Blender sculpture: floating metal and smoked-glass layers reveal an amber-lit missing section. A visual metaphor for unanswered questions before launch.">
-        </picture>
-        <figcaption><strong>Before you launch. Know what to check.</strong><span>Conceptual Blender illustration · Product in development.</span></figcaption>
+      <figure class="frr-capsule" data-frr-film>
+        <div class="frr-film-frame">
+          <video id="frr-film" controls playsinline muted preload="none" poster="assets/img/frr/missing-piece-film-poster.webp" width="1280" height="960" aria-label="The Missing Piece — Founders Release concept film" aria-describedby="frr-film-description">
+            <source src="assets/video/frr/missing-piece-web.mp4" type="video/mp4">
+            Your browser does not support video. Use the Open film link below.
+          </video>
+        </div>
+        <div class="frr-film-controls">
+          <button class="film-toggle" type="button" data-film-toggle aria-controls="frr-film" hidden>Play film</button>
+          <span class="frr-film-duration">18 seconds · Silent</span>
+          <a class="small-link" href="assets/video/frr/missing-piece-web.mp4" target="_blank" rel="noopener">Open film <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        </div>
+        <figcaption><strong data-film-caption>Before you launch. Know what to check.</strong><span>Concept film · Product in development.</span></figcaption>
+        <p class="frr-film-description" id="frr-film-description">An 18-second silent Blender animation. Metal and smoked-glass layers separate to reveal an amber-lit missing section. The gap stays open. The story reads: You built it with AI. It works in the demo. Ready for real customers? Before you launch. Know what to check. The decision stays yours. This is a visual metaphor, not a depiction of the product's architecture.</p>
+        <p class="frr-film-error" role="status" hidden>Unable to play here. Use Open film to watch in a separate tab.</p>
       </figure>
     </div>
     <aside class="frr-status" aria-label="Project status"><strong>In development</strong><p>The commercial offering is not yet available. <span>Pricing to be announced.</span></p></aside>
