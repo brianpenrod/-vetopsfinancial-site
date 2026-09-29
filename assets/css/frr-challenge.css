@@ -1,0 +1,50 @@
+/* A physical note, native text, and a short teaching interaction. */
+.frr-challenge{padding:74px 0 0;border-top:1px solid var(--studio-line);scroll-margin-top:90px}
+.frr-page section#challenge{scroll-margin-top:0}
+.frr-challenge [hidden]{display:none!important}
+.challenge-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:65px;align-items:start}
+.frr-page .challenge-kicker{color:var(--studio-gold);font-size:10px;letter-spacing:.19em;text-transform:uppercase;display:flex;align-items:center;gap:17px;margin:33px 0 35px}
+.challenge-kicker:before{content:'';display:block;width:30px;height:1px;background:currentColor}
+.frr-challenge h2{font-size:clamp(64px,6.6vw,96px);line-height:.99;letter-spacing:-.035em;margin:0 0 32px}
+.frr-challenge h2 em{display:block;color:var(--studio-gold)}
+.frr-page .challenge-intro{max-width:390px;color:var(--studio-muted);font-size:17px;line-height:1.7}
+.frr-page .challenge-disclosure{margin-top:90px;max-width:350px;color:var(--studio-muted);font-size:11px;line-height:1.65}
+.challenge-disclosure:before{content:'';display:block;width:45px;height:1px;background:var(--studio-line);margin-bottom:17px}
+.scenario-progress{display:flex;align-items:center;gap:20px;font-size:9px;letter-spacing:.16em;color:var(--studio-muted);margin:8px 0 16px}
+.scenario-progress:before{content:'';height:3px;flex:1;background:linear-gradient(to right,var(--studio-gold) 0 var(--progress),var(--studio-line) var(--progress) 100%);border-radius:3px;transition:background .25s}
+.scenario-note{position:relative;aspect-ratio:1.85;margin:0 -25px 12px}
+.scenario-note img{position:absolute;width:100%;height:100%;object-fit:cover}
+.scenario-note-copy{position:absolute;left:19%;right:20%;top:31%;bottom:35%;display:flex;flex-direction:column;justify-content:center;gap:11px;text-align:center;color:#222322}
+.frr-page .scenario-note h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(28px,3vw,42px);line-height:1.02;margin:0;letter-spacing:-.02em}
+.frr-page .scenario-note-copy p{font-size:clamp(12px,1.16vw,16px);line-height:1.45;margin:0}
+.frr-page .scenario-tag{position:absolute;left:82.4%;right:7%;top:39.5%;height:10%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;color:#352913;font-size:12px;line-height:1.05;text-align:center}
+.frr-page .scenario-question{font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;font-weight:400;line-height:1.2;margin:0 0 18px}
+.scenario-choices{display:grid;gap:12px}
+.scenario-choice{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;text-align:left;font:inherit;font-size:15px;line-height:1.45;background:transparent;color:var(--studio-ink);border:1px solid #727b7e;border-radius:6px;padding:17px 23px;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
+.scenario-choice b{font-size:23px;font-weight:400;color:var(--studio-gold)}
+.scenario-choice:hover:not(:disabled),.scenario-choice:focus-visible{border-color:var(--studio-gold);background:#d8b66a09;transform:translateY(-1px)}
+.scenario-choice:disabled{cursor:default;color:var(--studio-muted);opacity:.7}
+.scenario-choice.is-selected{opacity:1;border-color:var(--studio-gold);background:#d8b66a0d;color:var(--studio-ink)}
+.scenario-choice:focus-visible,.challenge-next:focus-visible,.challenge-restart:focus-visible{outline:2px solid var(--studio-gold);outline-offset:5px}
+.frr-page .scenario-feedback{color:var(--studio-muted);font-size:14px;line-height:1.65;margin:14px 0 0;animation:reveal-evidence .25s ease-out}
+.frr-page .scenario-takeaway{font-size:15px;color:var(--studio-ink);font-weight:500;margin:21px 0 0}
+.scenario-takeaway:empty{display:none}
+.challenge-next{font:inherit;display:block;width:max-content;background:none;border:0;border-bottom:1px solid #d8b66a88;color:var(--studio-gold);font-size:14px;padding:12px 0 6px;cursor:pointer;margin-top:11px}
+.challenge-footer{display:flex;align-items:center;justify-content:space-between;gap:26px;border-top:1px solid var(--studio-line);margin-top:70px;padding:26px 0 34px}
+.frr-page .challenge-footer p{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;line-height:1.2;margin:0}
+.challenge-footer a{flex-shrink:0}
+.challenge-summary{padding:35px 0;min-height:480px}
+.challenge-summary>p:first-child{color:var(--studio-gold);letter-spacing:.12em;font-size:11px;text-transform:uppercase}
+.frr-page .challenge-summary h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:48px;line-height:1.08;margin:30px 0 20px;font-weight:400}
+.frr-page .challenge-summary p{font-size:15px;line-height:1.7;color:var(--studio-muted)}
+.challenge-summary ul{padding-left:20px;line-height:1.75;color:var(--studio-ink);font-size:15px;margin:23px 0}
+.challenge-restart{display:block;font:inherit;background:transparent;border:0;border-bottom:1px solid var(--studio-line);padding:7px 0;color:var(--studio-muted);cursor:pointer;font-size:12px;margin-top:25px}
+.challenge-static details{border-bottom:1px solid var(--studio-line);padding:22px 0;color:var(--studio-muted);font-size:15px;line-height:1.65}
+.challenge-static summary{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;color:var(--studio-ink);cursor:pointer}
+.challenge-live{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@keyframes reveal-evidence{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1100px){.challenge-grid{gap:34px;grid-template-columns:.85fr 1.15fr}.frr-challenge h2{font-size:69px}.frr-page .scenario-question{font-size:28px}.scenario-choice{padding:15px 18px}.frr-page .challenge-kicker{letter-spacing:.12em;font-size:9px}}
+@media(max-width:900px){.challenge-grid{grid-template-columns:1fr;gap:29px;max-width:650px;margin:auto}.frr-page .challenge-kicker{margin-top:0}.frr-challenge h2{font-size:76px}.frr-page .challenge-intro{max-width:530px}.frr-page .challenge-disclosure{margin-top:23px;max-width:none}.challenge-disclosure:before{display:none}.frr-page .scenario-note h3{font-size:42px}.frr-page .scenario-note-copy p{font-size:17px}.frr-page .scenario-tag{font-size:12px}.challenge-footer{margin-top:45px}.frr-page .challenge-footer p{font-size:27px}.challenge-summary{min-height:0}}
+@media(max-width:640px){.frr-challenge{padding-top:45px}.frr-page .challenge-kicker{font-size:8px;margin-bottom:24px}.frr-challenge h2{font-size:67px;margin-bottom:22px}.frr-page .challenge-intro{font-size:15px}.scenario-note{margin:0 -15px 4px}.frr-page .scenario-note h3{font-size:30px}.scenario-note-copy{gap:9px}.frr-page .scenario-note-copy p{font-size:12px}.frr-page .scenario-tag{font-size:9px}.frr-page .scenario-question{font-size:27px}.scenario-choice{font-size:14px;padding:16px}.scenario-progress{font-size:8px}.challenge-footer{display:block;padding:25px 0}.frr-page .challenge-footer p{font-size:27px;margin-bottom:20px}.frr-page .challenge-summary h3{font-size:43px}}
+@media(max-width:360px){.frr-challenge h2{font-size:57px}.frr-page .scenario-note h3{font-size:26px}.frr-page .scenario-note-copy p{font-size:11px}.frr-page .scenario-tag{font-size:8px}.frr-page .scenario-question{font-size:24px}}
+@media(prefers-reduced-motion:reduce){.scenario-choice,.scenario-progress{transition:none}.frr-page .scenario-feedback{animation:none}.scenario-choice:hover:not(:disabled){transform:none}}

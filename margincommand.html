@@ -569,27 +569,18 @@
   }
 </style>
 <link rel="stylesheet" href="assets/css/refresh.css">
+<link rel="stylesheet" href="assets/css/company.css">
 <script src="assets/js/site.js" defer></script>
 </head>
 <body class="product-page">
-<a class="skip-link" href="#main">Skip to content</a>
-
 <!-- NAV -->
-<nav aria-label="Main navigation">
-  <a href="#" class="nav-logo">
-    <img src="vetops-shield.png" alt="VetOps Financial" class="nav-logo-img">
-    <span class="nav-mc">Margin<span>Command</span></span>
-    <span class="nav-by">by VetOps Financial</span>
-  </a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" hidden>Menu</button>
-  <div class="nav-right" id="site-menu">
-    <a href="index.html" class="nav-back"><span class="nav-back-arrow">←</span> VetOps Financial</a>
-    <a href="#how" class="nav-link">How It Works</a>
-    <a href="#modules" class="nav-link">Features</a>
-    <a href="#pricing" class="nav-link">Pricing</a>
-    <a href="#pilot" class="nav-cta-btn">Join the Pilot</a>
-  </div>
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="company-nav" aria-label="Main navigation">
+<a class="company-brand" href="/" aria-label="VetOps Financial home"><img src="vetops-shield.png" alt="" width="31" height="35">VetOps Financial</a>
+<button class="menu-toggle" type="button" aria-controls="site-menu" aria-expanded="false" hidden>Menu</button>
+<ul class="company-links" id="site-menu"><li><a href="/">Home</a></li><li><a href="/studio">VetOps Studio</a></li><li><a href="/margincommand" aria-current="page">MarginCommand</a></li><li><a href="/founderrelease">Founders Release</a></li><li><a href="/#contact">Contact</a></li></ul>
 </nav>
+<div class="product-subnav" aria-label="MarginCommand page sections"><a href="#how">How it works</a><a href="#modules">Features</a><a href="#pricing">Pricing</a><a href="#pilot">Request pilot access</a></div>
 <main id="main">
 
 <!-- HERO -->
@@ -1236,24 +1227,7 @@
 
 </main>
 <!-- FOOTER -->
-<footer>
-  <div class="foot-inner">
-    <div style="display:flex;align-items:center;gap:14px;">
-      <img src="vetops-shield.png" alt="VetOps Financial" style="height:42px;width:auto;display:block;flex-shrink:0;">
-      <div class="foot-brand">
-        <div class="foot-mc">Margin<span>Command</span></div>
-        <div class="foot-parent">A VetOps Financial Product · vetopsfinancial.com</div>
-      </div>
-    </div>
-    <div class="foot-links">
-      <a href="index.html">VetOps Financial</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#pilot">Pilot</a>
-      <a href="mailto:support@vetopsfinancial.com">Contact</a>
-    </div>
-    <div class="foot-copy">© 2026 VetOps Financial, LLC<br>Veteran-Owned · Fayetteville, NC</div>
-  </div>
-</footer>
+<footer class="company-footer"><div class="shell-width footer-inner"><div><div class="footer-title">VETOPS FINANCIAL</div><p>Veteran-owned · Fayetteville, NC</p></div><div class="footer-links" aria-label="Footer navigation"><a href="/">Home</a><a href="/studio">VetOps Studio</a><a href="/margincommand">MarginCommand</a><a href="/founderrelease">Founders Release</a></div><div class="footer-credit">© 2026 VetOps Financial, LLC</div></div></footer>
 
 </body>
 </html>
