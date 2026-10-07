@@ -12,7 +12,7 @@ if(stage){
  const cancel=()=>{cancelAnimationFrame(raf);raf=0;last=0;};
  const draw=()=>{if(mode!=='ready'||!renderer)return;try{renderer.draw(x,y,lx,ly);stage.dataset.rotationX=x.toFixed(4);stage.dataset.rotationY=y.toFixed(4);stage.dataset.frames=String(renderer.frames);}catch{fallback('3D is unavailable here. The approved image is shown.');}};
  const update=()=>{play.textContent=automatic?'Pause motion':'Play motion';play.setAttribute('aria-pressed',String(automatic));stage.dataset.automatic=String(automatic);};
- const tick=time=>{raf=0;if(mode!=='ready'||!automatic||!visible||document.hidden||motion.matches)return;
+ const tick=time=>{raf=0;if(motion.matches&&automatic){stop();status.textContent='Motion is off to respect your reduced-motion setting.';return;}if(mode!=='ready'||!automatic||!visible||document.hidden)return;
   if(!last||time-last>=32){const dt=last?Math.min((time-last)/1000,.05):0;last=time;t+=dt;
    if(!drag){y=.3+Math.sin(t*.32)*.12;x=-.12+Math.sin(t*.23)*.025;draw();}}
   if(mode==='ready')raf=requestAnimationFrame(tick);};
