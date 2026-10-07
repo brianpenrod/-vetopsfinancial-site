@@ -1,6 +1,7 @@
 /* Native players and direct MP4 links work without this enhancement. */
 (() => {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const smallScreen = window.matchMedia('(max-width: 640px)');
   const panels = [...document.querySelectorAll('[data-video-panel]')];
   let heroAutoAttempted = false;
   panels.forEach(panel => {
@@ -18,6 +19,10 @@
     };
     toggle.addEventListener('click', () => {
       if (video.id === 'watch-film') heroAutoAttempted = true;
+      if (video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE && video.readyState === 0) {
+        showError();
+        return;
+      }
       if (video.paused || video.ended) {
         if (video.ended) video.currentTime = 0;
         video.play().catch(() => { if (error) error.hidden = false; });
@@ -31,7 +36,11 @@
       update();
     });
     ['pause', 'ended', 'loadedmetadata'].forEach(event => video.addEventListener(event, update));
-    video.addEventListener('error', () => { if (error) error.hidden = false; update(); });
+    const showError = () => { video.pause(); if (error) error.hidden = false; update(); };
+    video.addEventListener('error', showError);
+    video.querySelectorAll('source').forEach(source => source.addEventListener('error', showError));
+    // A metadata request can fail before this deferred script attaches listeners.
+    if (video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) showError();
     update();
   });
   const hero = document.getElementById('watch-film');
@@ -39,7 +48,7 @@
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) { hero.pause(); return; }
-        if (!heroAutoAttempted && !reducedMotion.matches && !navigator.connection?.saveData) {
+        if (!heroAutoAttempted && !reducedMotion.matches && !smallScreen.matches && !navigator.connection?.saveData) {
           heroAutoAttempted = true;
           hero.muted = true;
           hero.play().catch(() => { /* Manual controls remain available. */ });
@@ -49,9 +58,33 @@
     observer.observe(hero);
   }
   reducedMotion.addEventListener('change', event => {
+    if (event.matches) panels.forEach(panel => panel.querySelector('video')?.pause());
+  });
+  smallScreen.addEventListener('change', event => {
     if (event.matches && hero) hero.pause();
   });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) panels.forEach(panel => panel.querySelector('video')?.pause());
   });
+
+  const copyButton = document.querySelector('[data-copy-email]');
+  const copyStatus = document.querySelector('[data-copy-status]');
+  const fallback = document.querySelector('[data-email-fallback]');
+  const emailField = document.getElementById('studio-email');
+  if (copyButton && copyStatus && fallback && emailField) {
+    copyButton.hidden = false;
+    copyButton.addEventListener('click', async () => {
+      try {
+        if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(emailField.value);
+        fallback.hidden = true;
+        copyStatus.textContent = 'Email address copied. Paste it into your email app.';
+      } catch {
+        fallback.hidden = false;
+        emailField.focus();
+        emailField.select();
+        copyStatus.textContent = 'Copy the selected address, then paste it into your email app.';
+      }
+    });
+  }
 })();
