@@ -146,24 +146,24 @@ class PublicConsistencyTests(unittest.TestCase):
                     with self.subTest(page=page.name, href=href):
                         self.assertIn(href[1:], ids)
 
-    def test_studio_exposes_finished_media_and_contact(self):
-        page = REPOSITORY_ROOT / "studio.html"
-        self.assertTrue(page.is_file(), "Studio page is missing")
-        parsed = parse_page(page)
-        self.assertIn("Your work deserves to be seen.", parsed.visible_text)
+    def test_studio_exposes_live_collection_tour_contact_and_retained_portfolio(self):
+        parsed = parse_page(REPOSITORY_ROOT / "studio.html")
+        self.assertIn("After Hours.", parsed.visible_text)
         self.assertIn("studio@vetopsfinancial.com", parsed.visible_text)
+        ids = {attrs.get("id") for _, attrs in parsed.tags}
+        self.assertTrue({"tour-panel", "project-dialog", "start-project", "simple"}.issubset(ids))
+        self.assertIn("/studio-portfolio", [href for _, href in parsed.links])
         videos = [a for t, a in parsed.tags if t == "video"]
-        self.assertEqual(4, len(videos))
-        for video in videos:
-            self.assertIn("controls", video)
-            self.assertIn("playsinline", video)
-            self.assertTrue(video.get("poster"))
-            self.assertNotIn("autoplay", video)
+        self.assertEqual(1, len(videos))
+        self.assertIn("controls", videos[0])
+        self.assertIn("playsinline", videos[0])
+        self.assertNotIn("autoplay", videos[0])
+        for name in ("watch", "ring", "plaque"):
+            self.assertTrue((REPOSITORY_ROOT / f"assets/after-hours/assets/collection-3d/{name}.glb").is_file())
+        portfolio = parse_page(REPOSITORY_ROOT / "studio-portfolio.html")
         for name in ("watch", "ring", "bbq", "plaque"):
-            self.assertTrue((REPOSITORY_ROOT / f"assets/studio/{name}.mp4").is_file())
             self.assertTrue((REPOSITORY_ROOT / f"assets/studio/{name}-hd.mp4").is_file())
-            self.assertTrue((REPOSITORY_ROOT / f"assets/studio/{name}.jpg").is_file())
-            self.assertTrue(any(f"assets/studio/{name}-hd.mp4" in href for _, href in parsed.links))
+            self.assertTrue(any(f"assets/studio/{name}-hd.mp4" in href for _, href in portfolio.links))
 
     def test_public_pages_declare_existing_favicon(self):
         self.assertTrue(

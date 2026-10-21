@@ -3,3 +3,8 @@ __pycache__/
 .superpowers/
 .qa/
 node_modules/
+
+dist/
+.wrangler/
+.dev.vars*
+.env*

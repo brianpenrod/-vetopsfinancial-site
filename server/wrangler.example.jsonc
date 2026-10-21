@@ -1,0 +1,18 @@
+{
+  // Review template only. No route, account or deployment has been created.
+  "name": "vetops-studio-inquiry",
+  "main": "inquiry-handler.mjs",
+  "compatibility_date": "2026-10-21",
+  "workers_dev": false,
+  "vars": {
+    "DELIVERY_ENABLED": "false",
+    "STUDIO_ORIGIN": "https://vetopsfinancial.com",
+    "STUDIO_FROM": "requests@vetopsfinancial.com",
+    "TURNSTILE_SITE_KEY": ""
+  },
+  "send_email": [{"name":"EMAIL","destination_address":"studio@vetopsfinancial.com"}],
+  "ratelimits": [{"name":"REQUEST_LIMITER","namespace_id":"1001","simple":{"limit":3,"period":60}}]
+  // Choose a unique namespace_id in the target account; 1001 is an example.
+  // Set TURNSTILE_SECRET through Cloudflare secrets, never in this file.
+  // Add an approved same-origin /api/studio-request* route before launch.
+}

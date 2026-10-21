@@ -1,0 +1,5 @@
+/api/studio-request/*
+  Cache-Control: no-store
+  X-Content-Type-Options: nosniff
+/assets/after-hours/*
+  X-Content-Type-Options: nosniff

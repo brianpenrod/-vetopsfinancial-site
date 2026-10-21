@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node scripts/preview.mjs"
+    "dev": "node scripts/preview.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "python -m unittest discover -s tests -v && node --test tests/*.test.mjs"
   }
 }
