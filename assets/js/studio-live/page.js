@@ -2,7 +2,7 @@ import {journeyAt} from './journey.js';
 import {films,websites} from './collection.js';
 const $=id=>document.getElementById(id),body=document.body;
 const motion=matchMedia('(prefers-reduced-motion: reduce)');
-let selectedFilm='watch',selectedWebsite='carats';
+let selectedFilm='watch',selectedWebsite='gina';
 const dispatch=(name,detail)=>document.dispatchEvent(new CustomEvent(name,{detail}));
 const dialog=$('film-dialog'),video=dialog.querySelector('video');let returnFocus=null;
 function openFilm(key,trigger){const transmission=key==='transmission';const title=transmission?'The transmission film':films[key].title;
@@ -29,5 +29,5 @@ function position(){queued=false;const focus=scrollY+innerHeight*.5,centers=chap
   const index=Math.round(value);body.dataset.chapter=String(index);body.dataset.journey=value.toFixed(4);
   const railIndex=index<=1?0:index;document.querySelectorAll('[data-rail]').forEach(a=>{if(Number(a.dataset.rail)===railIndex)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');});dispatch('studio:journey',{value,index});}
 function schedule(){if(!queued){queued=true;requestAnimationFrame(position);}}addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);document.fonts?.ready.then(schedule);position();
-chooseFilm('watch');chooseWebsite('carats');
+chooseFilm('watch');chooseWebsite('gina');
 if(navigator.connection?.saveData){body.classList.add('simple');simple=true;$('simple-view').textContent='Load live 3D';$('simple-view').setAttribute('aria-pressed','true');$('loading').textContent='Data saver is on. Choose Load live 3D to explore.';let loaded=false;$('simple-view').addEventListener('click',()=>{if(!simple&&!loaded){loaded=true;import('./viewer.js');}});}else import('./viewer.js');
