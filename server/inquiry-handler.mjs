@@ -1,7 +1,7 @@
 import {validateInquiry,requestText} from '../assets/after-hours/inquiry-data.js';
 const recipient='studio@vetopsfinancial.com';
 const json=(data,status=200)=>Response.json(data,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
-const enabled=env=>env.DELIVERY_ENABLED==='true'&&env.EMAIL?.send&&env.REQUEST_LIMITER?.limit&&env.TURNSTILE_SECRET&&env.TURNSTILE_SITE_KEY&&env.STUDIO_ORIGIN&&/^[a-z0-9._+-]+@vetopsfinancial\.com$/i.test(env.STUDIO_FROM||'');
+const enabled=env=>env.DELIVERY_ENABLED==='true'&&env.EMAIL?.send&&env.REQUEST_LIMITER?.limit&&env.TURNSTILE_SECRET&&env.TURNSTILE_SITE_KEY&&env.STUDIO_ORIGIN&&/^[a-z0-9._+-]+@(?:studio-mail\.)?vetopsfinancial\.com$/i.test(env.STUDIO_FROM||'');
 const escapeHtml=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function readBounded(request){const reader=request.body?.getReader();if(!reader)throw Error();let size=0,chunks=[];try{for(;;){const {value,done}=await reader.read();if(done)break;size+=value.length;if(size>16384){await reader.cancel();throw Error();}chunks.push(value);}}finally{reader.releaseLock();}const bytes=new Uint8Array(size);let offset=0;for(const c of chunks){bytes.set(c,offset);offset+=c.length;}return JSON.parse(new TextDecoder().decode(bytes));}
 export async function handleInquiry(request,env,{fetcher=fetch}={}){
