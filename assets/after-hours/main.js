@@ -105,6 +105,12 @@ $('tour-pause').onclick=()=>{if(!tour||reduced)return;tour.paused=!tour.paused;u
 $('tour-next').onclick=()=>tour&&enterTourStop(tour.index+1);
 $('tour-previous').onclick=()=>tour&&enterTourStop(tour.index-1);
 $('tour-end').onclick=()=>endTour();
+$('tour-details-toggle').onclick=()=>{
+ const expanded=$('tour-details-toggle').getAttribute('aria-expanded')!=='true';
+ $('tour-details-toggle').setAttribute('aria-expanded',String(expanded));
+ $('tour-details-toggle').innerHTML=expanded?'Less <span aria-hidden="true">−</span>':'Details <span aria-hidden="true">＋</span>';
+ $('tour-panel').classList.toggle('details-expanded',expanded);
+};
 $('tour-explore').onclick=()=>{if(!tour)return;const id=tourStops[tour.index].id;clearTour();if(id==='transmission'){setView('workbench');applyReveal(1);panel.focus({preventScroll:true});}else if(id==='room')endTour();else showExhibit(id);};
 document.querySelectorAll('[data-tour-stop]').forEach(b=>b.onclick=()=>tour&&enterTourStop(Number(b.dataset.tourStop)));
 

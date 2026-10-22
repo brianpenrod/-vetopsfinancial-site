@@ -47,3 +47,38 @@ body.touring .website-spotlight,body.opening .website-spotlight,body[data-view=d
 @media(max-width:1100px){.website-spotlight{right:22px;top:105px;width:230px}.website-spotlight-copy{padding:14px}.website-spotlight h2{font-size:26px}.website-preview-title{font-size:23px}}
 @media(max-width:700px){.website-spotlight{display:none}header{flex-wrap:wrap;row-gap:9px}header nav{gap:14px}header nav>a.website-nav{display:inline-flex;font-size:11px;gap:5px}header .brand{font-size:16px}header nav .outline{font-size:10px}.tour-website-link{font-size:10px;gap:5px 10px;margin-top:9px;padding-top:9px}}
 @media(max-width:480px){header{padding:14px 18px}header nav{width:100%;justify-content:space-between;gap:12px}header nav>a.website-nav{padding:6px 0}header nav .outline{padding:8px 12px}.tour-website-link span{font-size:7px}#workbench,#exhibit-panel{top:45svh}}
+
+/* Website inquiries retain the context of the featured portfolio. */
+.website-request{width:100%;font-size:11px;gap:8px;padding:12px 10px;margin-top:10px;border-color:var(--brass);color:var(--brass)}
+/* The tour keeps its essentials visible; phones can reveal the full story. */
+#tour-panel:focus{outline:none}
+#tour-details-toggle{display:none}
+.tour-story>h2{margin:0;flex:1}
+.tour-actions>div{margin-bottom:0}
+#tour-extra{position:relative}
+#tour-copy{max-width:calc(100% - 260px);font-size:12px;line-height:1.6;margin:10px 0 0;color:#d5cdbf}
+#tour-explore{position:absolute;right:0;top:0;width:225px;font-size:11px;padding:11px 16px}
+@media(max-width:600px){
+ #tour-panel{bottom:76px;width:calc(100vw - 24px);padding:8px 14px 6px;max-height:calc(100svh - 185px);overflow:auto;scrollbar-width:thin}
+ .tour-top{font-size:10px;min-height:32px}
+ .tour-top>span:nth-child(2){display:none}
+ .tour-top button{font-size:11px;min-height:36px;padding:6px 0}
+ #tour-progress{margin:2px 0 8px}
+ .tour-story>h2{font-size:25px;line-height:1.05;margin:0}
+ .tour-actions{margin-top:5px;display:block}
+ .tour-actions>div{gap:4px;justify-content:space-between}
+ .tour-actions button{min-height:44px;padding:8px 3px;font-size:11px}
+ #tour-details-toggle{display:inline-flex;align-items:center;gap:5px;color:var(--brass)}
+ #tour-panel:not(.details-expanded) #tour-extra{display:none}
+ #tour-extra{padding:6px 0 8px;border-top:1px solid #ccad7033}
+ #tour-copy{max-width:none;font-size:12px;line-height:1.6;margin:4px 0 12px}
+ #tour-explore{position:static;width:100%;min-height:44px;font-size:12px}
+ #tour-panel nav{gap:5px;font-size:10px;flex-wrap:wrap;margin-top:9px}
+ #tour-panel nav button{min-height:44px}
+ .tour-website-link{min-height:44px;font-size:11px}
+ #tour-hint{font-size:10px}
+ body[data-view=tour] #scene{height:calc(100svh - 180px);bottom:auto}
+ body.touring footer{bottom:25px}
+ .touring .comfort{gap:12px;font-size:10px}
+}
+@media(max-width:360px){.tour-story>h2{font-size:22px}.tour-actions button{font-size:10px}#tour-panel{padding-inline:10px}}

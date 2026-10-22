@@ -6,8 +6,31 @@ for(const [id,options] of [['project-type',projectTypes],['project-budget',budge
 function status(text){$('project-status').textContent=text;}
 function section(name){for(const step of ['edit','review','receipt'])$('project-'+step).hidden=step!==name;$('project-step').textContent={edit:'01 / THE IDEA',review:'02 / YOUR PROJECT BRIEF',receipt:'03 / YOUR REFERENCE'}[name];}
 async function settings(){if(local)return {mode:'preview'};try{const r=await fetch('/api/studio-request/config',{cache:'no-store'});if(!r.ok)throw Error();return await r.json();}catch{return {mode:'unavailable'};}}
-$('start-project').onclick=async()=>{dialog.showModal();document.dispatchEvent(new Event('studio-inquiry-open'));config=await settings();$('project-mode').textContent=config.mode==='preview'?'Local review · Prepare a sample request. No email will be sent.':config.mode==='live'?'Your brief goes directly to studio@vetopsfinancial.com.':'Prepare your brief here, then send it to the Studio using your email app.';};
-$('project-close').onclick=()=>dialog.close();dialog.addEventListener('close',()=>{document.dispatchEvent(new Event('studio-inquiry-close'));$('start-project').focus();});
+let opener=$('start-project');
+const websiteExamples={gina:'https://ginapenrod.me/',carats:'https://carats-timepieces-preview.pages.dev/'};
+async function openProject(trigger,example){
+ if(sending)return;
+ opener=trigger||$('start-project');
+ if(example){
+  // Keep the visitor's unsent brief; only apply the requested project category.
+  if(!$('project-receipt').hidden){form.reset();draft=null;reference=null;}
+  $('project-type').value='Website design';
+  if(!form.elements.reference.value)form.elements.reference.value=websiteExamples[example]||'';
+  section('edit');clearErrors();status('');
+ }
+ dialog.showModal();document.dispatchEvent(new Event('studio-inquiry-open'));
+ config=await settings();$('project-mode').textContent=config.mode==='preview'?'Local review · Prepare a sample request. No email will be sent.':config.mode==='live'?'Your brief goes directly to studio@vetopsfinancial.com.':'Prepare your brief here, then send it to the Studio using your email app.';
+}
+$('start-project').onclick=e=>openProject(e.currentTarget);
+for(const button of document.querySelectorAll('[data-project-example]'))button.onclick=e=>openProject(e.currentTarget,button.dataset.projectExample);
+$('project-close').onclick=()=>dialog.close();dialog.addEventListener('close',()=>{document.dispatchEvent(new Event('studio-inquiry-close'));(opener?.getClientRects().length?opener:$('start-project')).focus();});
+const projectQuery=new URLSearchParams(location.search);
+if(projectQuery.get('project')==='website'){
+ const example=projectQuery.get('example');
+ openProject(null,Object.hasOwn(websiteExamples,example)?example:'website');
+ // A refresh should return to the Studio, not repeatedly reopen the inquiry.
+ const cleanUrl=new URL(location.href);cleanUrl.searchParams.delete('project');cleanUrl.searchParams.delete('example');history.replaceState(history.state,'',cleanUrl);
+}
 function clearErrors(){for(const el of form.querySelectorAll('[aria-invalid]'))el.removeAttribute('aria-invalid');$('project-errors').replaceChildren();}
 form.onsubmit=async e=>{e.preventDefault();clearErrors();const raw=Object.fromEntries(new FormData(form));raw.consent=$('project-consent').checked;const result=validateInquiry(raw);if(!result.valid){for(const [key,message] of Object.entries(result.errors)){const p=document.createElement('p');p.textContent=message;$('project-errors').append(p);form.elements[key]?.setAttribute('aria-invalid','true');}form.elements[Object.keys(result.errors)[0]]?.focus();return;}
  draft=result.data;reference=null;created=new Date().toISOString();$('project-summary').replaceChildren();for(const [key,label] of fields){if(!draft[key])continue;const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=draft[key];$('project-summary').append(dt,dd);}section('review');status('');config ||= await settings();$('project-send').textContent=config.mode==='live'?'Send project request':config.mode==='preview'?'Create preview request':'Open email draft';$('project-review-title').focus();if(config.mode==='live')await challenge();};
