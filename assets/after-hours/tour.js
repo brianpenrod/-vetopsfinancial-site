@@ -5,7 +5,7 @@ export const tourStops=Object.freeze([
  {id:'watch',name:'Watch',title:'A smaller kind of precision.',copy:'Six wheels. Three hands. Look through the layers while the mechanism keeps moving.',duration:18},
  {id:'ring',name:'Ring',title:'A conversation with light.',copy:'Follow the crown, the setting and the eternity band as each facet catches a different reflection.',duration:14},
  {id:'plaque',name:'Plaque',title:'Depth behind the detail.',copy:'Wood, brass and raised artwork. Seven layers separate to reveal how the piece comes together.',duration:18},
- {id:'room',name:'The studio',title:'The room is yours.',copy:'Take another look. Choose any piece and make the next move yourself.',duration:5},
+ {id:'room',name:'The studio',title:'Your turn at the workbench.',copy:'The tour ends where your exploration begins. Rotate the transmission, reveal its layers, or choose another piece.',duration:5},
 ]);
 export const TOUR_DURATION=tourStops.reduce((sum,s)=>sum+s.duration,0);
 export function tourShot(index,time){
