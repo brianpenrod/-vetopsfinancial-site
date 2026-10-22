@@ -6,5 +6,5 @@ export const films = {
 };
 export const websites={
   carats:{title:'Carats & Timepieces',kind:'Concept preview · Family-related project',copy:'A jewelry website concept built around the details of the product, with original watch and ring animations.',url:'https://carats-timepieces-preview.pages.dev/',cta:'Explore the concept preview',poster:'/assets/studio/ring.jpg'},
-  gina:{title:'Gina M. Penrod',kind:'Live website · Professional portfolio',copy:'A home for instructional design work, bringing case studies, curriculum materials, and professional experience together.',url:'https://ginapenrod.me/',cta:'Open portfolio',poster:'/assets/studio/gina-learning-layers.webp'}
+  gina:{title:'Gina M. Penrod',kind:'Live website · Professional portfolio',copy:'A home for instructional design work, bringing case studies, curriculum materials, and professional experience together.',url:'https://ginapenrod.me/',cta:'Visit Gina’s live website',poster:'/assets/studio/gina-learning-layers.webp'}
 };
