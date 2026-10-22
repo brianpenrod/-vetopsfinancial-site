@@ -1,0 +1,18 @@
+{
+  "name": "vetops-studio-inquiry",
+  "account_id": "727473324d532da1321532650ef6c9c0",
+  "main": "inquiry-handler.mjs",
+  "compatibility_date": "2026-10-21",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{"pattern":"vetopsfinancial.com/api/studio-request*","zone_id":"8d5bc4f681e2e8a354f003b7e0d23b90"}],
+  "vars": {
+    "DELIVERY_ENABLED": "true",
+    "STUDIO_ORIGIN": "https://vetopsfinancial.com",
+    "STUDIO_FROM": "requests@studio-mail.vetopsfinancial.com",
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAFgvln4Sgzxum-7g"
+  },
+  "send_email": [{"name":"EMAIL","destination_address":"studio@vetopsfinancial.com"}],
+  "ratelimits": [{"name":"REQUEST_LIMITER","namespace_id":"2026102201","simple":{"limit":3,"period":60}}],
+  "observability": {"enabled":false}
+}
