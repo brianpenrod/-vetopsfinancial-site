@@ -82,3 +82,54 @@ body.touring .website-spotlight,body.opening .website-spotlight,body[data-view=d
  .touring .comfort{gap:12px;font-size:10px}
 }
 @media(max-width:360px){.tour-story>h2{font-size:22px}.tour-actions button{font-size:10px}#tour-panel{padding-inline:10px}}
+
+/* A single compact desk column leaves the work itself unobstructed. */
+#studio-rail{display:contents}
+#workbench:focus{outline:none}
+#workbench-details{border-top:1px solid #ccad7033;margin-top:12px}
+#workbench-details summary{display:flex;justify-content:space-between;align-items:center;min-height:40px;cursor:pointer;font-size:11px;color:var(--brass);list-style:none}
+#workbench-details summary::-webkit-details-marker{display:none}
+#workbench-details summary:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+#workbench-details[open] summary span{transform:rotate(45deg)}
+@media(min-width:701px){
+ #studio-rail{display:flex;flex-direction:column;gap:12px;position:fixed;z-index:4;left:24px;top:96px;bottom:112px;width:260px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#ccad7055 transparent;padding:2px}
+ body.touring #studio-rail,body.opening #studio-rail,body[data-view=display] #studio-rail{display:none}
+ #workbench{position:static;flex:none;width:100%;padding:15px 16px;overflow:visible;margin:0}
+ #workbench h2{font-size:30px;margin:12px 0 8px}
+ #detail-copy{font-size:11px;line-height:1.5;min-height:0;margin:0 0 12px}
+ #workbench .row{margin:10px 0;gap:18px}
+ #workbench .row .outline{padding:8px 13px}
+ #workbench .range-label{margin:14px 0 7px}
+ #workbench input[type=range]{margin:0;min-height:20px}
+ #workbench #parts{margin-top:3px;gap:4px}
+ #workbench #parts button{padding:9px 3px}
+ #studio-rail .website-spotlight{position:static;flex:none;width:100%;margin:0}
+ #studio-rail .website-preview{padding:5px 12px}
+ #studio-rail .website-preview-bar,#studio-rail .website-preview-title{display:none}
+ #studio-rail .website-preview img{height:53px;object-fit:contain;margin:0}
+ #studio-rail .website-spotlight-copy{padding:11px 14px}
+ #studio-rail .website-spotlight h2{font-size:23px;margin:6px 0}
+ #studio-rail .website-spotlight p{display:none}
+ #studio-rail .website-feature-link{font-size:11px;padding:8px 0}
+ #studio-rail .website-request{margin-top:5px;padding:9px 8px;font-size:10px}
+}
+/* Compact tour at every screen size; the same Details control opens the story. */
+#tour-details-toggle{display:inline-flex;align-items:center;gap:5px;color:var(--brass)}
+#tour-panel:not(.details-expanded) #tour-extra{display:none}
+@media(min-width:601px){
+ #tour-panel{width:min(720px,calc(100vw - 48px));bottom:85px;padding:10px 18px;max-height:calc(100svh - 190px);overflow:auto;scrollbar-width:thin}
+ .tour-top{font-size:9px;min-height:26px}
+ .tour-top button{padding:6px 0}
+ #tour-progress{margin:4px 0 8px}
+ .tour-story{gap:18px}
+ .tour-story>h2{font-size:27px;line-height:1.05}
+ .tour-actions{min-width:265px}
+ .tour-actions>div{gap:8px}
+ .tour-actions button{min-height:36px;padding:7px 2px;font-size:11px}
+ #tour-extra{border-top:1px solid #ccad7033;margin-top:10px;padding-top:4px}
+ #tour-copy{max-width:calc(100% - 220px);font-size:11px}
+ #tour-explore{top:12px;width:200px}
+ body[data-view=tour] #scene{bottom:110px}
+}
+@media(min-width:601px) and (max-width:850px){.tour-story>h2{font-size:24px}.tour-actions{min-width:245px}}
+@media(min-width:1101px) and (max-height:760px){#studio-rail{bottom:90px}}
